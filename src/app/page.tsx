@@ -17,6 +17,7 @@ import LiveAlerts from '@/components/LiveAlerts';
 import BasemapSwitcher from '@/components/BasemapSwitcher';
 import TimeTravel from '@/components/TimeTravel';
 import SearchBar2 from '@/components/SearchBar2';
+import AddCameraWindow from '@/components/AddCameraWindow';
 import LFrame, { GLASS_STYLE } from '@/components/LFrame';
 import LocationInfoPanel from '@/components/LocationInfoPanel';
 import SystemHealthContent, { useSystemHealth } from '@/components/SystemHealth';
@@ -887,12 +888,13 @@ export default function Dashboard() {
 
       {/* ── PINPOINT INFO ── */}
       <LocationInfoPanel data={pinpoint} onClose={() => setPinpoint(null)} onAddFeed={(lat, lon, name) => {
-        const url = prompt('Stream/Camera URL eingeben:');
-        if (url) {
-          authFetch('/api/admin/cameras', { method: 'POST', body: JSON.stringify({ cameras: [{ url, name, lat, lon }] }) })
-            .then(r => { if (r.ok) { /* toast would be nice but no direct access here */ } });
-          setPinpoint(null);
-        }
+        wm.openWindow({
+          id: 'add-camera',
+          title: 'KAMERA / STREAM HINZUFÜGEN',
+          defaultSize: { w: 380, h: 420 },
+          defaultPos: { x: 200, y: 100 },
+          content: <AddCameraWindow defaultLat={lat} defaultLon={lon} defaultName={name} onSaved={() => wm.closeWindow('add-camera')} />,
+        });
       }} />
 
 
@@ -946,6 +948,9 @@ export default function Dashboard() {
               </span>
             </button>
           </div>
+
+          {/* TimeTravel */}
+          <TimeTravel onDateChange={setTimeTravelDate} active={!!timeTravelDate} />
         </div>
       </motion.div>
 

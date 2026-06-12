@@ -74,16 +74,50 @@ async function detectRss(url: string) {
 }
 
 async function detectGeneric(url: string) {
-  const result: any = { name: url.split('/').pop() || 'Camera', lat: 0, lon: 0 };
+  // Extract a reasonable name from the URL as fallback
+  const urlObj = new URL(url);
+  const fallbackName = urlObj.hostname.replace(/^www\./, '').split('.')[0] || 'Camera';
+  const result: any = { name: fallbackName, lat: 0, lon: 0 };
+  
   try {
-    // Try to fetch page title
-    const r = await fetch(url, { signal: AbortSignal.timeout(6000), headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/125.0' } });
-    if (r.ok) {
-      const text = (await r.text()).slice(0, 10000);
-      const titleMatch = text.match(/<title[^>]*>(.*?)<\/title>/i);
-      if (titleMatch) result.name = titleMatch[1].trim().slice(0, 100);
+    // First try HEAD to check content type
+    const head = await fetch(url, { method: 'HEAD', signal: AbortSignal.timeout(5000), headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/125.0' }, redirect: 'follow' });
+    const ct = head.headers.get('content-type') || '';
+    
+    // If it's an image/video stream, use hostname as name
+    if (ct.includes('image/') || ct.includes('video/') || ct.includes('multipart/')) {
+      // It's a direct stream/image - extract name from URL path
+      const pathParts = urlObj.pathname.split('/').filter(Boolean);
+      if (pathParts.length > 0) {
+        const lastPart = pathParts[pathParts.length - 1].replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+        if (lastPart.length > 2) result.name = lastPart.charAt(0).toUpperCase() + lastPart.slice(1);
+      }
+      result.name = result.name || urlObj.hostname;
+      return result;
     }
-  } catch { /* best effort */ }
+    
+    // For HTML pages, fetch and extract title
+    if (ct.includes('text/html') || ct.includes('text/') || !ct) {
+      const r = await fetch(url, { signal: AbortSignal.timeout(6000), headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/125.0' }, redirect: 'follow' });
+      if (r.ok) {
+        const text = (await r.text()).slice(0, 20000);
+        // Try multiple title patterns
+        const titleMatch = text.match(/<title[^>]*>([^<]+)<\/title>/i) 
+          || text.match(/<h1[^>]*>([^<]+)<\/h1>/i)
+          || text.match(/<meta[^>]*property="og:title"[^>]*content="([^"]+)"/i)
+          || text.match(/<meta[^>]*name="title"[^>]*content="([^"]+)"/i);
+        if (titleMatch) result.name = titleMatch[1].trim().slice(0, 100);
+        
+        // Try to find location from page content
+        const geoMatch = text.match(/<meta[^>]*name="geo\.position"[^>]*content="([^"]+)"/i);
+        if (geoMatch) {
+          const [lat, lon] = geoMatch[1].split(';').map(Number);
+          if (lat && lon) { result.lat = lat; result.lon = lon; }
+        }
+      }
+    }
+  } catch { /* best effort - timeout/unreachable is fine */ }
+  
   return result;
 }
 

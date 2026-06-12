@@ -95,7 +95,7 @@ export default function UpdateSection() {
             )}
             <div className="flex flex-col gap-1">
               <span className="text-[11px] font-mono text-[var(--text-primary)]">{info.message}</span>
-              {info.behindCount && info.behindCount > 0 && (
+              {info.behindCount != null && info.behindCount > 0 && (
                 <span className="text-[9px] font-mono text-[var(--gold-primary)]">
                   {info.behindCount} Commit(s) hinter upstream
                 </span>

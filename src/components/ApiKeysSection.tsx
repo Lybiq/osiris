@@ -74,42 +74,24 @@ export default function ApiKeysSection() {
           {Object.entries(sections).map(([section, sectionKeys]) => (
             <div key={section}>
               <div className="text-[10px] font-mono font-bold tracking-widest text-[var(--gold-primary)] border-b border-[var(--border-secondary)] pb-1 mb-2">{section}</div>
-              <div className="flex flex-col gap-3">
-                {sectionKeys.filter(k => !k.hidden).map(k => {
-                  const pairedKey = k.pair ? keys.find(p => p.env === k.pair) : null;
-                  return (
-                  <div key={k.env} className="flex flex-col gap-1">
-                    <div className="flex items-center gap-2">
-                      <KeyRound className={`w-3 h-3 ${k.set ? 'text-[var(--alert-green)]' : 'text-[var(--text-muted)]'}`} />
-                      <span className="text-[11px] font-mono text-[var(--text-primary)] tracking-wide">{k.label}</span>
-                      {k.set && (
-                        <span className="flex items-center gap-0.5 text-[8px] font-mono text-[var(--alert-green)] tracking-wider">
-                          <Check className="w-2.5 h-2.5" /> {k.fromEnv ? '.ENV' : 'SET'} {k.preview}
-                        </span>
-                      )}
+              <div className="grid grid-cols-2 gap-x-3 gap-y-2">
+                {sectionKeys.filter(k => !k.hidden).map(k => (
+                  <div key={k.env} className="flex flex-col gap-0.5">
+                    <div className="flex items-center gap-1.5">
+                      <KeyRound className={`w-2.5 h-2.5 ${k.set ? 'text-[var(--alert-green)]' : 'text-[var(--text-muted)]'}`} />
+                      <span className="text-[10px] font-mono text-white/70 tracking-wide">{k.label}</span>
+                      {k.set && <span className="text-[7px] text-[var(--alert-green)]">✓</span>}
                     </div>
-                    <span className="text-[8px] text-[var(--text-muted)] font-mono ml-5">{k.hint}</span>
-                    <div className={pairedKey ? "flex gap-2 ml-5" : ""}>
+                    <span className="text-[7px] text-white/25 font-mono truncate">{k.hint}</span>
                     <input
                       type={k.secret ? 'password' : 'text'}
                       value={edits[k.env] ?? ''}
                       onChange={e => setEdits(s => ({ ...s, [k.env]: e.target.value }))}
-                      placeholder={k.set ? 'Neuen Wert (leer = unverändert)' : 'Key eingeben…'}
-                      className={pairedKey ? "bg-black/40 border border-white/10 rounded px-2 py-1 text-[10px] text-white/80 font-mono outline-none focus:border-[var(--gold-primary)]/50 flex-1" : "ml-5 bg-black/40 border border-white/10 rounded px-2 py-1 text-[10px] text-white/80 font-mono outline-none focus:border-[var(--gold-primary)]/50"}
+                      placeholder={k.set ? 'Neuer Wert' : 'Key eingeben…'}
+                      className="bg-black/30 border border-white/10 rounded px-2 py-1 text-[9px] text-white/80 font-mono outline-none focus:border-[var(--gold-primary)]/50 w-full"
                     />
-                    {pairedKey && (
-                      <input
-                        type="password"
-                        value={edits[pairedKey.env] ?? ''}
-                        onChange={e => setEdits(s => ({ ...s, [pairedKey.env]: e.target.value }))}
-                        placeholder={pairedKey.set ? pairedKey.label + ' (unverändert)' : pairedKey.label}
-                        className="bg-black/40 border border-white/10 rounded px-2 py-1 text-[10px] text-white/80 font-mono outline-none focus:border-[var(--gold-primary)]/50 flex-1"
-                      />
-                    )}
-                    </div>
                   </div>
-                  );
-                })}
+                ))}
               </div>
             </div>
           ))}
