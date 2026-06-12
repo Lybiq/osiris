@@ -46,6 +46,22 @@ export const KEY_DEFS: KeyDef[] = [
   { env: 'THUNDERFOREST_KEY', label: 'Thunderforest Key', hint: 'thunderforest.com — free tier: 150k tiles/month', secret: true, section: '🗺 MAPS' },
   { env: 'GOOGLE_PLACES_KEY', label: 'Google Places Key', hint: 'Google Cloud Console — enables POI data & place details', secret: true, section: '🗺 MAPS' },
 
+
+  // ✈ FLIGHTS (additional)
+  { env: 'ADSBLOL_KEY', label: 'adsb.lol Key', hint: 'adsb.lol — community flight tracker, free tier available', secret: true, section: '✈ FLIGHTS' },
+  { env: 'AIRPLANESLIVE_KEY', label: 'AirplanesLive Key', hint: 'airplanes.live — real-time ADS-B data', secret: true, section: '✈ FLIGHTS' },
+  { env: 'ADSBFI_KEY', label: 'adsb.fi Key', hint: 'adsb.fi — Finnish ADS-B network', secret: true, section: '✈ FLIGHTS' },
+  { env: 'AVIATIONSTACK_KEY', label: 'AviationStack Key', hint: 'aviationstack.com — flight data API, free tier: 100 req/month', secret: true, section: '✈ FLIGHTS' },
+
+  // 🚢 SHIPS (additional)
+  { env: 'MYSHIPTRACKING_KEY', label: 'MyShipTracking Key', hint: 'myshiptracking.com — AIS vessel tracking', secret: true, section: '🚢 SHIPS' },
+  { env: 'SHIPFINDER_KEY', label: 'ShipFinder Key', hint: 'shipfinder.co — live ship tracking API', secret: true, section: '🚢 SHIPS' },
+
+  // 📡 OSINT
+  { env: 'SHODAN_KEY', label: 'Shodan API Key', hint: 'shodan.io — IoT/device search engine', secret: true, section: '📡 OSINT' },
+  { env: 'CENSYS_KEY', label: 'Censys API Key', hint: 'censys.io — internet-wide scan data', secret: true, section: '📡 OSINT' },
+  { env: 'VIRUSTOTAL_KEY', label: 'VirusTotal Key', hint: 'virustotal.com — malware/URL analysis', secret: true, section: '📡 OSINT' },
+
   // 🤖 AI
   { env: 'GEMINI_API_KEY_1', label: 'Gemini API Key', hint: 'aistudio.google.com/apikey — KI-Analyse', secret: true, section: '🤖 AI' },
 ];

@@ -1,0 +1,2783 @@
+[
+  {
+    "id": "fw-zugspitze",
+    "name": "Zugspitze Gipfel",
+    "location": "Zugspitze, Bavaria, Germany",
+    "lat": 47.421,
+    "lon": 10.985,
+    "url": "https://www.foto-webcam.eu/webcam/zugspitze/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-zugspitze-sued",
+    "name": "Zugspitze Süd",
+    "location": "Zugspitze, Bavaria, Germany",
+    "lat": 47.417,
+    "lon": 10.986,
+    "url": "https://www.foto-webcam.eu/webcam/zugspitze-sued/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-zugspitze-ost",
+    "name": "Zugspitze Ost",
+    "location": "Zugspitze, Bavaria, Germany",
+    "lat": 47.424,
+    "lon": 10.984,
+    "url": "https://www.foto-webcam.eu/webcam/zugspitze-ost/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-bzb-gipfel",
+    "name": "Zugspitze West",
+    "location": "Zugspitze, Bavaria, Germany",
+    "lat": 47.421,
+    "lon": 10.977,
+    "url": "https://www.foto-webcam.eu/webcam/bzb-gipfel/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-bzb-tal",
+    "name": "Zugspitze Tal",
+    "location": "Grainau, Bavaria, Germany",
+    "lat": 47.464,
+    "lon": 10.984,
+    "url": "https://www.foto-webcam.eu/webcam/bzb-tal/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-sonnalpin",
+    "name": "Sonnalpin",
+    "location": "Zugspitze, Bavaria, Germany",
+    "lat": 47.42,
+    "lon": 10.987,
+    "url": "https://www.foto-webcam.eu/webcam/sonnalpin/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-eibsee-nord",
+    "name": "Eibsee Nord",
+    "location": "Grainau, Bavaria, Germany",
+    "lat": 47.446,
+    "lon": 10.98,
+    "url": "https://www.foto-webcam.eu/webcam/eibsee-nord/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-eibsee-hotel",
+    "name": "Eibsee Hotel",
+    "location": "Grainau, Bavaria, Germany",
+    "lat": 47.458,
+    "lon": 10.985,
+    "url": "https://www.foto-webcam.eu/webcam/eibsee-hotel/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-kreuzeck",
+    "name": "Kreuzeck",
+    "location": "Garmisch-Partenkirchen, Germany",
+    "lat": 47.445,
+    "lon": 11.07,
+    "url": "https://www.foto-webcam.eu/webcam/kreuzeck/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-hausberg",
+    "name": "Hausberg",
+    "location": "Garmisch-Partenkirchen, Germany",
+    "lat": 47.441,
+    "lon": 11.074,
+    "url": "https://www.foto-webcam.eu/webcam/hausberg/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-kandahar-express",
+    "name": "Kandahar-Express",
+    "location": "Garmisch-Partenkirchen, Germany",
+    "lat": 47.444,
+    "lon": 11.063,
+    "url": "https://www.foto-webcam.eu/webcam/kandahar-express/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-wank",
+    "name": "Wankhaus",
+    "location": "Garmisch-Partenkirchen, Germany",
+    "lat": 47.489,
+    "lon": 11.149,
+    "url": "https://www.foto-webcam.eu/webcam/wank/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-meilerhuette",
+    "name": "Meilerhütte West",
+    "location": "Wetterstein, Germany",
+    "lat": 47.424,
+    "lon": 11.014,
+    "url": "https://www.foto-webcam.eu/webcam/meilerhuette/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-meilerhuette-nord",
+    "name": "Meilerhütte Nord",
+    "location": "Wetterstein, Germany",
+    "lat": 47.428,
+    "lon": 11.009,
+    "url": "https://www.foto-webcam.eu/webcam/meilerhuette-nord/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-herzogstand",
+    "name": "Herzogstand Süd",
+    "location": "Walchensee, Germany",
+    "lat": 47.566,
+    "lon": 11.258,
+    "url": "https://www.foto-webcam.eu/webcam/herzogstand/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-kochelsee",
+    "name": "Herzogstand Nord",
+    "location": "Kochelsee, Germany",
+    "lat": 47.633,
+    "lon": 11.286,
+    "url": "https://www.foto-webcam.eu/webcam/kochelsee/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-kampenwand",
+    "name": "Kampenwand",
+    "location": "Chiemsee, Germany",
+    "lat": 47.787,
+    "lon": 12.375,
+    "url": "https://www.foto-webcam.eu/webcam/kampenwand/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-hochries",
+    "name": "Hochries West",
+    "location": "Rosenheim, Germany",
+    "lat": 47.803,
+    "lon": 12.305,
+    "url": "https://www.foto-webcam.eu/webcam/hochries/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-hochries-nord",
+    "name": "Hochries Nord",
+    "location": "Rosenheim, Germany",
+    "lat": 47.805,
+    "lon": 12.301,
+    "url": "https://www.foto-webcam.eu/webcam/hochries-nord/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-hochries-sued",
+    "name": "Hochries Süd",
+    "location": "Rosenheim, Germany",
+    "lat": 47.797,
+    "lon": 12.31,
+    "url": "https://www.foto-webcam.eu/webcam/hochries-sued/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-hochries-ost",
+    "name": "Hochries Ost",
+    "location": "Rosenheim, Germany",
+    "lat": 47.8,
+    "lon": 12.316,
+    "url": "https://www.foto-webcam.eu/webcam/hochries-ost/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-wendelstein-west",
+    "name": "Wendelstein West",
+    "location": "Bavaria, Germany",
+    "lat": 47.698,
+    "lon": 11.983,
+    "url": "https://www.foto-webcam.eu/webcam/wendelstein-west/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-wendelstein-ost",
+    "name": "Wendelstein Ost",
+    "location": "Bavaria, Germany",
+    "lat": 47.7,
+    "lon": 11.99,
+    "url": "https://www.foto-webcam.eu/webcam/wendelstein-ost/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-tegelberg",
+    "name": "Tegelberg",
+    "location": "Füssen, Bavaria, Germany",
+    "lat": 47.558,
+    "lon": 10.748,
+    "url": "https://www.foto-webcam.eu/webcam/tegelberg/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-nebelhorn",
+    "name": "Nebelhorn",
+    "location": "Oberstdorf, Germany",
+    "lat": 47.396,
+    "lon": 10.343,
+    "url": "https://www.foto-webcam.eu/webcam/nebelhorn/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-scheibenhaus",
+    "name": "Oberstdorf",
+    "location": "Oberstdorf, Germany",
+    "lat": 47.388,
+    "lon": 10.282,
+    "url": "https://www.foto-webcam.eu/webcam/scheibenhaus/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-hochstaufen",
+    "name": "Bad Reichenhall",
+    "location": "Bad Reichenhall, Germany",
+    "lat": 47.723,
+    "lon": 12.866,
+    "url": "https://www.foto-webcam.eu/webcam/hochstaufen/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-windbeutelbaron",
+    "name": "Windbeutelbaron",
+    "location": "Berchtesgaden, Germany",
+    "lat": 47.629,
+    "lon": 13.053,
+    "url": "https://www.foto-webcam.eu/webcam/windbeutelbaron/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-jenner-sued",
+    "name": "Jenner Süd",
+    "location": "Königssee, Germany",
+    "lat": 47.556,
+    "lon": 12.988,
+    "url": "https://www.foto-webcam.eu/webcam/jenner-sued/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-funtensee",
+    "name": "Funtensee",
+    "location": "Nationalpark Berchtesgaden",
+    "lat": 47.548,
+    "lon": 13.011,
+    "url": "https://www.foto-webcam.eu/webcam/funtensee/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-toelzer-huette",
+    "name": "Tölzer Hütte",
+    "location": "Karwendel, Bavaria",
+    "lat": 47.561,
+    "lon": 11.542,
+    "url": "https://www.foto-webcam.eu/webcam/toelzer-huette/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-samerberg",
+    "name": "Samerberg",
+    "location": "Bavaria, Germany",
+    "lat": 47.831,
+    "lon": 12.252,
+    "url": "https://www.foto-webcam.eu/webcam/samerberg/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-rosenheim",
+    "name": "Rosenheim",
+    "location": "Rosenheim, Bavaria, Germany",
+    "lat": 47.855,
+    "lon": 12.134,
+    "url": "https://www.foto-webcam.eu/webcam/rosenheim/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-murnau",
+    "name": "Murnau",
+    "location": "Murnau, Bavaria, Germany",
+    "lat": 47.68,
+    "lon": 11.198,
+    "url": "https://www.foto-webcam.eu/webcam/murnau/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-peissenberg",
+    "name": "Hohenpeißenberg",
+    "location": "Bavaria, Germany",
+    "lat": 47.8,
+    "lon": 11.033,
+    "url": "https://www.foto-webcam.eu/webcam/peissenberg/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-oberstaufen",
+    "name": "Oberstaufen",
+    "location": "Oberstaufen, Allgäu, Germany",
+    "lat": 47.554,
+    "lon": 10.021,
+    "url": "https://www.foto-webcam.eu/webcam/oberstaufen/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-sonthofen",
+    "name": "Sonthofen",
+    "location": "Sonthofen, Germany",
+    "lat": 47.515,
+    "lon": 10.279,
+    "url": "https://www.foto-webcam.eu/webcam/sonthofen/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-ettelsberg",
+    "name": "Ettelsberg",
+    "location": "Sauerland, Germany",
+    "lat": 51.197,
+    "lon": 8.598,
+    "url": "https://www.foto-webcam.eu/webcam/ettelsberg/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-feldberg-ts",
+    "name": "Feldberg Taunus",
+    "location": "Frankfurt, Germany",
+    "lat": 50.226,
+    "lon": 8.451,
+    "url": "https://www.foto-webcam.eu/webcam/feldberg-ts/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-darmstadt-west",
+    "name": "Darmstadt West",
+    "location": "Darmstadt, Germany",
+    "lat": 49.872,
+    "lon": 8.636,
+    "url": "https://www.foto-webcam.eu/webcam/darmstadt-west/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-darmstadt-ost",
+    "name": "Darmstadt Ost",
+    "location": "Darmstadt, Germany",
+    "lat": 49.872,
+    "lon": 8.676,
+    "url": "https://www.foto-webcam.eu/webcam/darmstadt-ost/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-wetteronline-bonn",
+    "name": "Bonn",
+    "location": "Bonn, Germany",
+    "lat": 50.74,
+    "lon": 7.094,
+    "url": "https://www.foto-webcam.eu/webcam/wetteronline-bonn/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-flensburg",
+    "name": "Flensburg",
+    "location": "Flensburg, Germany",
+    "lat": 54.794,
+    "lon": 9.434,
+    "url": "https://www.foto-webcam.eu/webcam/flensburg/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-husum-hafenklappbruecke",
+    "name": "Husum Hafen",
+    "location": "Husum, Germany",
+    "lat": 54.484,
+    "lon": 9.056,
+    "url": "https://www.foto-webcam.eu/webcam/husum-hafenklappbruecke/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-husum-marktplatz",
+    "name": "Husum Marktplatz",
+    "location": "Husum, Germany",
+    "lat": 54.483,
+    "lon": 9.054,
+    "url": "https://www.foto-webcam.eu/webcam/husum-marktplatz/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-husum-dockkoog",
+    "name": "Husum Dockkoog",
+    "location": "Husum, Germany",
+    "lat": 54.485,
+    "lon": 9.048,
+    "url": "https://www.foto-webcam.eu/webcam/husum-dockkoog/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-norderney",
+    "name": "Norderney",
+    "location": "Ostfriesland, Germany",
+    "lat": 53.705,
+    "lon": 7.146,
+    "url": "https://www.foto-webcam.eu/webcam/norderney/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-lech",
+    "name": "Lech am Arlberg",
+    "location": "Lech, Vorarlberg, Austria",
+    "lat": 47.208,
+    "lon": 10.139,
+    "url": "https://www.foto-webcam.eu/webcam/lech/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-ruefikopf",
+    "name": "Lech Rüfikopf",
+    "location": "Lech, Vorarlberg, Austria",
+    "lat": 47.208,
+    "lon": 10.128,
+    "url": "https://www.foto-webcam.eu/webcam/ruefikopf/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-st-anton",
+    "name": "St. Anton am Arlberg",
+    "location": "St. Anton, Tirol, Austria",
+    "lat": 47.131,
+    "lon": 10.276,
+    "url": "https://www.foto-webcam.eu/webcam/st-anton/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-stuben",
+    "name": "Stuben am Arlberg",
+    "location": "Stuben, Vorarlberg, Austria",
+    "lat": 47.147,
+    "lon": 10.216,
+    "url": "https://www.foto-webcam.eu/webcam/stuben/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-gargellen",
+    "name": "Gargellen",
+    "location": "Montafon, Vorarlberg, Austria",
+    "lat": 47.086,
+    "lon": 9.896,
+    "url": "https://www.foto-webcam.eu/webcam/gargellen/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-schruns",
+    "name": "Schruns",
+    "location": "Montafon, Austria",
+    "lat": 47.072,
+    "lon": 9.919,
+    "url": "https://www.foto-webcam.eu/webcam/schruns/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-feldkirch",
+    "name": "Feldkirch",
+    "location": "Feldkirch, Vorarlberg, Austria",
+    "lat": 47.234,
+    "lon": 9.6,
+    "url": "https://www.foto-webcam.eu/webcam/feldkirch/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-dornbirn",
+    "name": "Dornbirn",
+    "location": "Dornbirn, Vorarlberg, Austria",
+    "lat": 47.412,
+    "lon": 9.745,
+    "url": "https://www.foto-webcam.eu/webcam/dornbirn/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-hoherkasten",
+    "name": "Hoher Kasten",
+    "location": "Appenzell, Switzerland",
+    "lat": 47.278,
+    "lon": 9.396,
+    "url": "https://www.foto-webcam.eu/webcam/hoherkasten/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-innsbruck",
+    "name": "Innsbruck",
+    "location": "Innsbruck, Tirol, Austria",
+    "lat": 47.317,
+    "lon": 11.396,
+    "url": "https://www.foto-webcam.eu/webcam/innsbruck/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-innsbruck-uni",
+    "name": "UNI Innsbruck",
+    "location": "Innsbruck, Tirol, Austria",
+    "lat": 47.264,
+    "lon": 11.385,
+    "url": "https://www.foto-webcam.eu/webcam/innsbruck-uni/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-seefeld",
+    "name": "Seefeld",
+    "location": "Seefeld, Tirol, Austria",
+    "lat": 47.329,
+    "lon": 11.188,
+    "url": "https://www.foto-webcam.eu/webcam/seefeld/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-st-johann-in-tirol",
+    "name": "St. Johann in Tirol",
+    "location": "St. Johann, Tirol, Austria",
+    "lat": 47.524,
+    "lon": 12.431,
+    "url": "https://www.foto-webcam.eu/webcam/st-johann-in-tirol/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-wilder-kaiser",
+    "name": "Wilder Kaiser",
+    "location": "St. Johann, Tirol, Austria",
+    "lat": 47.524,
+    "lon": 12.388,
+    "url": "https://www.foto-webcam.eu/webcam/wilder-kaiser/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-pendling-ost",
+    "name": "Pendling Ost",
+    "location": "Kufstein, Tirol, Austria",
+    "lat": 47.578,
+    "lon": 12.196,
+    "url": "https://www.foto-webcam.eu/webcam/pendling-ost/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-schlegeis",
+    "name": "Schlegeis",
+    "location": "Zillertal, Tirol, Austria",
+    "lat": 47.073,
+    "lon": 11.761,
+    "url": "https://www.foto-webcam.eu/webcam/schlegeis/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-mayrhofen",
+    "name": "Mayrhofen",
+    "location": "Zillertal, Tirol, Austria",
+    "lat": 47.166,
+    "lon": 11.86,
+    "url": "https://www.foto-webcam.eu/webcam/mayrhofen/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-braunschweigerhuette",
+    "name": "Braunschweiger Hütte",
+    "location": "Wildspitze, Tirol, Austria",
+    "lat": 46.881,
+    "lon": 10.83,
+    "url": "https://www.foto-webcam.eu/webcam/braunschweigerhuette/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-saalfelden",
+    "name": "Saalfelden",
+    "location": "Pinzgau, Salzburg, Austria",
+    "lat": 47.427,
+    "lon": 12.849,
+    "url": "https://www.foto-webcam.eu/webcam/saalfelden/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-zellamsee",
+    "name": "Zell am See",
+    "location": "Pinzgau, Salzburg, Austria",
+    "lat": 47.325,
+    "lon": 12.797,
+    "url": "https://www.foto-webcam.eu/webcam/zellamsee/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-mooserboden",
+    "name": "Mooserboden",
+    "location": "Kaprun, Salzburg, Austria",
+    "lat": 47.193,
+    "lon": 12.736,
+    "url": "https://www.foto-webcam.eu/webcam/mooserboden/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-asitz",
+    "name": "Leogang Asitz",
+    "location": "Leogang, Salzburg, Austria",
+    "lat": 47.409,
+    "lon": 12.74,
+    "url": "https://www.foto-webcam.eu/webcam/asitz/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-hochkoenig",
+    "name": "Hochkönig",
+    "location": "Salzburg, Austria",
+    "lat": 47.42,
+    "lon": 13.069,
+    "url": "https://www.foto-webcam.eu/webcam/hochkoenig/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-obertauern2",
+    "name": "Seekarspitz Berg",
+    "location": "Obertauern, Salzburg, Austria",
+    "lat": 47.254,
+    "lon": 13.568,
+    "url": "https://www.foto-webcam.eu/webcam/obertauern2/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-sonnblick",
+    "name": "Sonnblick",
+    "location": "Rauris, Salzburg, Austria",
+    "lat": 47.054,
+    "lon": 12.958,
+    "url": "https://www.foto-webcam.eu/webcam/sonnblick/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-heiligenblut",
+    "name": "Heiligenblut",
+    "location": "Großglockner, Austria",
+    "lat": 47.04,
+    "lon": 12.848,
+    "url": "https://www.foto-webcam.eu/webcam/heiligenblut/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-adlersruhe",
+    "name": "Adlersruhe",
+    "location": "Großglockner, Austria",
+    "lat": 47.074,
+    "lon": 12.699,
+    "url": "https://www.foto-webcam.eu/webcam/adlersruhe/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-lucknerhaus",
+    "name": "Lucknerhaus",
+    "location": "Großglockner, Austria",
+    "lat": 47.046,
+    "lon": 12.629,
+    "url": "https://www.foto-webcam.eu/webcam/lucknerhaus/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-kals",
+    "name": "Kals",
+    "location": "Großglockner, Austria",
+    "lat": 47.008,
+    "lon": 12.65,
+    "url": "https://www.foto-webcam.eu/webcam/kals/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-lienz",
+    "name": "Lienz",
+    "location": "Osttirol, Austria",
+    "lat": 46.827,
+    "lon": 12.766,
+    "url": "https://www.foto-webcam.eu/webcam/lienz/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-dobratsch",
+    "name": "Dobratsch",
+    "location": "Villach, Carinthia, Austria",
+    "lat": 46.598,
+    "lon": 13.677,
+    "url": "https://www.foto-webcam.eu/webcam/dobratsch/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-turrach-west",
+    "name": "Turracher Höhe",
+    "location": "Turracher Höhe, Austria",
+    "lat": 46.862,
+    "lon": 13.906,
+    "url": "https://www.foto-webcam.eu/webcam/turrach-west/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-strohsack",
+    "name": "BKK Strohsack",
+    "location": "Bad Kleinkirchheim, Austria",
+    "lat": 46.91,
+    "lon": 13.751,
+    "url": "https://www.foto-webcam.eu/webcam/strohsack/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-falkert",
+    "name": "Falkert Heidialm",
+    "location": "Falkertsee, Austria",
+    "lat": 46.904,
+    "lon": 13.793,
+    "url": "https://www.foto-webcam.eu/webcam/falkert/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-heidi-hotel",
+    "name": "Heidi-Hotel",
+    "location": "Falkertsee, Austria",
+    "lat": 46.905,
+    "lon": 13.797,
+    "url": "https://www.foto-webcam.eu/webcam/heidi-hotel/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-gnesau",
+    "name": "Gnesau",
+    "location": "Carinthia, Austria",
+    "lat": 46.881,
+    "lon": 13.96,
+    "url": "https://www.foto-webcam.eu/webcam/gnesau/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-wien",
+    "name": "Wien Donaustadt",
+    "location": "Vienna, Austria",
+    "lat": 48.233,
+    "lon": 16.421,
+    "url": "https://www.foto-webcam.eu/webcam/wien/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-bisamberg",
+    "name": "Wien Bisamberg",
+    "location": "Vienna, Austria",
+    "lat": 48.349,
+    "lon": 16.362,
+    "url": "https://www.foto-webcam.eu/webcam/bisamberg/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-helmut-list-halle",
+    "name": "Graz",
+    "location": "Graz, Styria, Austria",
+    "lat": 47.064,
+    "lon": 15.459,
+    "url": "https://www.foto-webcam.eu/webcam/helmut-list-halle/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-hochkar",
+    "name": "Hochkar",
+    "location": "Steiermark, Austria",
+    "lat": 47.764,
+    "lon": 15.146,
+    "url": "https://www.foto-webcam.eu/webcam/hochkar/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-grimming",
+    "name": "Grimming",
+    "location": "Steiermark, Austria",
+    "lat": 47.574,
+    "lon": 13.969,
+    "url": "https://www.foto-webcam.eu/webcam/grimming/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-burg-altpernstein",
+    "name": "Burg Altpernstein",
+    "location": "Kremstal, Austria",
+    "lat": 47.91,
+    "lon": 14.166,
+    "url": "https://www.foto-webcam.eu/webcam/burg-altpernstein/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-simonyhuette",
+    "name": "Simonyhütte",
+    "location": "Dachstein, Austria",
+    "lat": 47.476,
+    "lon": 13.704,
+    "url": "https://www.foto-webcam.eu/webcam/simonyhuette/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-kronplatz",
+    "name": "Kronplatz",
+    "location": "Bruneck, South Tyrol, Italy",
+    "lat": 46.745,
+    "lon": 11.931,
+    "url": "https://www.foto-webcam.eu/webcam/kronplatz/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-trafoi",
+    "name": "Trafoi",
+    "location": "Ortler, South Tyrol, Italy",
+    "lat": 46.549,
+    "lon": 10.519,
+    "url": "https://www.foto-webcam.eu/webcam/trafoi/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-meran",
+    "name": "Meran",
+    "location": "Meran, South Tyrol, Italy",
+    "lat": 46.66,
+    "lon": 11.155,
+    "url": "https://www.foto-webcam.eu/webcam/meran/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-gantkofel",
+    "name": "Gantkofel",
+    "location": "Bozen, South Tyrol, Italy",
+    "lat": 46.502,
+    "lon": 11.33,
+    "url": "https://www.foto-webcam.eu/webcam/gantkofel/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-ritten",
+    "name": "Ritten",
+    "location": "Ritten, South Tyrol, Italy",
+    "lat": 46.547,
+    "lon": 11.465,
+    "url": "https://www.foto-webcam.eu/webcam/ritten/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-zallinger",
+    "name": "Seiser Alm",
+    "location": "Seiser Alm, South Tyrol, Italy",
+    "lat": 46.534,
+    "lon": 11.61,
+    "url": "https://www.foto-webcam.eu/webcam/zallinger/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-st-kassian",
+    "name": "San Cassiano",
+    "location": "Alta Badia, South Tyrol, Italy",
+    "lat": 46.578,
+    "lon": 11.953,
+    "url": "https://www.foto-webcam.eu/webcam/st-kassian/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-dreizinnenblick",
+    "name": "Drei Zinnenblick",
+    "location": "Toblach, South Tyrol, Italy",
+    "lat": 46.731,
+    "lon": 12.212,
+    "url": "https://www.foto-webcam.eu/webcam/dreizinnenblick/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-becherhaus",
+    "name": "Becherhaus",
+    "location": "Ridnaun, South Tyrol, Italy",
+    "lat": 46.817,
+    "lon": 11.124,
+    "url": "https://www.foto-webcam.eu/webcam/becherhaus/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-malcesine",
+    "name": "Malcesine",
+    "location": "Lago di Garda, Italy",
+    "lat": 45.765,
+    "lon": 10.783,
+    "url": "https://www.foto-webcam.eu/webcam/malcesine/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-bardolino",
+    "name": "Bardolino",
+    "location": "Lago di Garda, Italy",
+    "lat": 45.546,
+    "lon": 10.724,
+    "url": "https://www.foto-webcam.eu/webcam/bardolino/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-rheinschlucht",
+    "name": "Rheinschlucht",
+    "location": "Graubünden, Switzerland",
+    "lat": 46.816,
+    "lon": 9.426,
+    "url": "https://www.foto-webcam.eu/webcam/rheinschlucht/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-konkordiahuette",
+    "name": "Konkordiahütte",
+    "location": "Jungfrau-Aletsch, Switzerland",
+    "lat": 46.498,
+    "lon": 8.053,
+    "url": "https://www.foto-webcam.eu/webcam/konkordiahuette/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-wildhaus",
+    "name": "Wildhaus",
+    "location": "Toggenburg, Switzerland",
+    "lat": 47.203,
+    "lon": 9.351,
+    "url": "https://www.foto-webcam.eu/webcam/wildhaus/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-brunnen",
+    "name": "Brunnen",
+    "location": "Vierwaldstättersee, Switzerland",
+    "lat": 47.004,
+    "lon": 8.619,
+    "url": "https://www.foto-webcam.eu/webcam/brunnen/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-grandsberg",
+    "name": "Grandsberg",
+    "location": "Bayerischer Wald, Germany",
+    "lat": 48.859,
+    "lon": 12.744,
+    "url": "https://www.foto-webcam.eu/webcam/grandsberg/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-waldwipfelweg",
+    "name": "Waldwipfelweg",
+    "location": "Bayerischer Wald, Germany",
+    "lat": 48.908,
+    "lon": 13.024,
+    "url": "https://www.foto-webcam.eu/webcam/waldwipfelweg/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-berghaus-sonnenfels",
+    "name": "Großer Arber",
+    "location": "Bayerischer Wald, Germany",
+    "lat": 49.121,
+    "lon": 13.106,
+    "url": "https://www.foto-webcam.eu/webcam/berghaus-sonnenfels/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-dachau",
+    "name": "Dachau",
+    "location": "Dachau, Bavaria, Germany",
+    "lat": 48.262,
+    "lon": 11.442,
+    "url": "https://www.foto-webcam.eu/webcam/dachau/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-lmu-klinikum",
+    "name": "München LMU",
+    "location": "Munich, Germany",
+    "lat": 48.113,
+    "lon": 11.463,
+    "url": "https://www.foto-webcam.eu/webcam/lmu-klinikum/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-tum-olympiapark",
+    "name": "TUM Olympiapark",
+    "location": "Munich, Germany",
+    "lat": 48.172,
+    "lon": 11.55,
+    "url": "https://www.foto-webcam.eu/webcam/tum-olympiapark/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-luisenplatz",
+    "name": "Darmstadt Luisenplatz",
+    "location": "Darmstadt, Germany",
+    "lat": 49.872,
+    "lon": 8.651,
+    "url": "https://www.foto-webcam.eu/webcam/luisenplatz/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "fw-huaraz",
+    "name": "Huaraz",
+    "location": "Ancash, Peru",
+    "lat": -9.527,
+    "lon": -77.528,
+    "url": "https://www.foto-webcam.eu/webcam/huaraz/current/640.jpg",
+    "source": "foto-webcam.eu"
+  },
+  {
+    "id": "swc-bremen-marktplatz",
+    "name": "Bremen Marktplatz",
+    "location": "Bremen, Germany",
+    "lat": 53.075,
+    "lon": 8.807,
+    "url": "https://cdn.skylinewebcams.com/social5893.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "swc-bremen-weser",
+    "name": "Bremen Weser",
+    "location": "Bremen, Germany",
+    "lat": 53.077,
+    "lon": 8.81,
+    "url": "https://cdn.skylinewebcams.com/social5894.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "swc-bremen-weserstadion",
+    "name": "Bremen Weserstadion",
+    "location": "Bremen, Germany",
+    "lat": 53.066,
+    "lon": 8.838,
+    "url": "https://cdn.skylinewebcams.com/social5907.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-grassau-achental",
+    "name": "Grassau Hochplatte Achental",
+    "location": "Grassau, Bavaria, Germany",
+    "lat": 47.762,
+    "lon": 12.459,
+    "url": "https://www.terra-hd.de/grassau-achental/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-grassau-zeppelin",
+    "name": "Grassau Zeppelinhöhe",
+    "location": "Grassau, Bavaria, Germany",
+    "lat": 47.774,
+    "lon": 12.464,
+    "url": "https://www.terra-hd.de/grassau-zeppelin/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-grassau-reifinger-see",
+    "name": "Grassau Reifinger See",
+    "location": "Grassau, Bavaria, Germany",
+    "lat": 47.766,
+    "lon": 12.452,
+    "url": "https://www.terra-hd.de/grassau-reifinger-see/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-rottau",
+    "name": "Rottau Chiemgau",
+    "location": "Rottau, Bavaria, Germany",
+    "lat": 47.821,
+    "lon": 12.511,
+    "url": "https://www.terra-hd.de/rottau/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-chiemseepark-bernau-felden",
+    "name": "Bernau Chiemseepark",
+    "location": "Bernau, Bavaria, Germany",
+    "lat": 47.867,
+    "lon": 12.394,
+    "url": "https://www.terra-hd.de/chiemseepark-bernau-felden/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-tiroler-achen",
+    "name": "Tiroler Achen",
+    "location": "Grassau, Bavaria, Germany",
+    "lat": 47.779,
+    "lon": 12.456,
+    "url": "https://www.terra-hd.de/tiroler-achen/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-chiemsee",
+    "name": "Chiemsee Gstadt",
+    "location": "Gstadt am Chiemsee, Bavaria",
+    "lat": 47.888,
+    "lon": 12.398,
+    "url": "https://www.terra-hd.de/chiemsee/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-stoettham",
+    "name": "Chiemsee Stöttham",
+    "location": "Stöttham, Bavaria, Germany",
+    "lat": 47.921,
+    "lon": 12.507,
+    "url": "https://www.terra-hd.de/stoettham/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-seebruck-hafen",
+    "name": "Seebruck Hafen",
+    "location": "Seebruck am Chiemsee, Bavaria",
+    "lat": 47.932,
+    "lon": 12.469,
+    "url": "https://www.terra-hd.de/seebruck-hafen/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-seeon",
+    "name": "Seeoner See",
+    "location": "Seeon, Bavaria, Germany",
+    "lat": 47.961,
+    "lon": 12.5,
+    "url": "https://www.terra-hd.de/seeon/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-siegsdorf",
+    "name": "Siegsdorf",
+    "location": "Siegsdorf, Bavaria, Germany",
+    "lat": 47.822,
+    "lon": 12.65,
+    "url": "https://www.terra-hd.de/siegsdorf/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-siegsdorf-stoerche",
+    "name": "Siegsdorf Störche",
+    "location": "Siegsdorf, Bavaria, Germany",
+    "lat": 47.82,
+    "lon": 12.648,
+    "url": "https://www.terra-hd.de/siegsdorf-stoerche/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-neue-traunsteiner-huette",
+    "name": "Neue Traunsteiner Hütte",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.736,
+    "lon": 12.614,
+    "url": "https://www.terra-hd.de/neue-traunsteiner-huette/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-traunsteiner-skihuette",
+    "name": "Traunsteiner Skihütte",
+    "location": "Hochfelln, Bavaria, Germany",
+    "lat": 47.792,
+    "lon": 12.429,
+    "url": "https://www.terra-hd.de/traunsteiner-skihuette/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochfelln",
+    "name": "Hochfelln Chiemsee",
+    "location": "Hochfelln, Bavaria, Germany",
+    "lat": 47.793,
+    "lon": 12.41,
+    "url": "https://www.terra-hd.de/hochfelln/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochfelln2",
+    "name": "Hochfelln Süd",
+    "location": "Hochfelln, Bavaria, Germany",
+    "lat": 47.791,
+    "lon": 12.413,
+    "url": "https://www.terra-hd.de/hochfelln2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochfelln-mittel",
+    "name": "Hochfelln Bründling",
+    "location": "Hochfelln, Bavaria, Germany",
+    "lat": 47.792,
+    "lon": 12.42,
+    "url": "https://www.terra-hd.de/hochfelln-mittel/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochfelln-hfb-s",
+    "name": "Hochfelln Südwest",
+    "location": "Hochfelln, Bavaria, Germany",
+    "lat": 47.79,
+    "lon": 12.416,
+    "url": "https://www.terra-hd.de/hochfelln-hfb-s/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-staffn",
+    "name": "Staffn-Alm",
+    "location": "Marquartstein, Bavaria, Germany",
+    "lat": 47.783,
+    "lon": 12.383,
+    "url": "https://www.terra-hd.de/staffn/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-sachrang",
+    "name": "Sachrang",
+    "location": "Sachrang, Bavaria, Germany",
+    "lat": 47.744,
+    "lon": 12.19,
+    "url": "https://www.terra-hd.de/sachrang/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-sachrang2",
+    "name": "Sachrang Loipe",
+    "location": "Sachrang, Bavaria, Germany",
+    "lat": 47.743,
+    "lon": 12.197,
+    "url": "https://www.terra-hd.de/sachrang2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-sachrang-kaiserblick",
+    "name": "Sachrang Kaiserblick",
+    "location": "Sachrang, Bavaria, Germany",
+    "lat": 47.748,
+    "lon": 12.186,
+    "url": "https://www.terra-hd.de/sachrang-kaiserblick/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-sachrang-oelberg",
+    "name": "Sachrang Ölbergkapelle",
+    "location": "Sachrang, Bavaria, Germany",
+    "lat": 47.748,
+    "lon": 12.183,
+    "url": "https://www.terra-hd.de/sachrang-oelberg/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-sachrang-reichenau",
+    "name": "Sachrang Reichenau",
+    "location": "Sachrang, Bavaria, Germany",
+    "lat": 47.744,
+    "lon": 12.192,
+    "url": "https://www.terra-hd.de/sachrang-reichenau/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-aschau1",
+    "name": "Aschau Fellerer",
+    "location": "Aschau im Chiemgau, Bavaria",
+    "lat": 47.778,
+    "lon": 12.322,
+    "url": "https://www.terra-hd.de/aschau1/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-aschau2",
+    "name": "Hohenaschau",
+    "location": "Aschau im Chiemgau, Bavaria",
+    "lat": 47.78,
+    "lon": 12.325,
+    "url": "https://www.terra-hd.de/aschau2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-aschau3",
+    "name": "Aschau Winkler",
+    "location": "Aschau im Chiemgau, Bavaria",
+    "lat": 47.779,
+    "lon": 12.317,
+    "url": "https://www.terra-hd.de/aschau3/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-aschau4",
+    "name": "Aschau Cafe Pauli",
+    "location": "Aschau im Chiemgau, Bavaria",
+    "lat": 47.781,
+    "lon": 12.33,
+    "url": "https://www.terra-hd.de/aschau4/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-aschau-hochseilgarten",
+    "name": "Aschau Hochseilgarten",
+    "location": "Aschau im Chiemgau, Bavaria",
+    "lat": 47.781,
+    "lon": 12.324,
+    "url": "https://www.terra-hd.de/aschau-hochseilgarten/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-prienavera",
+    "name": "Prienavera Prien",
+    "location": "Prien am Chiemsee, Bavaria",
+    "lat": 47.854,
+    "lon": 12.351,
+    "url": "https://www.terra-hd.de/prienavera/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-priener-huette1",
+    "name": "Priener Hütte Süd",
+    "location": "Kampenwand, Bavaria, Germany",
+    "lat": 47.738,
+    "lon": 12.296,
+    "url": "https://www.terra-hd.de/priener-huette1/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-priener-huette2",
+    "name": "Priener Hütte West",
+    "location": "Kampenwand, Bavaria, Germany",
+    "lat": 47.738,
+    "lon": 12.295,
+    "url": "https://www.terra-hd.de/priener-huette2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-bernau1",
+    "name": "Bernau Bergham",
+    "location": "Bernau am Chiemsee, Bavaria",
+    "lat": 47.873,
+    "lon": 12.396,
+    "url": "https://www.terra-hd.de/bernau1/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-bernau2",
+    "name": "Bernau Hittenkirchen",
+    "location": "Bernau am Chiemsee, Bavaria",
+    "lat": 47.862,
+    "lon": 12.391,
+    "url": "https://www.terra-hd.de/bernau2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-bernau-felden",
+    "name": "Bernau Felden",
+    "location": "Bernau am Chiemsee, Bavaria",
+    "lat": 47.872,
+    "lon": 12.4,
+    "url": "https://www.terra-hd.de/bernau-felden/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-eggstaett",
+    "name": "Turmfalken Eggstätt",
+    "location": "Eggstätt, Bavaria, Germany",
+    "lat": 47.9,
+    "lon": 12.398,
+    "url": "https://www.terra-hd.de/eggstaett/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-erlstaett",
+    "name": "Erlstätt",
+    "location": "Erlstätt, Bavaria, Germany",
+    "lat": 47.932,
+    "lon": 12.465,
+    "url": "https://www.terra-hd.de/erlstaett/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hartsee",
+    "name": "Hartsee",
+    "location": "Hartsee, Bavaria, Germany",
+    "lat": 48.035,
+    "lon": 12.632,
+    "url": "https://www.terra-hd.de/hartsee/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-klinik-chiemseewinkel",
+    "name": "Klinik ChiemseeWinkel",
+    "location": "Chiemsee, Bavaria, Germany",
+    "lat": 47.868,
+    "lon": 12.46,
+    "url": "https://www.terra-hd.de/klinik-chiemseewinkel/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-pfaffing",
+    "name": "Pfaffing",
+    "location": "Pfaffing, Bavaria, Germany",
+    "lat": 47.993,
+    "lon": 12.131,
+    "url": "https://www.terra-hd.de/pfaffing/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-pullach",
+    "name": "Seebruck Alz",
+    "location": "Seebruck, Bavaria, Germany",
+    "lat": 47.93,
+    "lon": 12.46,
+    "url": "https://www.terra-hd.de/pullach/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-wimpasing",
+    "name": "Vachendorf Wimpasing",
+    "location": "Vachendorf, Bavaria, Germany",
+    "lat": 47.93,
+    "lon": 12.742,
+    "url": "https://www.terra-hd.de/wimpasing/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-ruhpolding",
+    "name": "Ruhpolding Eggerschneid",
+    "location": "Ruhpolding, Bavaria, Germany",
+    "lat": 47.768,
+    "lon": 12.648,
+    "url": "https://www.terra-hd.de/ruhpolding/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-ruhpolding2",
+    "name": "Ruhpolding HELDs",
+    "location": "Ruhpolding, Bavaria, Germany",
+    "lat": 47.772,
+    "lon": 12.653,
+    "url": "https://www.terra-hd.de/ruhpolding2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-ruhpolding-cc",
+    "name": "Ruhpolding Ortseingang",
+    "location": "Ruhpolding, Bavaria, Germany",
+    "lat": 47.773,
+    "lon": 12.648,
+    "url": "https://www.terra-hd.de/ruhpolding-cc/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-ruhpolding-golfplatz",
+    "name": "Ruhpolding Golfplatz",
+    "location": "Ruhpolding, Bavaria, Germany",
+    "lat": 47.764,
+    "lon": 12.642,
+    "url": "https://www.terra-hd.de/ruhpolding-golfplatz/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-ruhpolding-zell",
+    "name": "Ruhpolding Zell",
+    "location": "Ruhpolding, Bavaria, Germany",
+    "lat": 47.758,
+    "lon": 12.618,
+    "url": "https://www.terra-hd.de/ruhpolding-zell/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-freizeitpark-ruhpolding",
+    "name": "Freizeitpark Ruhpolding",
+    "location": "Ruhpolding, Bavaria, Germany",
+    "lat": 47.77,
+    "lon": 12.655,
+    "url": "https://www.terra-hd.de/freizeitpark-ruhpolding/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-turmfalken-ruhpolding",
+    "name": "Turmfalken Ruhpolding",
+    "location": "Ruhpolding, Bavaria, Germany",
+    "lat": 47.772,
+    "lon": 12.65,
+    "url": "https://www.terra-hd.de/turmfalken-ruhpolding/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-unternberg",
+    "name": "Unternberg",
+    "location": "Unternberg, Bavaria, Germany",
+    "lat": 47.774,
+    "lon": 12.601,
+    "url": "https://www.terra-hd.de/unternberg/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-unternberg2",
+    "name": "Unternberg Panorama",
+    "location": "Unternberg, Bavaria, Germany",
+    "lat": 47.775,
+    "lon": 12.603,
+    "url": "https://www.terra-hd.de/unternberg2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-unternberg-bergstation",
+    "name": "Unternberg Bergstation",
+    "location": "Unternberg, Bavaria, Germany",
+    "lat": 47.776,
+    "lon": 12.598,
+    "url": "https://www.terra-hd.de/unternberg-bergstation/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-unternbergalm",
+    "name": "Unternbergalm",
+    "location": "Unternberg, Bavaria, Germany",
+    "lat": 47.774,
+    "lon": 12.605,
+    "url": "https://www.terra-hd.de/unternbergalm/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-stoana-alm",
+    "name": "Stoana Alm",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.79,
+    "lon": 12.655,
+    "url": "https://www.terra-hd.de/stoana-alm/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-stoisser-alm",
+    "name": "Stoißer Alm",
+    "location": "Stoißer Alm, Bavaria, Germany",
+    "lat": 47.81,
+    "lon": 12.65,
+    "url": "https://www.terra-hd.de/stoisser-alm/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-halsgrube",
+    "name": "Teufelskopf Halsgrube",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.808,
+    "lon": 12.682,
+    "url": "https://www.terra-hd.de/halsgrube/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-surberg-hub",
+    "name": "Surberg Hub",
+    "location": "Surberg, Bavaria, Germany",
+    "lat": 47.882,
+    "lon": 12.718,
+    "url": "https://www.terra-hd.de/surberg-hub/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-traunstein",
+    "name": "Stadt Traunstein",
+    "location": "Traunstein, Bavaria, Germany",
+    "lat": 47.868,
+    "lon": 12.641,
+    "url": "https://www.terra-hd.de/traunstein/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-trostberg",
+    "name": "Trostberg Alztec",
+    "location": "Trostberg, Bavaria, Germany",
+    "lat": 47.999,
+    "lon": 12.553,
+    "url": "https://www.terra-hd.de/trostberg/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-fridolfing",
+    "name": "Fridolfing",
+    "location": "Fridolfing, Bavaria, Germany",
+    "lat": 47.872,
+    "lon": 12.79,
+    "url": "https://www.terra-hd.de/fridolfing/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-fridolfing-turmfalken",
+    "name": "Turmfalken Fridolfing",
+    "location": "Fridolfing, Bavaria, Germany",
+    "lat": 47.87,
+    "lon": 12.792,
+    "url": "https://www.terra-hd.de/fridolfing-turmfalken/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-rauschberg",
+    "name": "Rauschberg",
+    "location": "Rauschberg, Bavaria, Germany",
+    "lat": 47.802,
+    "lon": 12.862,
+    "url": "https://www.terra-hd.de/rauschberg/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hoegl",
+    "name": "Högl",
+    "location": "Högl, Bavaria, Germany",
+    "lat": 47.793,
+    "lon": 12.963,
+    "url": "https://www.terra-hd.de/hoegl/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-maerchenpark",
+    "name": "Märchenpark",
+    "location": "Ruhpolding, Bavaria, Germany",
+    "lat": 47.755,
+    "lon": 12.678,
+    "url": "https://www.terra-hd.de/maerchenpark/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-heutal",
+    "name": "Unken Heutal",
+    "location": "Unken, Austria",
+    "lat": 47.641,
+    "lon": 12.733,
+    "url": "https://www.terra-hd.de/heutal/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-heutal2",
+    "name": "Heutaler Hof",
+    "location": "Heutal, Austria",
+    "lat": 47.638,
+    "lon": 12.72,
+    "url": "https://www.terra-hd.de/heutal2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-heutal-bergstation",
+    "name": "Heutal Bergstation",
+    "location": "Heutal, Austria",
+    "lat": 47.64,
+    "lon": 12.713,
+    "url": "https://www.terra-hd.de/heutal-bergstation/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-heutal-talstation",
+    "name": "Heutal Talstation",
+    "location": "Heutal, Austria",
+    "lat": 47.638,
+    "lon": 12.73,
+    "url": "https://www.terra-hd.de/heutal-talstation/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-heutal-snow-stake",
+    "name": "Heutal Snow Stake",
+    "location": "Heutal, Austria",
+    "lat": 47.639,
+    "lon": 12.716,
+    "url": "https://www.terra-hd.de/heutal-snow-stake/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-winklmoosalm",
+    "name": "Winklmoosalm",
+    "location": "Winklmoosalm, Bavaria, Germany",
+    "lat": 47.682,
+    "lon": 12.449,
+    "url": "https://www.terra-hd.de/winklmoosalm/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-winklmoosalm-snow-stake",
+    "name": "Winklmoosalm Snow Stake",
+    "location": "Winklmoosalm, Bavaria, Germany",
+    "lat": 47.68,
+    "lon": 12.45,
+    "url": "https://www.terra-hd.de/winklmoosalm-snow-stake/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-oberstaufen",
+    "name": "Oberstaufen Hochgrat",
+    "location": "Oberstaufen, Bavaria, Germany",
+    "lat": 47.562,
+    "lon": 10.02,
+    "url": "https://www.terra-hd.de/oberstaufen/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-oberstaufen2",
+    "name": "Oberstaufen Steibis",
+    "location": "Oberstaufen, Bavaria, Germany",
+    "lat": 47.553,
+    "lon": 10.083,
+    "url": "https://www.terra-hd.de/oberstaufen2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-oberstaufen-schlossberg",
+    "name": "Oberstaufen Schlossberg",
+    "location": "Oberstaufen, Bavaria, Germany",
+    "lat": 47.557,
+    "lon": 10.016,
+    "url": "https://www.terra-hd.de/oberstaufen-schlossberg/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochgratbahn",
+    "name": "Hochgratbahn Oberstaufen",
+    "location": "Oberstaufen, Bavaria, Germany",
+    "lat": 47.568,
+    "lon": 10.018,
+    "url": "https://www.terra-hd.de/hochgratbahn/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-imbergbahn",
+    "name": "Imbergbahn Steibis",
+    "location": "Steibis, Bavaria, Germany",
+    "lat": 47.557,
+    "lon": 10.08,
+    "url": "https://www.terra-hd.de/imbergbahn/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-max-wild-arena",
+    "name": "Max Wild Arena Isny",
+    "location": "Isny im Allgäu, Bavaria, Germany",
+    "lat": 47.693,
+    "lon": 10.036,
+    "url": "https://www.terra-hd.de/max-wild-arena/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochstubai",
+    "name": "Hochstubaihütte",
+    "location": "Stubaier Alpen, Austria",
+    "lat": 46.835,
+    "lon": 11.084,
+    "url": "https://www.terra-hd.de/hochstubai/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochstubai2",
+    "name": "Hochstubaihütte West",
+    "location": "Stubaier Alpen, Austria",
+    "lat": 46.834,
+    "lon": 11.082,
+    "url": "https://www.terra-hd.de/hochstubai2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-geraer-huette",
+    "name": "Geraer Hütte",
+    "location": "Stubaier Alpen, Austria",
+    "lat": 47.067,
+    "lon": 11.222,
+    "url": "https://www.terra-hd.de/geraer-huette/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hildesheimer-huette",
+    "name": "Hildesheimer Hütte",
+    "location": "Stubaier Alpen, Austria",
+    "lat": 46.893,
+    "lon": 11.067,
+    "url": "https://www.terra-hd.de/hildesheimer-huette/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-spitzsteinhaus",
+    "name": "Spitzsteinhaus",
+    "location": "Spitzstein, Bavaria, Germany",
+    "lat": 47.712,
+    "lon": 12.258,
+    "url": "https://www.terra-hd.de/spitzsteinhaus/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-lenggries2",
+    "name": "Lenggries Geierstein",
+    "location": "Lenggries, Bavaria, Germany",
+    "lat": 47.681,
+    "lon": 11.58,
+    "url": "https://www.terra-hd.de/lenggries2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-mittenwald",
+    "name": "Mittenwald",
+    "location": "Mittenwald, Bavaria, Germany",
+    "lat": 47.44,
+    "lon": 11.263,
+    "url": "https://www.terra-hd.de/mittenwald/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-bruennsteinhaus",
+    "name": "Brünnsteinhaus",
+    "location": "Brünnstein, Bavaria, Germany",
+    "lat": 47.65,
+    "lon": 11.85,
+    "url": "https://www.terra-hd.de/bruennsteinhaus/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hintersee",
+    "name": "Ramsau Hintersee",
+    "location": "Ramsau, Bavaria, Germany",
+    "lat": 47.596,
+    "lon": 12.873,
+    "url": "https://www.terra-hd.de/hintersee/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-weidener-huette",
+    "name": "Weidener Hütte West",
+    "location": "Weidener Hütte, Austria",
+    "lat": 47.213,
+    "lon": 11.818,
+    "url": "https://www.terra-hd.de/weidener-huette/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-weidener-huette2",
+    "name": "Weidener Hütte Süd",
+    "location": "Weidener Hütte, Austria",
+    "lat": 47.211,
+    "lon": 11.82,
+    "url": "https://www.terra-hd.de/weidener-huette2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-weidener-huette3",
+    "name": "Weidener Hütte Nord",
+    "location": "Weidener Hütte, Austria",
+    "lat": 47.215,
+    "lon": 11.817,
+    "url": "https://www.terra-hd.de/weidener-huette3/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochgseng",
+    "name": "Hochgseng",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.738,
+    "lon": 12.605,
+    "url": "https://www.terra-hd.de/hochgseng/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-garmisch",
+    "name": "Kandaharlodge Zugspitze",
+    "location": "Garmisch-Partenkirchen, Bavaria",
+    "lat": 47.479,
+    "lon": 11.094,
+    "url": "https://www.terra-hd.de/garmisch/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-steinlingalm1",
+    "name": "Steinlingalm Süd",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.792,
+    "lon": 12.641,
+    "url": "https://www.terra-hd.de/steinlingalm1/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-steinlingalm2",
+    "name": "Steinlingalm West",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.792,
+    "lon": 12.639,
+    "url": "https://www.terra-hd.de/steinlingalm2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-steinlingalm3",
+    "name": "Steinlingalm Ost",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.793,
+    "lon": 12.643,
+    "url": "https://www.terra-hd.de/steinlingalm3/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochlehen",
+    "name": "Hochlehen SO",
+    "location": "Hochlehen, Bavaria, Germany",
+    "lat": 47.771,
+    "lon": 12.583,
+    "url": "https://www.terra-hd.de/hochlehen/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochlehen2",
+    "name": "Hochlehen N",
+    "location": "Hochlehen, Bavaria, Germany",
+    "lat": 47.773,
+    "lon": 12.582,
+    "url": "https://www.terra-hd.de/hochlehen2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochwald",
+    "name": "Hochwald Nord",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.812,
+    "lon": 12.66,
+    "url": "https://www.terra-hd.de/hochwald/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochwald2",
+    "name": "Hochwald West",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.81,
+    "lon": 12.658,
+    "url": "https://www.terra-hd.de/hochwald2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochwald3",
+    "name": "Hochwald Ost",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.811,
+    "lon": 12.663,
+    "url": "https://www.terra-hd.de/hochwald3/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hochwald4",
+    "name": "Hochwald Süd",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.809,
+    "lon": 12.661,
+    "url": "https://www.terra-hd.de/hochwald4/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-teufelskopf",
+    "name": "Teufelskopf",
+    "location": "Chiemgau, Bavaria, Germany",
+    "lat": 47.817,
+    "lon": 12.68,
+    "url": "https://www.terra-hd.de/teufelskopf/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-badendorf",
+    "name": "Bad Endorf EDPC",
+    "location": "Bad Endorf, Bavaria, Germany",
+    "lat": 47.906,
+    "lon": 12.302,
+    "url": "https://www.terra-hd.de/badendorf/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-wasserburg",
+    "name": "Wasserburg am Inn",
+    "location": "Wasserburg am Inn, Bavaria",
+    "lat": 48.058,
+    "lon": 12.232,
+    "url": "https://www.terra-hd.de/wasserburg/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-muensing",
+    "name": "Münsing Dr. Munzinger",
+    "location": "Münsing, Bavaria, Germany",
+    "lat": 47.88,
+    "lon": 11.38,
+    "url": "https://www.terra-hd.de/muensing/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-th-rosenheim",
+    "name": "TH Rosenheim",
+    "location": "Rosenheim, Bavaria, Germany",
+    "lat": 47.86,
+    "lon": 12.113,
+    "url": "https://www.terra-hd.de/th-rosenheim/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-niederndorferberg",
+    "name": "Niederndorferberg",
+    "location": "Niederndorf, Tirol, Austria",
+    "lat": 47.66,
+    "lon": 12.27,
+    "url": "https://www.terra-hd.de/niederndorferberg/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-attersee",
+    "name": "Attersee Salzkammergut",
+    "location": "Attersee, Austria",
+    "lat": 47.887,
+    "lon": 13.54,
+    "url": "https://www.terra-hd.de/attersee/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-attersee2",
+    "name": "Attersee Höllengebirge",
+    "location": "Attersee, Austria",
+    "lat": 47.889,
+    "lon": 13.542,
+    "url": "https://www.terra-hd.de/attersee2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-deutschesmuseum",
+    "name": "Deutsches Museum NO",
+    "location": "München, Bavaria, Germany",
+    "lat": 48.13,
+    "lon": 11.583,
+    "url": "https://www.terra-hd.de/deutschesmuseum/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-deutschesmuseum2",
+    "name": "Deutsches Museum NW",
+    "location": "München, Bavaria, Germany",
+    "lat": 48.131,
+    "lon": 11.581,
+    "url": "https://www.terra-hd.de/deutschesmuseum2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-deutschesmuseum3",
+    "name": "Deutsches Museum",
+    "location": "München, Bavaria, Germany",
+    "lat": 48.13,
+    "lon": 11.582,
+    "url": "https://www.terra-hd.de/deutschesmuseum3/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-deutschesmuseum4",
+    "name": "Deutsches Museum SW",
+    "location": "München, Bavaria, Germany",
+    "lat": 48.129,
+    "lon": 11.581,
+    "url": "https://www.terra-hd.de/deutschesmuseum4/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-boehmerwaldturm1",
+    "name": "Böhmerwaldturm Süd",
+    "location": "Böhmerwald, Bavaria, Germany",
+    "lat": 48.782,
+    "lon": 13.839,
+    "url": "https://www.terra-hd.de/boehmerwaldturm1/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-boehmerwaldturm2",
+    "name": "Böhmerwaldturm Ost",
+    "location": "Böhmerwald, Bavaria, Germany",
+    "lat": 48.783,
+    "lon": 13.841,
+    "url": "https://www.terra-hd.de/boehmerwaldturm2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-boehmerwaldturm3",
+    "name": "Böhmerwaldturm West",
+    "location": "Böhmerwald, Bavaria, Germany",
+    "lat": 48.78,
+    "lon": 13.836,
+    "url": "https://www.terra-hd.de/boehmerwaldturm3/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-stadlern",
+    "name": "Stadlern Kirche",
+    "location": "Stadlern, Bavaria, Germany",
+    "lat": 49.432,
+    "lon": 12.654,
+    "url": "https://www.terra-hd.de/stadlern/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-krompach",
+    "name": "Krompach",
+    "location": "Böhmen, Czech Republic",
+    "lat": 50.898,
+    "lon": 14.551,
+    "url": "https://www.terra-hd.de/krompach/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-vlcihora",
+    "name": "Vlčí Hora Wolfsberg",
+    "location": "Böhmerwald, Czech Republic",
+    "lat": 48.783,
+    "lon": 13.805,
+    "url": "https://www.terra-hd.de/vlcihora/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hildesheim",
+    "name": "Stadt Hildesheim",
+    "location": "Hildesheim, Lower Saxony, Germany",
+    "lat": 52.15,
+    "lon": 9.95,
+    "url": "https://www.terra-hd.de/hildesheim/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hildesheim-lilie",
+    "name": "Hildesheim Lilie",
+    "location": "Hildesheim, Lower Saxony, Germany",
+    "lat": 52.151,
+    "lon": 9.949,
+    "url": "https://www.terra-hd.de/hildesheim-lilie/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hildesheim-gefahrenabwehrzentrum-1",
+    "name": "Hildesheim Gefahrenabwehr 1",
+    "location": "Hildesheim, Germany",
+    "lat": 52.149,
+    "lon": 9.952,
+    "url": "https://www.terra-hd.de/hildesheim-gefahrenabwehrzentrum-1/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hildesheim-gefahrenabwehrzentrum-2",
+    "name": "Hildesheim Gefahrenabwehr 2",
+    "location": "Hildesheim, Germany",
+    "lat": 52.149,
+    "lon": 9.953,
+    "url": "https://www.terra-hd.de/hildesheim-gefahrenabwehrzentrum-2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hildesheim-gefahrenabwehrzentrum-3",
+    "name": "Hildesheim Gefahrenabwehr 3",
+    "location": "Hildesheim, Germany",
+    "lat": 52.15,
+    "lon": 9.954,
+    "url": "https://www.terra-hd.de/hildesheim-gefahrenabwehrzentrum-3/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-badpyrmont",
+    "name": "Bad Pyrmont",
+    "location": "Bad Pyrmont, Lower Saxony, Germany",
+    "lat": 51.984,
+    "lon": 9.271,
+    "url": "https://www.terra-hd.de/badpyrmont/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-mik3",
+    "name": "Bad Pyrmont EDVW",
+    "location": "Bad Pyrmont, Germany",
+    "lat": 51.982,
+    "lon": 9.273,
+    "url": "https://www.terra-hd.de/mik3/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-moormerland",
+    "name": "Moormerland Ostfriesland",
+    "location": "Moormerland, Lower Saxony, Germany",
+    "lat": 53.363,
+    "lon": 7.468,
+    "url": "https://www.terra-hd.de/moormerland/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-moormerland-storch",
+    "name": "Storchennest Moormerland",
+    "location": "Moormerland, Germany",
+    "lat": 53.361,
+    "lon": 7.47,
+    "url": "https://www.terra-hd.de/moormerland-storch/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-schuettorf-wanderfalken",
+    "name": "Schüttorf Wanderfalken",
+    "location": "Schüttorf, Lower Saxony, Germany",
+    "lat": 52.317,
+    "lon": 7.22,
+    "url": "https://www.terra-hd.de/schuettorf-wanderfalken/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-marburg",
+    "name": "Marburg",
+    "location": "Marburg, Hesse, Germany",
+    "lat": 50.808,
+    "lon": 8.774,
+    "url": "https://www.terra-hd.de/marburg/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-starkenburg",
+    "name": "Starkenburg Mosel",
+    "location": "Enkirch, Rhineland-Palatinate, Germany",
+    "lat": 49.98,
+    "lon": 7.121,
+    "url": "https://www.terra-hd.de/starkenburg/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-starkenburg2",
+    "name": "Starkenburg Enkirch",
+    "location": "Enkirch, Rhineland-Palatinate, Germany",
+    "lat": 49.981,
+    "lon": 7.12,
+    "url": "https://www.terra-hd.de/starkenburg2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-donaueschingen2",
+    "name": "Donauursprung Brigach",
+    "location": "Donaueschingen, Baden-Württemberg",
+    "lat": 47.952,
+    "lon": 8.503,
+    "url": "https://www.terra-hd.de/donaueschingen2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-donaueschingen3",
+    "name": "Donauursprung Breg",
+    "location": "Donaueschingen, Baden-Württemberg",
+    "lat": 47.95,
+    "lon": 8.501,
+    "url": "https://www.terra-hd.de/donaueschingen3/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-donaueschingen4",
+    "name": "Donaueschingen Breg2",
+    "location": "Donaueschingen, Baden-Württemberg",
+    "lat": 47.951,
+    "lon": 8.502,
+    "url": "https://www.terra-hd.de/donaueschingen4/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-naturenergie6",
+    "name": "Donaueschingen Schlosspark",
+    "location": "Donaueschingen, Baden-Württemberg",
+    "lat": 47.953,
+    "lon": 8.499,
+    "url": "https://www.terra-hd.de/naturenergie6/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-naturenergie5",
+    "name": "Rümmingen Chanderli",
+    "location": "Rümmingen, Baden-Württemberg, Germany",
+    "lat": 47.618,
+    "lon": 7.622,
+    "url": "https://www.terra-hd.de/naturenergie5/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-araneus",
+    "name": "Araneus Mühlacker",
+    "location": "Mühlacker, Baden-Württemberg, Germany",
+    "lat": 48.945,
+    "lon": 8.84,
+    "url": "https://www.terra-hd.de/araneus/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-waldseilgarten-boxberg",
+    "name": "Erlebnispark Boxberg",
+    "location": "Boxberg, Baden-Württemberg, Germany",
+    "lat": 49.472,
+    "lon": 9.656,
+    "url": "https://www.terra-hd.de/waldseilgarten-boxberg/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-rodenbach",
+    "name": "Rodenbach Großes Mausohr",
+    "location": "Rodenbach, Hesse, Germany",
+    "lat": 50.148,
+    "lon": 9.012,
+    "url": "https://www.terra-hd.de/rodenbach/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-rodenbach2",
+    "name": "Rodenbach Großes Mausohr 2",
+    "location": "Rodenbach, Hesse, Germany",
+    "lat": 50.147,
+    "lon": 9.013,
+    "url": "https://www.terra-hd.de/rodenbach2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-augsburg-ulrich-afra",
+    "name": "Augsburg Wanderfalken",
+    "location": "Augsburg, Bavaria, Germany",
+    "lat": 48.369,
+    "lon": 10.894,
+    "url": "https://www.terra-hd.de/augsburg-ulrich-afra/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-wanderfalke-1",
+    "name": "Wanderfalken Hohenkammer 1",
+    "location": "Hohenkammer, Bavaria, Germany",
+    "lat": 48.378,
+    "lon": 11.67,
+    "url": "https://www.terra-hd.de/wanderfalke-1/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-wanderfalke-2",
+    "name": "Wanderfalken Hohenkammer 2",
+    "location": "Hohenkammer, Bavaria, Germany",
+    "lat": 48.379,
+    "lon": 11.671,
+    "url": "https://www.terra-hd.de/wanderfalke-2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-unterelchingen",
+    "name": "Storchennest Unterelchingen",
+    "location": "Unterelchingen, Bavaria, Germany",
+    "lat": 48.338,
+    "lon": 10.101,
+    "url": "https://www.terra-hd.de/unterelchingen/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-unterelchingen-turmfalken",
+    "name": "Turmfalken Unterelchingen",
+    "location": "Unterelchingen, Bavaria, Germany",
+    "lat": 48.339,
+    "lon": 10.1,
+    "url": "https://www.terra-hd.de/unterelchingen-turmfalken/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-turmfalken-kgmemmingen",
+    "name": "Turmfalken Memmingen",
+    "location": "Memmingen, Bavaria, Germany",
+    "lat": 47.982,
+    "lon": 10.183,
+    "url": "https://www.terra-hd.de/turmfalken-kgmemmingen/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-storch-rgsuntermain",
+    "name": "Storchennest Kleinostheim",
+    "location": "Kleinostheim, Bavaria, Germany",
+    "lat": 50.001,
+    "lon": 9.023,
+    "url": "https://www.terra-hd.de/storch-rgsuntermain/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-storch-winkl",
+    "name": "Storchennest Winkl",
+    "location": "Winkl, Bavaria, Germany",
+    "lat": 47.882,
+    "lon": 12.798,
+    "url": "https://www.terra-hd.de/storch-winkl/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-waischenfeld32",
+    "name": "Fledermaushaus Waischenfeld 1",
+    "location": "Waischenfeld, Bavaria, Germany",
+    "lat": 49.842,
+    "lon": 11.35,
+    "url": "https://www.terra-hd.de/waischenfeld32/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-waischenfeld35",
+    "name": "Fledermaushaus Waischenfeld 2",
+    "location": "Waischenfeld, Bavaria, Germany",
+    "lat": 49.843,
+    "lon": 11.351,
+    "url": "https://www.terra-hd.de/waischenfeld35/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-waischenfeld36",
+    "name": "Fledermaushaus Waischenfeld 3",
+    "location": "Waischenfeld, Bavaria, Germany",
+    "lat": 49.844,
+    "lon": 11.352,
+    "url": "https://www.terra-hd.de/waischenfeld36/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hufeisennase",
+    "name": "Fledermaushaus Hohenburg 1",
+    "location": "Hohenburg, Bavaria, Germany",
+    "lat": 49.352,
+    "lon": 11.803,
+    "url": "https://www.terra-hd.de/hufeisennase/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-hufeisennase-waermeglocke",
+    "name": "Fledermaushaus Hohenburg 2",
+    "location": "Hohenburg, Bavaria, Germany",
+    "lat": 49.353,
+    "lon": 11.804,
+    "url": "https://www.terra-hd.de/hufeisennase-waermeglocke/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-cc-live",
+    "name": "Chiemgau Coaster",
+    "location": "Ruhpolding, Bavaria, Germany",
+    "lat": 47.77,
+    "lon": 12.645,
+    "url": "https://www.terra-hd.de/cc-live/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-adlerfressplatz",
+    "name": "Adlerfressplatz",
+    "location": "Übersee, Bavaria, Germany",
+    "lat": 47.812,
+    "lon": 12.498,
+    "url": "https://www.terra-hd.de/adlerfressplatz/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-futterstelle-lgs",
+    "name": "Futterstelle LBV",
+    "location": "Bavaria, Germany",
+    "lat": 47.862,
+    "lon": 11.853,
+    "url": "https://www.terra-hd.de/futterstelle-lgs/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-bartgeier1",
+    "name": "Bartgeier Projekt 1",
+    "location": "Nationalpark Hohe Tauern, Austria",
+    "lat": 47.142,
+    "lon": 12.671,
+    "url": "https://www.terra-hd.de/bartgeier1/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-bartgeier2",
+    "name": "Bartgeier Projekt 2",
+    "location": "Nationalpark Hohe Tauern, Austria",
+    "lat": 47.143,
+    "lon": 12.672,
+    "url": "https://www.terra-hd.de/bartgeier2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-dlr-windenergie",
+    "name": "DLR OPUS 2",
+    "location": "Oberpfaffenhofen, Bavaria, Germany",
+    "lat": 48.086,
+    "lon": 11.281,
+    "url": "https://www.terra-hd.de/dlr-windenergie/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-dlr-windenergie-live",
+    "name": "DLR OPUS 1",
+    "location": "Oberpfaffenhofen, Bavaria, Germany",
+    "lat": 48.087,
+    "lon": 11.282,
+    "url": "https://www.terra-hd.de/dlr-windenergie-live/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-terlan",
+    "name": "Terlan",
+    "location": "Terlan, Südtirol, Italy",
+    "lat": 46.543,
+    "lon": 11.218,
+    "url": "https://www.terra-hd.de/terlan/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-europahuette",
+    "name": "Landshuter Europahütte",
+    "location": "Alps, Austria",
+    "lat": 47.244,
+    "lon": 11.72,
+    "url": "https://www.terra-hd.de/europahuette/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-nabu-koeln1",
+    "name": "NABU Köln Mauersegler 1",
+    "location": "Köln, North Rhine-Westphalia",
+    "lat": 50.94,
+    "lon": 6.96,
+    "url": "https://www.terra-hd.de/nabu-koeln1/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-nabu-koeln2",
+    "name": "NABU Köln Mauersegler 2",
+    "location": "Köln, North Rhine-Westphalia",
+    "lat": 50.94,
+    "lon": 6.961,
+    "url": "https://www.terra-hd.de/nabu-koeln2/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-feilnbach-eder",
+    "name": "Bad Feilnbach Holzbau Eder",
+    "location": "Bad Feilnbach, Bavaria, Germany",
+    "lat": 47.789,
+    "lon": 12.014,
+    "url": "https://www.terra-hd.de/feilnbach-eder/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-mtb",
+    "name": "Wonneberg MTB",
+    "location": "Wonneberg, Bavaria, Germany",
+    "lat": 47.815,
+    "lon": 12.604,
+    "url": "https://www.terra-hd.de/mtb/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-grundlsee-rostiger-anker",
+    "name": "Grundlsee Rostiger Anker",
+    "location": "Grundlsee, Styria, Austria",
+    "lat": 47.629,
+    "lon": 13.82,
+    "url": "https://www.terra-hd.de/grundlsee-rostiger-anker/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "thd-domberg1",
+    "name": "Kardinal-Döpfner-Haus Freising",
+    "location": "Freising, Bavaria, Germany",
+    "lat": 48.4,
+    "lon": 11.74,
+    "url": "https://www.terra-hd.de/domberg1/img/current/1200.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-norderoog-sunset",
+    "name": "Norderoog Sunset",
+    "location": "Hallig Norderoog, Schleswig-Holstein, Germany",
+    "lat": 54.483,
+    "lon": 8.517,
+    "url": "https://webcam.solutionshosted.de/memfs/6c93dfce-8516-4090-9cc1-03ee6619963c.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-norderoog-huette",
+    "name": "Norderoog Hütte NW",
+    "location": "Hallig Norderoog, Schleswig-Holstein, Germany",
+    "lat": 54.484,
+    "lon": 8.518,
+    "url": "https://webcam.solutionshosted.de/memfs/63261973-d98d-4115-9996-183b5b94e03f.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-pellworm-faehre",
+    "name": "Pellworm Fähre",
+    "location": "Pellworm, Schleswig-Holstein, Germany",
+    "lat": 54.533,
+    "lon": 8.683,
+    "url": "https://webcam.solutionshosted.de/memfs/e3d57c7a-0978-4464-a415-994b21cdd9c5.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-pellworm-deich",
+    "name": "Pellworm Nordermitteldeich",
+    "location": "Pellworm, Schleswig-Holstein, Germany",
+    "lat": 54.541,
+    "lon": 8.67,
+    "url": "https://webcam.solutionshosted.de/memfs/5002f63e-7e0f-41f2-9398-d3c8e6e2894a.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-nabu1",
+    "name": "NABU Vogelstation 1",
+    "location": "NABU Vogelstation, Mühlenberger Loch, Hamburg, Germany",
+    "lat": 53.5443,
+    "lon": 9.7925,
+    "url": "https://webcam.solutionshosted.de/memfs/f8e2a4cb-f57f-4f07-9732-3aa51906e66b.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-nabu2",
+    "name": "NABU Vogelstation 2",
+    "location": "NABU Vogelstation, Mühlenberger Loch, Hamburg, Germany",
+    "lat": 53.5444,
+    "lon": 9.793,
+    "url": "https://webcam.solutionshosted.de/memfs/d9888b22-167d-42e2-8ca8-e189c910e0eb.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-nabu3",
+    "name": "NABU Vogelstation 3",
+    "location": "NABU Vogelstation, Mühlenberger Loch, Hamburg, Germany",
+    "lat": 53.5446,
+    "lon": 9.7928,
+    "url": "https://webcam.solutionshosted.de/memfs/dd0ecd5f-1585-4e5b-b27b-fef329878cac.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-nabu4",
+    "name": "NABU Vogelstation 4",
+    "location": "NABU Vogelstation, Mühlenberger Loch, Hamburg, Germany",
+    "lat": 53.5448,
+    "lon": 9.7932,
+    "url": "https://webcam.solutionshosted.de/memfs/d60c3512-06c2-4426-bd00-6936f945d51a.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-nabu5",
+    "name": "NABU Vogelstation 5",
+    "location": "NABU Vogelstation, Mühlenberger Loch, Hamburg, Germany",
+    "lat": 53.545,
+    "lon": 9.793,
+    "url": "https://webcam.solutionshosted.de/memfs/3fc67722-7fea-4e6b-852e-4f3074255d47.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-strandbad",
+    "name": "Strandbad Wedel",
+    "location": "Strandbad Wedel, Wedel, Schleswig-Holstein, Germany",
+    "lat": 53.577,
+    "lon": 9.7075,
+    "url": "https://webcam.solutionshosted.de/memfs/strandbad-placeholder.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-hafen-sued",
+    "name": "Schulauer Hafen Süd",
+    "location": "Schulauer Hafen, Wedel, Schleswig-Holstein, Germany",
+    "lat": 53.573,
+    "lon": 9.6985,
+    "url": "https://webcam.solutionshosted.de/memfs/8d4b2999-8980-4f9e-899e-9989e5afcc76.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-hafen-west",
+    "name": "Schulauer Hafen West",
+    "location": "Schulauer Hafen, Wedel, Schleswig-Holstein, Germany",
+    "lat": 53.5732,
+    "lon": 9.6983,
+    "url": "https://webcam.solutionshosted.de/memfs/6cebdcf3-b115-48ad-a718-25a944f42159.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-faehrhaus-r1",
+    "name": "Schulauer Fährhaus Rundum 1",
+    "location": "Schulauer Fährhaus, Wedel, Schleswig-Holstein, Germany",
+    "lat": 53.5734,
+    "lon": 9.7028,
+    "url": "https://webcam.solutionshosted.de/memfs/3e9a2a2a-095a-4cb6-ba89-a27dd2e8effb.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-faehrhaus-ost",
+    "name": "Schulauer Fährhaus Ost",
+    "location": "Schulauer Fährhaus, Wedel, Schleswig-Holstein, Germany",
+    "lat": 53.5733,
+    "lon": 9.703,
+    "url": "https://webcam.solutionshosted.de/memfs/20e30e12-e2d5-474f-9462-cbf5c96e3988.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-faehrhaus-west",
+    "name": "Schulauer Fährhaus Westen",
+    "location": "Schulauer Fährhaus, Wedel, Schleswig-Holstein, Germany",
+    "lat": 53.5735,
+    "lon": 9.7026,
+    "url": "https://webcam.solutionshosted.de/memfs/458af299-603e-442f-bd8e-2d843e5dd876.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-faehrhaus-sued",
+    "name": "Schulauer Fährhaus Süden",
+    "location": "Schulauer Fährhaus, Wedel, Schleswig-Holstein, Germany",
+    "lat": 53.5732,
+    "lon": 9.7027,
+    "url": "https://webcam.solutionshosted.de/memfs/1b487698-4bd0-4e28-8e84-469b3300cc57.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-wasserturm",
+    "name": "Wasserturm Wedel",
+    "location": "Wasserturm Wedel, Wedel, Schleswig-Holstein, Germany",
+    "lat": 53.582,
+    "lon": 9.7005,
+    "url": "https://webcam.solutionshosted.de/memfs/44601ca6-d93c-4f8f-ae55-ae167559b9b2.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-muehlenberg-elbe",
+    "name": "Mühlenberger Loch Elbe",
+    "location": "Mühlenberger Loch, Hamburg, Germany",
+    "lat": 53.5374,
+    "lon": 9.7892,
+    "url": "https://webcam.solutionshosted.de/memfs/86641f9c-6bb9-4072-afe4-905e40dab54f.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-muehlenberg-rundum",
+    "name": "Mühlenberger Loch Rundum",
+    "location": "Mühlenberger Loch, Hamburg, Germany",
+    "lat": 53.5376,
+    "lon": 9.7895,
+    "url": "https://webcam.solutionshosted.de/memfs/a74e0beb-1e4c-4283-957f-a6bcd3e4adb1.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-muehlenberg-treppen",
+    "name": "Mühlenberger Loch Treppenviertel",
+    "location": "Mühlenberger Loch, Hamburg, Germany",
+    "lat": 53.562,
+    "lon": 9.8001,
+    "url": "https://webcam.solutionshosted.de/memfs/cb95216a-9cd0-4bcf-88d0-7a67fb4ede7a.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-blankenese",
+    "name": "Fischclub / Marktkirche Blankenese",
+    "location": "Blankenese, Hamburg, Germany",
+    "lat": 53.5628,
+    "lon": 9.7985,
+    "url": "https://webcam.solutionshosted.de/memfs/63b3bb65-ecfb-48bd-a60c-13a07d36f757.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-altona-rundum",
+    "name": "Altona Rundum",
+    "location": "Altona, Hamburg, Germany",
+    "lat": 53.5465,
+    "lon": 9.9175,
+    "url": "https://webcam.solutionshosted.de/memfs/4017981d-2fa7-4d32-bfe2-4693242019b7.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-altona-sued",
+    "name": "Altona Süden",
+    "location": "Altona, Hamburg, Germany",
+    "lat": 53.5463,
+    "lon": 9.9173,
+    "url": "https://webcam.solutionshosted.de/memfs/6de6d0eb-e8a1-4ee3-8f18-3ad68a68d6ed.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-altona-ost",
+    "name": "Altona Osten",
+    "location": "Altona, Hamburg, Germany",
+    "lat": 53.5467,
+    "lon": 9.9178,
+    "url": "https://webcam.solutionshosted.de/memfs/152a3e27-17e0-4a83-8552-50fa329f3adf.jpg",
+    "source": "unknown"
+  },
+  {
+    "id": "gs-sehlendorf",
+    "name": "Sehlendorfer Binnensee",
+    "location": "Sehlendorfer Binnensee, Schleswig-Holstein, Germany",
+    "lat": 54.303,
+    "lon": 10.617,
+    "url": "https://webcam.solutionshosted.de/memfs/sehlendorf-placeholder.jpg",
+    "source": "unknown"
+  }
+]

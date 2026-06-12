@@ -87,6 +87,7 @@ export const getLayerGroups = (theme: 'core' | 'ghost') => {
     layers: [
       { key: 'infrastructure', label: 'Nuclear Facilities', icon: Radiation, color: '#26A69A', dataKey: 'infrastructure' },
       { key: 'global_incidents', label: 'Global Incidents', icon: AlertTriangle, color: '#D32F2F', dataKey: 'gdelt' },
+      { key: 'conflicts', label: 'Conflict Zones', icon: Target, color: '#FF1744', dataKey: '' },
       { key: 'gps_jamming', label: 'GPS Jamming', icon: Radio, color: '#D32F2F', dataKey: 'gps_jamming' },
     ],
   },

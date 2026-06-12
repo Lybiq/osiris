@@ -383,6 +383,24 @@ const REGION_FETCHERS: Record<string, () => Promise<any[]>> = {
   'spain': fetchSpainCameras,
   'poland': fetchPolandCameras,
   'japan': fetchJapanCameras,
+  'legacy': async () => {
+    const { fetchLegacyCameras } = await import('./legacy');
+    return fetchLegacyCameras();
+  },
+  'custom': async () => {
+    try {
+      const { readCustomCameras } = await import('@/lib/feeds');
+      return (await readCustomCameras()).map((c: any) => ({
+        id: `custom-${c.lat}-${c.lon}`,
+        name: c.name,
+        lat: c.lat,
+        lon: c.lon,
+        url: c.url,
+        source: 'custom',
+        type: c.type || 'stream',
+      }));
+    } catch { return []; }
+  },
 };
 
 // Determine which regions to fetch based on viewport bounds

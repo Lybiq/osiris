@@ -10,7 +10,7 @@ import {
 
 // ── Glass style (shared by the entire L-frame + all windows) ──
 export const GLASS_STYLE = {
-  background: 'rgba(60,60,60,0.40)',
+  background: 'rgba(30,30,30,0.72)',
   backdropFilter: 'blur(22px) saturate(1.5)',
   WebkitBackdropFilter: 'blur(22px) saturate(1.5)',
 } as const;

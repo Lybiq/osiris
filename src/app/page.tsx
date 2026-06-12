@@ -8,7 +8,6 @@ import IntelFeed from '@/components/IntelFeed';
 import MarketsPanel from '@/components/MarketsPanel';
 import ScmPanel from '@/components/ScmPanel';
 import SearchBar from '@/components/SearchBar';
-import ScaleBar from '@/components/ScaleBar';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import SharePanel from '@/components/SharePanel';
 import ViewPresets from '@/components/ViewPresets';
@@ -16,6 +15,7 @@ import KeyboardShortcuts from '@/components/KeyboardShortcuts';
 import GlobalStatusBar from '@/components/GlobalStatusBar';
 import LiveAlerts from '@/components/LiveAlerts';
 import BasemapSwitcher from '@/components/BasemapSwitcher';
+import TimeTravel from '@/components/TimeTravel';
 import LFrame, { GLASS_STYLE } from '@/components/LFrame';
 import LocationInfoPanel from '@/components/LocationInfoPanel';
 import SystemHealthContent, { useSystemHealth } from '@/components/SystemHealth';
@@ -123,6 +123,7 @@ export default function Dashboard() {
   const [mapProjection, setMapProjection] = useState<'globe'|'mercator'>('globe');
   const [mapStyle, setMapStyle] = useState<string>('dark');
   const [showBasemaps, setShowBasemaps] = useState(false);
+  const [timeTravelDate, setTimeTravelDate] = useState<string | null>(null);
   const [pinpoint, setPinpoint] = useState<{lat:number;lon:number;address?:Record<string,string>;loading?:boolean}|null>(null);
 
   const handleMapClick = useCallback(async (coords: {lat:number;lng:number}) => {
@@ -815,6 +816,7 @@ export default function Dashboard() {
           onRightClick={handleRightClick} 
           onMapClick={handleMapClick}
           pinpoint={pinpoint}
+          timeTravelDate={timeTravelDate}
           onViewStateChange={setMapView} 
           flyToLocation={flyToLocation}
           sweepData={sweepData}
@@ -831,12 +833,15 @@ export default function Dashboard() {
       {/* ── MAP VIEW CONTROLS (bottom-right) ── */}
       <motion.div
         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 3.5 }}
-        className="absolute bottom-6 right-6 z-[200] flex flex-col items-end gap-2 pointer-events-none"
+        className="absolute bottom-6 left-[240px] z-[200] flex flex-col items-start gap-2 pointer-events-none"
       >
-        {/* Zoom level */}
-        <span className="text-[11px] font-mono font-bold tracking-widest text-[var(--gold-primary)] tabular-nums pointer-events-none">
-          ZOOM {(Math.round(mapView.zoom * 2) / 2).toFixed(1)}
-        </span>
+        {/* Coordinates + Zoom */}
+        <div className="flex items-center gap-3 pointer-events-none">
+          <span ref={coordsDisplayRef} className="text-[10px] font-mono tabular-nums text-[var(--cyan-primary)] opacity-80">—</span>
+          <span className="text-[10px] font-mono font-bold tracking-widest text-[var(--gold-primary)] tabular-nums">
+            Z {(Math.round(mapView.zoom * 2) / 2).toFixed(1)}
+          </span>
+        </div>
 
         <div className="flex items-center gap-2">
           {/* 3D/2D Toggle */}
@@ -913,61 +918,69 @@ export default function Dashboard() {
       )}
 
 
-      {/* ═══ RIGHT SIDE PANELS ═══ */}
+      {/* ═══ RIGHT SIDE PANEL BUTTONS ═══ */}
       {!isMobile && <div className="absolute right-2 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-[250] pointer-events-auto p-1 rounded-full border border-white/5" style={GLASS_STYLE}>
-        <div className="relative group">
-          <button onClick={() => { setShowIntel(!showIntel); setShowMarkets(false); setShowAlerts(false); setShowEntityGraph(false); }} className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${showIntel ? 'bg-[var(--cyan-primary)]/20' : 'hover:bg-white/10'}`}>
-            <Radar className={`w-4 h-4 ${showIntel ? 'text-[var(--cyan-primary)]' : 'text-white/60'}`} />
-          </button>
-          {/* OSINT / Recon Panel Slideout */}
-          <AnimatePresence>
-            {showIntel && (
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="absolute right-12 top-1/2 -translate-y-1/2 w-80">
-                <OsintPanel onSweepVisualize={setSweepData} onScanGeolocate={(target, data) => {
-                  setScanTargets(prev => {
-                    const existing = prev.filter(t => t.id !== target);
-                    return [{ id: target, timestamp: Date.now(), ...data }, ...existing].slice(0, 10);
-                  });
-                  setFlyToLocation({ lat: data.lat, lng: data.lng, ts: Date.now() });
-                }} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        <button
+          onClick={() => wm.openWindow({
+            id: 'recon-toolkit',
+            title: 'RECON TOOLKIT',
+            defaultSize: { w: 400, h: 520 },
+            defaultPos: { x: window.innerWidth - 480, y: 60 },
+            content: <OsintPanel onSweepVisualize={setSweepData} onScanGeolocate={(target: string, data: any) => {
+              setScanTargets((prev: any[]) => {
+                const existing = prev.filter((t: any) => t.id !== target);
+                return [{ id: target, timestamp: Date.now(), ...data }, ...existing].slice(0, 10);
+              });
+              setFlyToLocation({ lat: data.lat, lng: data.lng, ts: Date.now() });
+            }} />,
+          })}
+          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${wm.isOpen('recon-toolkit') ? 'bg-[var(--cyan-primary)]/20' : 'hover:bg-white/10'}`}
+          title="Recon Toolkit"
+        >
+          <Radar className={`w-4 h-4 ${wm.isOpen('recon-toolkit') ? 'text-[var(--cyan-primary)]' : 'text-white/60'}`} />
+        </button>
 
-        <div className="relative group">
-          <button onClick={() => { setShowMarkets(!showMarkets); setShowIntel(false); setShowAlerts(false); }} className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${showMarkets ? 'bg-[var(--gold-primary)]/20' : 'hover:bg-white/10'}`}>
-            <BarChart3 className={`w-4 h-4 ${showMarkets ? 'text-[var(--gold-primary)]' : 'text-white/60'}`} />
-          </button>
-          {/* Markets Panel Slideout */}
-          <AnimatePresence>
-            {showMarkets && (
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="absolute right-12 top-1/2 -translate-y-1/2 w-80">
-                <MarketsPanel data={data} spaceWeather={spaceWeather} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        <button
+          onClick={() => wm.openWindow({
+            id: 'markets-intel',
+            title: 'MARKETS & INTEL',
+            defaultSize: { w: 380, h: 500 },
+            defaultPos: { x: window.innerWidth - 460, y: 80 },
+            content: <MarketsPanel data={data} spaceWeather={spaceWeather} />,
+          })}
+          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${wm.isOpen('markets-intel') ? 'bg-[var(--gold-primary)]/20' : 'hover:bg-white/10'}`}
+          title="Markets & Intel"
+        >
+          <BarChart3 className={`w-4 h-4 ${wm.isOpen('markets-intel') ? 'text-[var(--gold-primary)]' : 'text-white/60'}`} />
+        </button>
 
-        <div className="relative group">
-          <button onClick={() => { setShowAlerts(!showAlerts); setShowIntel(false); setShowMarkets(false); setShowEntityGraph(false); }} className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${showAlerts ? 'bg-[#FF3D3D]/20' : 'hover:bg-white/10'}`}>
-            <AlertTriangle className={`w-4 h-4 ${showAlerts ? 'text-[#FF3D3D]' : 'text-white/60'}`} />
-          </button>
-          {/* Alerts Panel Slideout */}
-          <AnimatePresence>
-            {showAlerts && (
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="absolute right-12 top-1/2 -translate-y-1/2 w-80">
-                <LiveAlerts data={data} onLocate={(lat, lng) => setFlyToLocation({ lat, lng, ts: Date.now() })} onWatchFeed={(url, name) => { setLiveFeedUrl(url); setLiveFeedName(name); }} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        <button
+          onClick={() => wm.openWindow({
+            id: 'live-alerts',
+            title: 'LIVE ALERTS',
+            defaultSize: { w: 380, h: 480 },
+            defaultPos: { x: window.innerWidth - 440, y: 100 },
+            content: <LiveAlerts data={data} onLocate={(lat: number, lng: number) => setFlyToLocation({ lat, lng, ts: Date.now() })} onWatchFeed={(url: string, name: string) => { setLiveFeedUrl(url); setLiveFeedName(name); }} />,
+          })}
+          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${wm.isOpen('live-alerts') ? 'bg-[#FF3D3D]/20' : 'hover:bg-white/10'}`}
+          title="Live Alerts"
+        >
+          <AlertTriangle className={`w-4 h-4 ${wm.isOpen('live-alerts') ? 'text-[#FF3D3D]' : 'text-white/60'}`} />
+        </button>
 
-        <div className="relative group">
-          <button onClick={() => { setShowEntityGraph(!showEntityGraph); setShowIntel(false); setShowMarkets(false); setShowAlerts(false); }} className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${showEntityGraph ? 'bg-[#D4AF37]/20' : 'hover:bg-white/10'}`}>
-            <Network className={`w-4 h-4 ${showEntityGraph ? 'text-[#D4AF37]' : 'text-white/60'}`} />
-          </button>
-        </div>
+        <button
+          onClick={() => wm.openWindow({
+            id: 'entity-graph',
+            title: 'ENTITY GRAPH',
+            defaultSize: { w: 400, h: 400 },
+            defaultPos: { x: window.innerWidth - 480, y: 120 },
+            content: <div className="p-4 text-[10px] font-mono text-white/40 text-center">Entity Graph — Coming Soon</div>,
+          })}
+          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${wm.isOpen('entity-graph') ? 'bg-[#D4AF37]/20' : 'hover:bg-white/10'}`}
+          title="Entity Graph"
+        >
+          <Network className={`w-4 h-4 ${wm.isOpen('entity-graph') ? 'text-[#D4AF37]' : 'text-white/60'}`} />
+        </button>
       </div>}
 
       {/* ── LIVE FEED VIEWER OVERLAY ── */}
@@ -1157,7 +1170,6 @@ export default function Dashboard() {
 
       {/* ── Scale Bar (desktop) ── */}
       <div className="desktop-only absolute bottom-[4.5rem] left-[20rem] z-[201] pointer-events-none">
-        <ScaleBar zoom={mapView.zoom} latitude={mapView.latitude} />
       </div>
 
       {/* ── Region Dossier ── */}

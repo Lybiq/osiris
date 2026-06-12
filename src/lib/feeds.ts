@@ -62,3 +62,17 @@ function getDefaultYtStreams(): YtStream[] {
     { url: 'https://www.youtube.com/watch?v=vOTiJkg1voo', name: 'CGTN', lat: 39.9042, lon: 116.4074, country: 'CN' },
   ];
 }
+
+// ── Custom Cameras (admin-managed) ──
+export interface CustomCamera { url: string; name: string; lat: number; lon: number; type?: string; }
+const CAM_FILE = path.join(DATA_DIR, 'custom-cameras.json');
+
+export async function readCustomCameras(): Promise<CustomCamera[]> {
+  try { return JSON.parse(await fs.readFile(CAM_FILE, 'utf-8')) || []; }
+  catch { return []; }
+}
+
+export async function writeCustomCameras(cams: CustomCamera[]): Promise<void> {
+  await fs.mkdir(DATA_DIR, { recursive: true });
+  await fs.writeFile(CAM_FILE, JSON.stringify(cams, null, 2), 'utf-8');
+}

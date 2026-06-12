@@ -1,7 +1,7 @@
 export type Lang = 'en' | 'de' | 'fr' | 'es' | 'pl' | 'ar' | 'fa';
 
 export const LANG_LABELS: Record<Lang, string> = {
-  en: 'English', de: 'Deutsch', fr: 'Français', es: 'Español', pl: 'Polski', ar: 'العربية', fa: 'فارسی',
+  en: '🇬🇧 EN', de: '🇩🇪 DE', fr: '🇫🇷 FR', es: '🇪🇸 ES', pl: '🇵🇱 PL', ar: '🇸🇦 AR', fa: '🇮🇷 FA',
 };
 
 export const LOGIN_I18N: Record<Lang, Record<string, string>> = {

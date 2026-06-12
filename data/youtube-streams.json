@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://www.youtube.com/watch?v=V1CNQT-DsME",
+    "name": "Sky News",
+    "lat": 51.5074,
+    "lon": -0.1278,
+    "country": "UK"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=9Auq9mYxFEE",
+    "name": "Al Jazeera English",
+    "lat": 25.2867,
+    "lon": 51.5333,
+    "country": "QA"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=GE_SfNVNyqk",
+    "name": "DW News",
+    "lat": 50.7339,
+    "lon": 7.0999,
+    "country": "DE"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=F-POY4Q0wSo",
+    "name": "France 24 English",
+    "lat": 48.8566,
+    "lon": 2.3522,
+    "country": "FR"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+    "name": "Lofi Girl",
+    "lat": 48.8566,
+    "lon": 2.3522,
+    "country": "FR"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=dp8PhLsUcFE",
+    "name": "ABC News",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "country": "US"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=w_Ma8oQLmSM",
+    "name": "NBC News NOW",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "country": "US"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=gAcKFobbEWs",
+    "name": "NHK World Japan",
+    "lat": 35.6762,
+    "lon": 139.6503,
+    "country": "JP"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=XWq5kBlakcQ",
+    "name": "India Today",
+    "lat": 28.6139,
+    "lon": 77.209,
+    "country": "IN"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=cYGFTmcR10U",
+    "name": "WION",
+    "lat": 28.6139,
+    "lon": 77.209,
+    "country": "IN"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=ntRFMkczJo0",
+    "name": "TRT World",
+    "lat": 41.0082,
+    "lon": 28.9784,
+    "country": "TR"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=vOTiJkg1voo",
+    "name": "CGTN",
+    "lat": 39.9042,
+    "lon": 116.4074,
+    "country": "CN"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=NN-Y_yhvq7k",
+    "name": "",
+    "lat": 0,
+    "lon": 0
+  }
+]

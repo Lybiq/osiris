@@ -150,7 +150,7 @@ html, body {
    GLASS PANELS — Premium depth with micro-reflections
    ═══════════════════════════════════════════════════════════════ */
 .glass-panel {
-  background: rgba(60,60,60,0.40);
+  background: rgba(30,30,30,0.72);
   backdrop-filter: blur(22px) saturate(1.5);
   -webkit-backdrop-filter: blur(22px) saturate(1.5);
   border: 1px solid rgba(255,255,255,0.08);

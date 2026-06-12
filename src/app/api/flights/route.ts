@@ -55,18 +55,52 @@ const MILITARY_INDICATORS = new Set([
 const AIRLINE_CODE_RE = /^([A-Z]{3})\d/;
 
 async function fetchRegion(region: typeof REGIONS[0]): Promise<any[]> {
+  // Source 1: adsb.lol (primary, no key needed)
   try {
     const url = `https://api.adsb.lol/v2/lat/${region.lat}/lon/${region.lon}/dist/${region.dist}`;
-    const res = await stealthFetch(url, {
-      signal: AbortSignal.timeout(12000),
-    });
+    const res = await stealthFetch(url, { signal: AbortSignal.timeout(12000) });
     if (res.ok) {
       const data = await res.json();
-      return data.ac || [];
+      if (data.ac && data.ac.length > 0) return data.ac;
     }
-  } catch (e) {
-    console.warn(`Region fetch failed for lat=${region.lat}:`, e);
-  }
+  } catch (e) { console.warn(`[OSINT] adsb.lol failed for lat=${region.lat}:`, e); }
+
+  // Source 2: airplanes.live (fallback, no key needed)
+  try {
+    const url = `https://api.airplanes.live/v2/point/${region.lat}/${region.lon}/${region.dist}`;
+    const res = await stealthFetch(url, { signal: AbortSignal.timeout(10000) });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.ac && data.ac.length > 0) return data.ac;
+    }
+  } catch (e) { console.warn(`[OSINT] airplanes.live failed:`, e); }
+
+  // Source 3: OpenSky Network (fallback, works without key but with rate limits)
+  try {
+    const lamin = region.lat - 15;
+    const lamax = region.lat + 15;
+    const lomin = region.lon - 20;
+    const lomax = region.lon + 20;
+    const url = `https://opensky-network.org/api/states/all?lamin=${lamin}&lomin=${lomin}&lamax=${lamax}&lomax=${lomax}`;
+    const headers: Record<string, string> = {};
+    if (process.env.OPENSKY_CLIENT_ID && process.env.OPENSKY_CLIENT_SECRET) {
+      headers['Authorization'] = 'Basic ' + Buffer.from(`${process.env.OPENSKY_CLIENT_ID}:${process.env.OPENSKY_CLIENT_SECRET}`).toString('base64');
+    }
+    const res = await stealthFetch(url, { signal: AbortSignal.timeout(10000), headers });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.states && data.states.length > 0) {
+        // Convert OpenSky format to adsb.lol-compatible format
+        return data.states.map((s: any[]) => ({
+          hex: s[0], flight: (s[1] || '').trim(), lat: s[6], lon: s[5],
+          alt_baro: s[7] ? Math.round(s[7] * 3.281) : null, // m to ft
+          gs: s[9] ? Math.round(s[9] * 1.944) : null, // m/s to knots
+          track: s[10], t: '', dbFlags: 0,
+        })).filter((f: any) => f.lat != null && f.lon != null);
+      }
+    }
+  } catch (e) { console.warn(`[OSINT] OpenSky failed:`, e); }
+
   return [];
 }
 

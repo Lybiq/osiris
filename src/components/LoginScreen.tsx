@@ -42,14 +42,14 @@ export default function LoginScreen() {
         style={{ ...GLASS_STYLE, boxShadow: '0 0 60px rgba(212,175,55,0.08)' }}
       >
         {/* Language selector */}
-        <div className="absolute top-3 right-3 flex gap-1">
+        <div className="flex justify-center gap-1.5 mb-1">
           {(Object.keys(LANG_LABELS) as Lang[]).map(l => (
             <button
               key={l}
               onClick={() => setLang(l)}
-              className={`text-[8px] font-mono px-1.5 py-0.5 rounded transition-colors ${lang === l ? 'text-[var(--gold-primary)] bg-white/10' : 'text-white/30 hover:text-white/60'}`}
+              className={`text-[11px] px-2 py-1 rounded transition-all ${lang === l ? 'bg-white/12 border border-[var(--gold-primary)]/40 scale-105' : 'opacity-50 hover:opacity-80 border border-transparent'}`}
             >
-              {l.toUpperCase()}
+              {LANG_LABELS[l]}
             </button>
           ))}
         </div>

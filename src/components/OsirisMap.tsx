@@ -12,6 +12,7 @@ interface OsirisMapProps {
   onRightClick?: (coords: { lat: number; lng: number }) => void;
   onMapClick?: (coords: { lat: number; lng: number }) => void;
   pinpoint?: { lat: number; lon: number } | null;
+  timeTravelDate?: string | null;
   onViewStateChange?: (vs: { zoom: number; latitude: number }) => void;
   flyToLocation?: { lat: number; lng: number; ts: number } | null;
   projection?: 'mercator' | 'globe';
@@ -44,7 +45,7 @@ function computeSolarTerminator(): [number, number][] {
 
 const EMPTY_FC = { type: 'FeatureCollection' as const, features: [] };
 
-function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightClick, onMapClick, pinpoint, onViewStateChange, flyToLocation, projection = 'globe', mapStyle = 'dark', sweepData, scanTargets = [], demoMode = false, theme = 'core' }: OsirisMapProps) {
+function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightClick, onMapClick, pinpoint, timeTravelDate, onViewStateChange, flyToLocation, projection = 'globe', mapStyle = 'dark', sweepData, scanTargets = [], demoMode = false, theme = 'core' }: OsirisMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
@@ -1307,6 +1308,9 @@ function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightCl
     setVis(['sat-dots'], activeLayers.satellites);
     setVis(['gdelt-dots'], activeLayers.global_incidents);
 
+    // Conflict zones (WAR markers) - toggleable
+    setVis(['conflict-icons'], activeLayers.conflicts);
+
     setVis(['malware-glow','malware-dots','malware-label'], activeLayers.malware);
     setVis(['network-mesh-atmo', 'network-mesh-glow', 'network-mesh-core'], activeLayers.internet_outages || activeLayers.malware);
     setVis(['jam-fill','jam-label'], activeLayers.gps_jamming);
@@ -1508,6 +1512,20 @@ function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightCl
     const maplibregl = require('maplibre-gl');
     new maplibregl.Marker({ element: el }).setLngLat([pinpoint.lon, pinpoint.lat]).addTo(map);
   }, [mapReady, pinpoint]);
+
+  // ── Time Travel: NASA GIBS historical imagery ──
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !mapReady) return;
+    // Remove existing time travel layer
+    if (map.getLayer('timetravel-layer')) map.removeLayer('timetravel-layer');
+    if (map.getSource('timetravel-tiles')) map.removeSource('timetravel-tiles');
+    if (!timeTravelDate) return;
+    // NASA GIBS MODIS True Color
+    const tileUrl = `https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Terra_CorrectedReflectance_TrueColor/default/${timeTravelDate}/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg`;
+    map.addSource('timetravel-tiles', { type: 'raster', tiles: [tileUrl], tileSize: 256, maxzoom: 9 });
+    map.addLayer({ id: 'timetravel-layer', type: 'raster', source: 'timetravel-tiles', paint: { 'raster-opacity': 0.85 } });
+  }, [mapReady, timeTravelDate]);
 
   return <div ref={containerRef} className="absolute inset-0 w-full h-full" />;
 }
