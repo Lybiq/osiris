@@ -101,7 +101,7 @@ export default function Dashboard() {
   const data = dataRef.current;
 
   const [backendStatus, setBackendStatus] = useState<'connecting' | 'connected' | 'error'>('connecting');
-  const [mapView, setMapView] = useState({ zoom: 2.5, latitude: 20 });
+  const [mapView, setMapView] = useState({ zoom: 4, latitude: 50, longitude: 10 });
   const [flyToLocation, setFlyToLocation] = useState<{ lat: number; lng: number; ts: number } | null>(null);
   const [globalStats, setGlobalStats] = useState<any>(null);
   const mouseCoordsRef = useRef<{ lat: number; lng: number } | null>(null);
@@ -122,7 +122,7 @@ export default function Dashboard() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [mobilePanel, setMobilePanel] = useState<'layers'|'markets'|'intel'|'search'|'recon'|null>(null);
   const [mapProjection, setMapProjection] = useState<'globe'|'mercator'>('globe');
-  const [mapStyle, setMapStyle] = useState<string>('dark');
+  const [mapStyle, setMapStyle] = useState<string>('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}');
   const [showBasemaps, setShowBasemaps] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [timeTravelDate, setTimeTravelDate] = useState<string | null>(null);
@@ -850,19 +850,8 @@ export default function Dashboard() {
       {/* ── MAP VIEW CONTROLS (bottom-right) ── */}
       <motion.div
         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 3.5 }}
-        className="absolute bottom-6 left-[240px] z-[200] flex flex-col items-start gap-2 pointer-events-none"
+        className="absolute bottom-4 left-[240px] z-[200] flex items-end gap-2 pointer-events-none flex-wrap"
       >
-        {/* Coordinates + Zoom */}
-        <div className="flex items-center gap-3 pointer-events-none">
-          <span ref={coordsDisplayRef} className="text-[10px] font-mono tabular-nums text-[var(--cyan-primary)] opacity-80">—</span>
-          <span className="text-[10px] font-mono font-bold tracking-widest text-[var(--gold-primary)] tabular-nums">
-            Z {(Math.round(mapView.zoom * 2) / 2).toFixed(1)}
-          </span>
-        </div>
-
-        {/* TimeTravel */}
-        <TimeTravel onDateChange={setTimeTravelDate} active={!!timeTravelDate} />
-
         <div className="flex items-center gap-2">
           {/* 3D/2D Toggle */}
           <button

@@ -24,6 +24,7 @@ export async function GET(req: Request) {
       secret: def.secret ?? true,
       section: def.section,
       registerUrl: def.registerUrl || null,
+      pair: def.pairWith || null,
       set: !!effective,
       preview: effective ? maskKey(effective) : '',
       fromEnv: !val && !!envVal,

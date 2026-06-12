@@ -44,19 +44,21 @@ export default function HotkeysSection() {
     const handler = (e: KeyboardEvent) => {
       e.preventDefault();
       e.stopPropagation();
+      // Ignore events that are ONLY modifier keys (wait for the actual key)
+      const isOnlyModifier = ['Control', 'Alt', 'Shift', 'Meta'].includes(e.key);
+      if (isOnlyModifier) return; // Don't save yet, wait for the real key
+
       const parts: string[] = [];
       if (e.ctrlKey) parts.push('Ctrl');
       if (e.altKey) parts.push('Alt');
       if (e.shiftKey) parts.push('Shift');
       if (e.metaKey) parts.push('Meta');
-      if (e.key && !['Control', 'Alt', 'Shift', 'Meta'].includes(e.key)) {
-        parts.push(e.key.length === 1 ? e.key.toUpperCase() : e.key);
-      }
-      if (parts.length > 0) {
-        const combo = parts.join('+');
-        setOverrides(prev => ({ ...prev, [recording]: combo }));
-        setRecording(null);
-      }
+      // Add the actual key
+      const key = e.key.length === 1 ? e.key.toUpperCase() : e.key;
+      parts.push(key);
+      const combo = parts.join('+');
+      setOverrides(prev => ({ ...prev, [recording]: combo }));
+      setRecording(null);
     };
     window.addEventListener('keydown', handler, true);
     return () => window.removeEventListener('keydown', handler, true);

@@ -12,6 +12,8 @@ interface KeyInfo {
   secret: boolean;
   section: string;
   registerUrl: string | null;
+  pair: string | null;
+  pair: string | null;
   set: boolean;
   preview: string;
   fromEnv: boolean;
