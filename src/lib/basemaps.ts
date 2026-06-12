@@ -34,6 +34,12 @@ export const BASEMAPS: Basemap[] = [
   { id: 'google-terrain', label: 'Google Terrain', value: 'https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', group: 'Terrain' },
   { id: 'esri-natgeo', label: 'ESRI NatGeo', value: 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', group: 'Terrain' },
   { id: 'esri-ocean', label: 'ESRI Ocean', value: 'https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', group: 'Terrain' },
+
+  // ── Special ──
+  { id: 'stamen-watercolor', label: 'Stamen Watercolor', value: 'https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', group: 'Special' },
+  { id: 'stamen-toner', label: 'Stamen Toner', value: 'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png', group: 'Special' },
 ];
 
-export const BASEMAP_GROUPS = ['Dark', 'Satellite', 'Street', 'Terrain'];
+// Note: Apple Maps has no public raster tiles. Bing Maps requires quadkey encoding
+// (not standard XYZ). Both are available as links in the pinpoint info window instead.
+export const BASEMAP_GROUPS = ['Dark', 'Satellite', 'Street', 'Terrain', 'Special'];

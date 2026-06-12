@@ -22,9 +22,10 @@ export async function GET(req: Request) {
       label: def.label,
       hint: def.hint,
       secret: def.secret ?? true,
+      section: def.section,
       set: !!effective,
       preview: effective ? maskKey(effective) : '',
-      fromEnv: !val && !!envVal, // set via .env file, not editable here
+      fromEnv: !val && !!envVal,
     };
   });
   return NextResponse.json(keys);

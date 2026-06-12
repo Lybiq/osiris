@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Plane, Satellite, Activity, Sun, AlertTriangle, Camera, Flame, Target,
   CloudLightning, Radiation, Tv, Anchor, Ship, Newspaper,
-  Network, Share2, Radio, ChevronLeft, ChevronRight
+  Network, Share2, Radio, ChevronLeft, ChevronRight,
+  Shield, Database, Eye, Monitor
 } from 'lucide-react';
 
 interface LayerPanelProps {
@@ -32,7 +33,7 @@ const getLayerGroups = (theme: 'core' | 'ghost') => {
 
   return [
   {
-    label: 'SDK',
+    label: 'SDK', groupIcon: Database,
     fullLabel: 'OSINT SDK',
     color: '#1565C0',
     layers: [
@@ -41,7 +42,7 @@ const getLayerGroups = (theme: 'core' | 'ghost') => {
     ],
   },
   {
-    label: 'AVIATION',
+    label: 'AVIATION', groupIcon: Plane,
     fullLabel: 'AVIATION',
     color: flightCom,
     layers: [
@@ -52,7 +53,7 @@ const getLayerGroups = (theme: 'core' | 'ghost') => {
     ],
   },
   {
-    label: 'MARITIME',
+    label: 'MARITIME', groupIcon: Ship,
     fullLabel: 'MARITIME & SPACE',
     color: '#26C6DA',
     layers: [
@@ -61,7 +62,7 @@ const getLayerGroups = (theme: 'core' | 'ghost') => {
     ],
   },
   {
-    label: 'SURVEIL',
+    label: 'SURVEIL', groupIcon: Eye,
     fullLabel: 'SURVEILLANCE',
     color: '#7E57C2',
     layers: [
@@ -70,7 +71,7 @@ const getLayerGroups = (theme: 'core' | 'ghost') => {
     ],
   },
   {
-    label: 'HAZARD',
+    label: 'HAZARD', groupIcon: Flame,
     fullLabel: 'NATURAL HAZARDS',
     color: '#F9A825',
     layers: [
@@ -80,7 +81,7 @@ const getLayerGroups = (theme: 'core' | 'ghost') => {
     ],
   },
   {
-    label: 'THREAT',
+    label: 'THREAT', groupIcon: Shield,
     fullLabel: 'THREATS & INFRA',
     color: '#D32F2F',
     layers: [
@@ -90,7 +91,7 @@ const getLayerGroups = (theme: 'core' | 'ghost') => {
     ],
   },
   {
-    label: 'NETWORK',
+    label: 'NETWORK', groupIcon: Network,
     fullLabel: 'NETWORK INTEL',
     color: '#D32F2F',
     layers: [
@@ -99,7 +100,7 @@ const getLayerGroups = (theme: 'core' | 'ghost') => {
     ],
   },
   {
-    label: 'DISPLAY',
+    label: 'DISPLAY', groupIcon: Monitor,
     fullLabel: 'DISPLAY',
     color: '#448AFF',
     layers: [
@@ -109,17 +110,9 @@ const getLayerGroups = (theme: 'core' | 'ghost') => {
   ];
 };
 
-// SVG component for Shield which was missing in the imports above
-function Shield(props: any) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    </svg>
-  );
-}
 
 function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'core', setTheme, expanded = false, onToggleExpand }: LayerPanelProps) {
-  const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
+  const [activeGroup, setActiveGroup] = useState<string | null>(null);
 
   const LAYER_GROUPS = getLayerGroups(theme);
   const ALL_LAYERS = LAYER_GROUPS.flatMap(g => g.layers);
@@ -236,91 +229,66 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
     >
       
       {!expanded && (
-      <div className="flex-1 flex flex-col gap-8 px-2">
+      <div className="flex-1 flex flex-col gap-2 px-2 items-center">
         {LAYER_GROUPS.map((group) => {
           const groupActiveCount = group.layers.filter(l => activeLayers[l.key]).length;
           const isActive = groupActiveCount > 0;
-          const isHovered = hoveredGroup === group.label;
+          const isOpen = activeGroup === group.label;
+          const GIcon = group.groupIcon || Target;
 
           return (
-            <div 
-              key={group.label} 
-              className="relative flex justify-center items-center"
-              onMouseEnter={() => setHoveredGroup(group.label)}
-              onMouseLeave={() => setHoveredGroup(null)}
-            >
-              {/* The Vertical Label */}
-              <div 
-                className={`text-[10px] font-mono font-bold cursor-pointer select-none transition-all duration-300 flex items-center justify-center`}
-                style={{
-                  writingMode: 'horizontal-tb',
-                  color: isActive ? group.color : 'rgba(255, 255, 255, 0.4)',
-                  textShadow: isActive ? `0 0 10px ${group.color}80` : 'none',
-                  letterSpacing: '0.1em',
-                  opacity: isActive || isHovered ? 1 : 0.5,
-                }}
+            <div key={group.label} className="relative flex justify-center items-center">
+              {/* Group Icon Button */}
+              <button
+                onClick={() => setActiveGroup(isOpen ? null : group.label)}
+                className="w-12 h-12 flex flex-col items-center justify-center gap-0.5 rounded-lg transition-all hover:bg-white/5"
+                title={group.fullLabel}
               >
-                {/* Active Indicator dot */}
                 {isActive && (
-                  <div 
-                    className="absolute -left-1 w-1 h-1 rounded-full animate-pulse"
-                    style={{ backgroundColor: group.color, boxShadow: `0 0 8px ${group.color}` }}
-                  />
+                  <div className="absolute top-0.5 right-1 w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: group.color, boxShadow: `0 0 6px ${group.color}` }} />
                 )}
-                {group.label}
-              </div>
+                <GIcon className="w-5 h-5 transition-all" style={{ color: isActive || isOpen ? group.color : 'rgba(255,255,255,0.35)', filter: isActive ? `drop-shadow(0 0 4px ${group.color}80)` : 'none' }} />
+                <span className="text-[6px] font-mono tracking-wider" style={{ color: isActive || isOpen ? group.color : 'rgba(255,255,255,0.3)' }}>{group.label}</span>
+              </button>
 
-              {/* Slide-out Menu */}
+              {/* Click-based Flyout Menu */}
               <AnimatePresence>
-                {isHovered && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -10, filter: 'blur(4px)' }}
-                    animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, x: -5, filter: 'blur(2px)' }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="absolute left-[70px] top-1/2 -translate-y-1/2 min-w-[240px] bg-black/80 backdrop-blur-md border border-white/10 rounded-lg p-3 shadow-2xl z-50 pointer-events-auto"
-                    style={{
-                      boxShadow: `0 0 30px ${group.color}15, inset 0 0 20px ${group.color}05`
-                    }}
-                  >
-                    <div className="text-[11px] font-bold font-mono mb-3 tracking-widest border-b border-white/10 pb-2" style={{ color: group.color }}>
-                      {group.fullLabel}
-                    </div>
-                    <div className="flex flex-col gap-1.5">
-                      {group.layers.map((layer) => {
-                        const isLayerActive = activeLayers[layer.key];
-                        const count = getCount(layer.dataKey);
-                        const Icon = layer.icon || Shield;
-                        
-                        return (
-                          <button
-                            key={layer.key}
-                            onClick={() => {
-                              if (layer.key === 'sdk_ransomware') {
-                                
-                              } else {
-                                toggle(layer.key);
-                              }
-                            }}
-                            className="w-full flex items-center gap-3 px-2 py-1.5 rounded bg-transparent hover:bg-white/5 transition-colors group"
-                          >
-                            <div 
-                              className={`w-2 h-2 rounded-full border flex-shrink-0 transition-all duration-300 ${isLayerActive ? 'bg-current border-current scale-100' : 'bg-transparent border-white/30 scale-75'}`}
-                              style={{ color: isLayerActive ? layer.color : 'inherit', boxShadow: isLayerActive ? `0 0 8px ${layer.color}` : 'none' }}
-                            />
-                            <span className={`text-[11px] font-mono uppercase tracking-wider flex-1 text-left transition-colors duration-200 ${isLayerActive ? 'text-white' : 'text-white/50 group-hover:text-white/80'}`}>
-                              {layer.label}
-                            </span>
-                            {count !== null && (
-                              <span className="text-[9px] font-mono tabular-nums opacity-60">
-                                {count.toLocaleString()}
-                              </span>
-                            )}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </motion.div>
+                {isOpen && (
+                  <>
+                    {/* Invisible backdrop to close on click-away */}
+                    <div className="fixed inset-0 z-40" onClick={() => setActiveGroup(null)} />
+                    <motion.div
+                      initial={{ opacity: 0, x: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      exit={{ opacity: 0, x: -5, scale: 0.97 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute left-[70px] top-1/2 -translate-y-1/2 min-w-[240px] bg-black/90 backdrop-blur-md border border-white/10 rounded-lg p-3 shadow-2xl z-50 pointer-events-auto"
+                      style={{ boxShadow: `0 0 30px ${group.color}15, inset 0 0 20px ${group.color}05` }}
+                    >
+                      <div className="text-[11px] font-bold font-mono mb-3 tracking-widest border-b border-white/10 pb-2" style={{ color: group.color }}>
+                        {group.fullLabel}
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        {group.layers.map((layer) => {
+                          const isLayerActive = activeLayers[layer.key];
+                          const count = getCount(layer.dataKey);
+                          const Icon = layer.icon || Shield;
+                          return (
+                            <button
+                              key={layer.key}
+                              onClick={() => { if (layer.key !== 'sdk_ransomware') toggle(layer.key); }}
+                              className="w-full flex items-center gap-3 px-2 py-1.5 rounded bg-transparent hover:bg-white/5 transition-colors group"
+                            >
+                              <div className={`w-2 h-2 rounded-full border flex-shrink-0 transition-all ${isLayerActive ? 'bg-current border-current' : 'bg-transparent border-white/30 scale-75'}`} style={{ color: isLayerActive ? layer.color : 'inherit', boxShadow: isLayerActive ? `0 0 8px ${layer.color}` : 'none' }} />
+                              <Icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: isLayerActive ? layer.color : 'rgba(255,255,255,0.4)' }} />
+                              <span className={`text-[11px] font-mono uppercase tracking-wider flex-1 text-left ${isLayerActive ? 'text-white' : 'text-white/50 group-hover:text-white/80'}`}>{layer.label}</span>
+                              {count !== null && <span className="text-[9px] font-mono tabular-nums opacity-60">{count.toLocaleString()}</span>}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  </>
                 )}
               </AnimatePresence>
             </div>
@@ -366,32 +334,31 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
       </div>
       )}
 
-      {/* DESKTOP THEME TOGGLE */}
-      {setTheme && (
-        <div className="mt-auto px-2 pt-6 pb-2 border-t border-[var(--border-primary)] flex flex-col items-center gap-3 relative z-50">
-          <div className="text-[9px] font-mono tracking-[0.25em] text-[var(--text-secondary)]">GHOST PROTOCOL</div>
-          <button
-            onClick={() => setTheme(theme === 'core' ? 'ghost' : 'core')}
-            className="relative w-14 h-7 rounded-full transition-all duration-500 ease-in-out border flex items-center px-1 cursor-pointer hover:shadow-lg"
-            style={{
-              backgroundColor: theme === 'ghost' ? 'rgba(179, 136, 255, 0.15)' : 'rgba(0,0,0,0.4)',
-              borderColor: theme === 'ghost' ? 'rgba(179, 136, 255, 0.5)' : 'rgba(255,255,255,0.1)',
-              boxShadow: theme === 'ghost' ? '0 0 15px rgba(179, 136, 255, 0.3), inset 0 0 8px rgba(179, 136, 255, 0.2)' : 'inset 0 0 5px rgba(0,0,0,0.5)'
-            }}
-          >
-            <motion.div 
-              layout
-              className="w-5 h-5 rounded-full"
-              style={{
-                backgroundColor: theme === 'ghost' ? '#B388FF' : 'rgba(255,255,255,0.4)',
-                boxShadow: theme === 'ghost' ? '0 0 10px #B388FF' : 'none'
-              }}
-              animate={{ x: theme === 'ghost' ? 28 : 0 }}
-              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            />
-          </button>
-        </div>
-      )}
+      {/* Select All / Deselect All */}
+      <div className="mt-auto px-2 pt-3 pb-2 border-t border-[var(--border-primary)] flex items-center justify-center gap-2">
+        <button
+          onClick={() => {
+            const all: Record<string, boolean> = {};
+            LAYER_GROUPS.forEach(g => g.layers.forEach(l => { all[l.key] = true; }));
+            setActiveLayers(prev => ({ ...prev, ...all }));
+          }}
+          className="text-[8px] font-mono tracking-wider text-[var(--text-muted)] hover:text-[var(--alert-green)] transition-colors px-1.5 py-1 rounded hover:bg-white/5"
+          title="Alle aktivieren"
+        >
+          {expanded ? 'SELECT ALL' : '✓'}
+        </button>
+        <button
+          onClick={() => {
+            const off: Record<string, boolean> = {};
+            LAYER_GROUPS.forEach(g => g.layers.forEach(l => { off[l.key] = false; }));
+            setActiveLayers(prev => ({ ...prev, ...off }));
+          }}
+          className="text-[8px] font-mono tracking-wider text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors px-1.5 py-1 rounded hover:bg-white/5"
+          title="Alle deaktivieren"
+        >
+          {expanded ? 'DESELECT ALL' : '✗'}
+        </button>
+      </div>
 
     </motion.div>
 

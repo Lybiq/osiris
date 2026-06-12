@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { X, UserPlus, Trash2, Shield, User as UserIcon, KeyRound, RefreshCw, Loader2, MapPin } from 'lucide-react';
+import { X, UserPlus, Trash2, Shield, User as UserIcon, KeyRound, RefreshCw, Loader2, MapPin, LogOut } from 'lucide-react';
 import { authFetch, useAuth, type Role } from '@/lib/authClient';
 import { ConfirmDialog, PromptDialog, useToast } from '@/components/UiDialogs';
 import ApiKeysSection from '@/components/ApiKeysSection';
@@ -17,7 +17,7 @@ interface ManagedUser {
   created: string | null;
 }
 
-export default function UserManagementPanel({ onClose }: { onClose: () => void }) {
+export default function UserManagementPanel({ onClose, onLogout }: { onClose: () => void; onLogout?: () => void }) {
   const { user: me } = useAuth();
   const toast = useToast();
   const [tab, setTab] = useState<'users' | 'apikeys' | 'update'>('users');
@@ -99,20 +99,6 @@ export default function UserManagementPanel({ onClose }: { onClose: () => void }
     });
   };
 
-  const toggleRole = async (u: ManagedUser) => {
-    const role: Role = u.role === 'admin' ? 'user' : 'admin';
-    const res = await authFetch(`/api/users/${encodeURIComponent(u.username)}`, {
-      method: 'PATCH',
-      body: JSON.stringify({ role }),
-    });
-    if (!res.ok) {
-      const d = await res.json().catch(() => ({}));
-      toast(d.error || 'Änderung fehlgeschlagen', 'err');
-      return;
-    }
-    toast(`„${u.username}" ist jetzt ${role}`);
-    load();
-  };
 
   const resetPassword = (username: string) => {
     setPromptState({
@@ -187,9 +173,18 @@ export default function UserManagementPanel({ onClose }: { onClose: () => void }
               <RefreshCw className="w-3.5 h-3.5" />
             </button>
           )}
+          {onLogout && (
+            <button
+              onClick={onLogout}
+              className={`p-1.5 rounded hover:bg-[var(--hover-accent)] text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors ${tab !== 'users' ? 'ml-auto' : ''}`}
+              title="Abmelden"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+            </button>
+          )}
           <button
             onClick={onClose}
-            className={`p-1.5 rounded hover:bg-[var(--hover-accent)] text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors ${tab === 'users' ? '' : 'ml-auto'}`}
+            className={`p-1.5 rounded hover:bg-[var(--hover-accent)] text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors`}
           >
             <X className="w-4 h-4" />
           </button>
@@ -280,7 +275,28 @@ export default function UserManagementPanel({ onClose }: { onClose: () => void }
                       </span>
                     </td>
                     <td className="px-2 py-2">
-                      <span className={u.role === 'admin' ? 'text-[var(--gold-primary)]' : 'text-[var(--text-secondary)]'}>{u.role}</span>
+                      <select
+                        value={u.role}
+                        onChange={async (e) => {
+                          const role = e.target.value as Role;
+                          if (role === u.role) return;
+                          const res = await authFetch(`/api/users/${encodeURIComponent(u.username)}`, {
+                            method: 'PATCH',
+                            body: JSON.stringify({ role }),
+                          });
+                          if (!res.ok) {
+                            const d = await res.json().catch(() => ({}));
+                            toast(d.error || 'Änderung fehlgeschlagen', 'err');
+                            return;
+                          }
+                          toast(`„${u.username}" ist jetzt ${role}`);
+                          load();
+                        }}
+                        className={`bg-black/40 border border-[var(--border-primary)] rounded px-1.5 py-0.5 text-[10px] font-mono outline-none focus:border-[var(--gold-primary)] cursor-pointer ${u.role === 'admin' ? 'text-[var(--gold-primary)]' : 'text-[var(--text-secondary)]'}`}
+                      >
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                      </select>
                     </td>
                     <td className="px-2 py-2 text-[var(--text-muted)] hidden sm:table-cell">{fmt(u.lastLogin)}</td>
                     <td className="px-2 py-2 text-[var(--text-muted)] hidden md:table-cell">{u.lastIP || '—'}</td>
@@ -292,9 +308,6 @@ export default function UserManagementPanel({ onClose }: { onClose: () => void }
                     </td>
                     <td className="px-2 py-2">
                       <div className="flex items-center justify-end gap-1">
-                        <button onClick={() => toggleRole(u)} title="Admin/User umschalten" className="p-1 rounded hover:bg-[var(--hover-accent)] text-[var(--text-muted)] hover:text-[var(--gold-primary)]">
-                          <Shield className="w-3.5 h-3.5" />
-                        </button>
                         <button onClick={() => resetPassword(u.username)} title="Passwort zurücksetzen" className="p-1 rounded hover:bg-[var(--hover-accent)] text-[var(--text-muted)] hover:text-[var(--cyan-primary)]">
                           <KeyRound className="w-3.5 h-3.5" />
                         </button>

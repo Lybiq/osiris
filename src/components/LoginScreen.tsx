@@ -115,6 +115,13 @@ export default function LoginScreen() {
         <div className="text-[9px] text-center text-[var(--text-muted)] font-mono tracking-wide">
           OSINT · OPEN SOURCE INTELLIGENCE
         </div>
+        <div className="flex flex-col items-center gap-1 mt-1">
+          <span className="text-[8px] text-[var(--text-muted)]/60 font-mono">
+            © {new Date().getFullYear()}{' '}
+            <a href="https://9rn.de" target="_blank" rel="noopener" className="text-[var(--cyan-primary)]/70 hover:text-[var(--cyan-primary)] transition-colors">9rn.de</a>
+          </span>
+          <a href="mailto:L@9rn.de" className="text-[8px] text-[var(--text-muted)]/50 hover:text-[var(--cyan-primary)] font-mono transition-colors">L@9rn.de</a>
+        </div>
       </motion.div>
     </div>
   );

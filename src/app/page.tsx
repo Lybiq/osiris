@@ -16,6 +16,7 @@ import KeyboardShortcuts from '@/components/KeyboardShortcuts';
 import GlobalStatusBar from '@/components/GlobalStatusBar';
 import LiveAlerts from '@/components/LiveAlerts';
 import BasemapSwitcher from '@/components/BasemapSwitcher';
+import LocationInfoPanel from '@/components/LocationInfoPanel';
 import { useAuth } from '@/lib/authClient';
 
 const UserManagementPanel = dynamic(() => import('@/components/UserManagementPanel'));
@@ -59,16 +60,18 @@ const UptimeClock = () => {
   return <span className="hidden lg:inline">UPTIME: <span className="text-[var(--gold-primary)]">{uptime}</span></span>;
 };
 
-const ZuluClock = () => {
-  const [time, setTime] = useState('');
+const LocalClock = () => {
+  const [display, setDisplay] = useState('');
   useEffect(() => {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+    const city = tz.split('/').pop()?.replace(/_/g, ' ') || tz;
     const iv = setInterval(() => {
       const now = new Date();
-      setTime(`ZULU ${String(now.getUTCHours()).padStart(2,'0')}:${String(now.getUTCMinutes()).padStart(2,'0')}:${String(now.getUTCSeconds()).padStart(2,'0')}Z`);
+      setDisplay(`${city} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`);
     }, 1000);
     return () => clearInterval(iv);
   }, []);
-  return <span className="text-[var(--cyan-primary)] font-bold tabular-nums">{time || 'ZULU --:--:--Z'}</span>;
+  return <span className="text-[var(--cyan-primary)] font-bold tabular-nums">{display || '--:--:--'}</span>;
 };
 
 /** Real entity count — no fake throughput metrics */
@@ -116,6 +119,31 @@ export default function Dashboard() {
   const [mapProjection, setMapProjection] = useState<'globe'|'mercator'>('globe');
   const [mapStyle, setMapStyle] = useState<string>('dark');
   const [showBasemaps, setShowBasemaps] = useState(false);
+  const [pinpoint, setPinpoint] = useState<{lat:number;lon:number;address?:Record<string,string>;loading?:boolean}|null>(null);
+
+  const handleMapClick = useCallback(async (coords: {lat:number;lng:number}) => {
+    const {lat, lng: lon} = coords;
+    setPinpoint({ lat, lon, loading: true });
+    try {
+      const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat.toFixed(6)}&lon=${lon.toFixed(6)}&zoom=18&accept-language=de`);
+      const d = await r.json();
+      const a = d.address || {};
+      setPinpoint({
+        lat, lon,
+        address: {
+          name: a.amenity || a.shop || a.tourism || a.leisure || a.building || undefined,
+          road: a.road,
+          houseNumber: a.house_number,
+          city: a.city || a.town || a.village || a.hamlet || a.county,
+          state: a.state,
+          country: a.country,
+          postcode: a.postcode,
+        },
+      });
+    } catch {
+      setPinpoint({ lat, lon });
+    }
+  }, []);
   const [showUserMgmt, setShowUserMgmt] = useState(false);
   const { user: authUser, logout } = useAuth();
   const [sweepData, setSweepData] = useState<any>(null);
@@ -763,6 +791,7 @@ export default function Dashboard() {
           onEntityClick={handleEntityClick} 
           onMouseCoords={handleMouseCoords} 
           onRightClick={handleRightClick} 
+          onMapClick={handleMapClick}
           onViewStateChange={setMapView} 
           flyToLocation={flyToLocation}
           sweepData={sweepData}
@@ -771,6 +800,9 @@ export default function Dashboard() {
           theme={osirisTheme}
         />
       </ErrorBoundary>
+
+      {/* ── PINPOINT INFO ── */}
+      <LocationInfoPanel data={pinpoint} onClose={() => setPinpoint(null)} />
 
 
       {/* ── MAP VIEW CONTROLS (3D/2D + SATELLITE TOGGLE) ── */}
@@ -825,25 +857,17 @@ export default function Dashboard() {
 
       </motion.div>
 
-      {/* ── HEADER ── */}
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 2.5 }} className={`absolute top-4 left-6 z-[200] pointer-events-none flex flex-col`}>
-        <div className="flex items-baseline gap-2">
+      {/* ── HEADER (centered) ── */}
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 2.5 }} className={`absolute top-4 left-0 right-0 z-[200] pointer-events-none flex flex-col items-center`}>
+        <div className="flex items-baseline gap-3">
           <h1 className="text-xl font-bold tracking-[0.4em] text-[var(--gold-primary)] font-mono">OSINT</h1>
-          <span className="text-[10px] text-[var(--text-muted)] font-mono tracking-[0.15em] opacity-80">GLOBAL INTELLIGENCE COMMAND</span>
-        </div>
-        <div className="flex items-center gap-4 mt-1">
-          <span className="text-[5px] text-[var(--text-muted)] font-mono tracking-[0.3em] uppercase opacity-40">
-            POWERED BY OSINT OPEN SOURCE INTELLIGENCE · C2 ENGINE: PHYSICAL COMMAND CORE · SENSORS: ORBITAL LATTICE · NET: LYCAN NETWORK
-          </span>
+          <span className="text-[10px] text-[var(--text-muted)] font-mono tracking-[0.15em] opacity-80">GLOBAL INTELLIGENCE</span>
+          <LocalClock />
         </div>
       </motion.div>
 
       {/* ── TOP-RIGHT STATUS (desktop) — C2 DISPLAY ── */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3 }} className="status-bar-desktop absolute top-4 right-6 z-[200] pointer-events-none flex items-center gap-4 text-[9px] font-mono tracking-widest text-[var(--text-muted)]">
-
-        <span className="hidden lg:inline-flex items-center gap-1.5">
-          <ZuluClock />
-        </span>
 
         <span className="flex items-center gap-1">SYS: <span className={backendStatus === 'connected' ? 'text-[var(--alert-green)]' : 'text-[var(--alert-red)]'}>{backendStatus.toUpperCase()}</span></span>
 
@@ -855,7 +879,6 @@ export default function Dashboard() {
         </span>
 
         <UptimeClock />
-        <span className="text-[10px] font-bold tracking-[0.2em] text-[var(--text-muted)] opacity-50 ml-2">V.4.1</span>
       </motion.div>
 
       {/* ── AUTH CONTROLS (desktop) ── */}
@@ -874,19 +897,17 @@ export default function Dashboard() {
               ADMIN PANEL
             </button>
           )}
-          <button
-            onClick={logout}
-            title="Logout"
-            className="glass-panel p-1.5 hover:border-[var(--alert-red)]/40 text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors"
-          >
-            <LogOut className="w-3.5 h-3.5" />
-          </button>
+          {authUser.role !== 'admin' && (
+            <button onClick={logout} title="Logout" className="glass-panel p-1.5 hover:border-[var(--alert-red)]/40 text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors">
+              <LogOut className="w-3.5 h-3.5" />
+            </button>
+          )}
         </motion.div>
       )}
 
       {/* ── USER MANAGEMENT MODAL ── */}
       <AnimatePresence>
-        {showUserMgmt && <UserManagementPanel onClose={() => setShowUserMgmt(false)} />}
+        {showUserMgmt && <UserManagementPanel onClose={() => setShowUserMgmt(false)} onLogout={logout} />}
       </AnimatePresence>
 
       {/* ── MOBILE: Compact top status ── */}
