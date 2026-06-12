@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { X, UserPlus, Trash2, Shield, User as UserIcon, KeyRound, RefreshCw, Loader2, MapPin } from 'lucide-react';
 import { authFetch, useAuth, type Role } from '@/lib/authClient';
 import { ConfirmDialog, PromptDialog, useToast } from '@/components/UiDialogs';
+import ApiKeysSection from '@/components/ApiKeysSection';
+import UpdateSection from '@/components/UpdateSection';
 
 interface ManagedUser {
   username: string;
@@ -18,6 +20,7 @@ interface ManagedUser {
 export default function UserManagementPanel({ onClose }: { onClose: () => void }) {
   const { user: me } = useAuth();
   const toast = useToast();
+  const [tab, setTab] = useState<'users' | 'apikeys' | 'update'>('users');
   const [users, setUsers] = useState<ManagedUser[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -151,25 +154,53 @@ export default function UserManagementPanel({ onClose }: { onClose: () => void }
         className="glass-panel w-full max-w-3xl max-h-[85vh] flex flex-col overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
-        {/* header */}
+        {/* header with tabs */}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border-primary)]">
           <Shield className="w-4 h-4 text-[var(--gold-primary)]" />
-          <span className="hud-text text-[13px] text-[var(--text-primary)] tracking-[0.2em]">USER MANAGEMENT</span>
-          <button
-            onClick={load}
-            className="ml-auto p-1.5 rounded hover:bg-[var(--hover-accent)] text-[var(--text-muted)] hover:text-[var(--gold-primary)] transition-colors"
-            title="Aktualisieren"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-          </button>
+          <span className="hud-text text-[13px] text-[var(--text-primary)] tracking-[0.2em] mr-2">ADMIN PANEL</span>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => setTab('users')}
+              className={`px-2.5 py-1 rounded text-[10px] font-mono tracking-wider transition-colors ${tab === 'users' ? 'bg-[var(--hover-accent)] text-[var(--gold-primary)] border border-[var(--border-active)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-transparent'}`}
+            >
+              USERS
+            </button>
+            <button
+              onClick={() => setTab('apikeys')}
+              className={`px-2.5 py-1 rounded text-[10px] font-mono tracking-wider transition-colors ${tab === 'apikeys' ? 'bg-[var(--hover-accent)] text-[var(--gold-primary)] border border-[var(--border-active)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-transparent'}`}
+            >
+              API KEYS
+            </button>
+            <button
+              onClick={() => setTab('update')}
+              className={`px-2.5 py-1 rounded text-[10px] font-mono tracking-wider transition-colors ${tab === 'update' ? 'bg-[var(--hover-accent)] text-[var(--gold-primary)] border border-[var(--border-active)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-transparent'}`}
+            >
+              UPDATE
+            </button>
+          </div>
+          {tab === 'users' && (
+            <button
+              onClick={load}
+              className="ml-auto p-1.5 rounded hover:bg-[var(--hover-accent)] text-[var(--text-muted)] hover:text-[var(--gold-primary)] transition-colors"
+              title="Aktualisieren"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+            </button>
+          )}
           <button
             onClick={onClose}
-            className="p-1.5 rounded hover:bg-[var(--hover-accent)] text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors"
+            className={`p-1.5 rounded hover:bg-[var(--hover-accent)] text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors ${tab === 'users' ? '' : 'ml-auto'}`}
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
+        {tab === 'apikeys' ? (
+          <ApiKeysSection />
+        ) : tab === 'update' ? (
+          <UpdateSection />
+        ) : (
+        <>
         {/* create form */}
         <div className="px-4 py-3 border-b border-[var(--border-secondary)] flex flex-wrap items-end gap-2">
           <div className="flex flex-col gap-1 flex-1 min-w-[120px]">
@@ -278,6 +309,8 @@ export default function UserManagementPanel({ onClose }: { onClose: () => void }
             </table>
           )}
         </div>
+        </>
+        )}
       </motion.div>
 
       {/* in-design dialogs (replace browser popups) */}

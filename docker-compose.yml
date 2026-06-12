@@ -25,6 +25,9 @@ services:
       - OSIRIS_DATA_DIR=/app/data
     volumes:
       - ./data:/app/data
+      # Self-update: mount repo + docker socket so the admin panel can pull & rebuild
+      - /var/run/docker.sock:/var/run/docker.sock
+      - .:/repo
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped

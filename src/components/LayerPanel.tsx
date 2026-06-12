@@ -15,8 +15,8 @@ interface LayerPanelProps {
   isMobile?: boolean;
   theme?: 'core' | 'ghost';
   setTheme?: (theme: 'core' | 'ghost') => void;
-  collapsed?: boolean;
-  onToggleCollapse?: () => void;
+  expanded?: boolean;
+  onToggleExpand?: () => void;
 }
 
 const getLayerGroups = (theme: 'core' | 'ghost') => {
@@ -118,7 +118,7 @@ function Shield(props: any) {
   );
 }
 
-function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'core', setTheme, collapsed = false, onToggleCollapse }: LayerPanelProps) {
+function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'core', setTheme, expanded = false, onToggleExpand }: LayerPanelProps) {
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
 
   const LAYER_GROUPS = getLayerGroups(theme);
@@ -160,7 +160,7 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
                     key={layer.key}
                     onClick={() => {
                       if (layer.key === 'sdk_ransomware') {
-                        alert('Ransomware Feed - Coming Soon');
+                        
                       } else {
                         toggle(layer.key);
                       }
@@ -229,12 +229,13 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
     <>
     <motion.div 
       initial={{ x: -100, opacity: 0 }}
-      animate={{ x: collapsed ? -80 : 0, opacity: collapsed ? 0 : 1 }}
+      animate={{ x: 0, opacity: 1, width: expanded ? 280 : 80 }}
       transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-      className="absolute top-0 left-0 h-full w-[80px] border-r border-[var(--border-primary)] flex flex-col pt-32 pb-8 z-50 pointer-events-auto bg-[var(--bg-panel)] backdrop-blur-[24px] saturate-150"
-      style={{ boxShadow: '4px 0 24px rgba(0,0,0,0.5)', pointerEvents: collapsed ? 'none' : 'auto' }}
+      className="absolute top-0 left-0 h-full border-r border-[var(--border-primary)] flex flex-col pt-32 pb-8 z-50 pointer-events-auto bg-[var(--bg-panel)] backdrop-blur-[24px] saturate-150 overflow-hidden"
+      style={{ boxShadow: '4px 0 24px rgba(0,0,0,0.5)' }}
     >
       
+      {!expanded && (
       <div className="flex-1 flex flex-col gap-8 px-2">
         {LAYER_GROUPS.map((group) => {
           const groupActiveCount = group.layers.filter(l => activeLayers[l.key]).length;
@@ -296,7 +297,7 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
                             key={layer.key}
                             onClick={() => {
                               if (layer.key === 'sdk_ransomware') {
-                                alert('Ransomware Feed - Coming Soon');
+                                
                               } else {
                                 toggle(layer.key);
                               }
@@ -326,6 +327,44 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
           );
         })}
       </div>
+      )}
+
+      {/* EXPANDED: full inline layer list with toggles (wie altes Script) */}
+      {expanded && (
+      <div className="flex-1 flex flex-col gap-4 px-3 overflow-y-auto">
+        {LAYER_GROUPS.map((group) => (
+          <div key={group.label} className="flex flex-col gap-1">
+            <div className="text-[10px] font-bold font-mono tracking-widest border-b border-white/10 pb-1.5 mb-1" style={{ color: group.color }}>
+              {group.fullLabel}
+            </div>
+            {group.layers.map((layer) => {
+              const isLayerActive = activeLayers[layer.key];
+              const count = getCount(layer.dataKey);
+              const Icon = layer.icon || Shield;
+              return (
+                <button
+                  key={layer.key}
+                  onClick={() => { if (layer.key !== 'sdk_ransomware') toggle(layer.key); }}
+                  className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded hover:bg-white/5 transition-colors group"
+                >
+                  <div
+                    className={`w-2 h-2 rounded-full border flex-shrink-0 transition-all ${isLayerActive ? 'bg-current border-current' : 'bg-transparent border-white/30 scale-75'}`}
+                    style={{ color: isLayerActive ? layer.color : 'inherit', boxShadow: isLayerActive ? `0 0 8px ${layer.color}` : 'none' }}
+                  />
+                  <Icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: isLayerActive ? layer.color : 'rgba(255,255,255,0.4)' }} />
+                  <span className={`text-[11px] font-mono uppercase tracking-wider flex-1 text-left ${isLayerActive ? 'text-white' : 'text-white/50 group-hover:text-white/80'}`}>
+                    {layer.label}
+                  </span>
+                  {count !== null && (
+                    <span className="text-[9px] font-mono tabular-nums opacity-60">{count.toLocaleString()}</span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+      )}
 
       {/* DESKTOP THEME TOGGLE */}
       {setTheme && (
@@ -357,17 +396,17 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
     </motion.div>
 
     {/* Collapse / expand arrow tab (Pfeil ein-/ausklappen) */}
-    {onToggleCollapse && (
+    {onToggleExpand && (
       <motion.button
         initial={false}
-        animate={{ left: collapsed ? 0 : 80 }}
+        animate={{ left: expanded ? 280 : 80 }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        onClick={onToggleCollapse}
-        title={collapsed ? 'Sidebar einblenden' : 'Sidebar ausblenden'}
+        onClick={onToggleExpand}
+        title={expanded ? 'Sidebar einklappen' : 'Sidebar ausklappen'}
         className="absolute top-1/2 -translate-y-1/2 z-[60] w-5 h-12 flex items-center justify-center rounded-r border border-l-0 border-[var(--border-primary)] bg-[var(--bg-panel)] backdrop-blur-[24px] text-[var(--text-muted)] hover:text-[var(--gold-primary)] pointer-events-auto transition-colors"
         style={{ boxShadow: '4px 0 16px rgba(0,0,0,0.4)' }}
       >
-        {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+        {expanded ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
       </motion.button>
     )}
     </>

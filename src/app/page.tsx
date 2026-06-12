@@ -105,7 +105,7 @@ export default function Dashboard() {
   const [activeCamera, setActiveCamera] = useState<any>(null);
   const [spaceWeather, setSpaceWeather] = useState<any>(null);
   const [showLayers, setShowLayers] = useState(true);
-  const [layersCollapsed, setLayersCollapsed] = useState(false);
+  const [layersExpanded, setLayersExpanded] = useState(false);
   const [showMarkets, setShowMarkets] = useState(false);
   const [showAlerts, setShowAlerts] = useState(false);
   const [showScmPanel, setShowScmPanel] = useState(true);
@@ -864,11 +864,6 @@ export default function Dashboard() {
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.2 }}
           className="absolute top-11 right-6 z-[250] pointer-events-auto flex items-center gap-2"
         >
-          <span className="glass-panel px-2.5 py-1 text-[9px] font-mono tracking-widest text-[var(--text-secondary)] flex items-center gap-1.5">
-            <span className={authUser.role === 'admin' ? 'text-[var(--gold-primary)]' : 'text-[var(--cyan-primary)]'}>●</span>
-            {authUser.username.toUpperCase()}
-            <span className="text-[var(--text-muted)]/60">/ {authUser.role.toUpperCase()}</span>
-          </span>
           {authUser.role === 'admin' && (
             <button
               onClick={() => setShowUserMgmt(true)}
@@ -917,7 +912,7 @@ export default function Dashboard() {
 
 
       {/* ── NEW SIDEBAR (Root Level) ── */}
-      {showLayers && !isMobile && <LayerPanel data={data} activeLayers={activeLayers} setActiveLayers={setActiveLayers} theme={osirisTheme} setTheme={setOsirisTheme} collapsed={layersCollapsed} onToggleCollapse={() => setLayersCollapsed(c => !c)} />}
+      {showLayers && !isMobile && <LayerPanel data={data} activeLayers={activeLayers} setActiveLayers={setActiveLayers} theme={osirisTheme} setTheme={setOsirisTheme} expanded={layersExpanded} onToggleExpand={() => setLayersExpanded(c => !c)} />}
 
 
 
