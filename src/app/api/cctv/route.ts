@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server';
 import { stealthFetch } from '@/lib/stealthFetch';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const maxDuration = 60; // allow up to 60s for worldwide camera fetching
 import { fetchAsfinagCameras } from './asfinag';
 import { fetchBulgariaCameras } from './bulgaria';
 import { fetchGreeceCameras } from './greece';

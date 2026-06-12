@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { X, UserPlus, Trash2, Shield, User as UserIcon, KeyRound, RefreshCw, Loader2, MapPin, LogOut } from 'lucide-react';
 import { authFetch, useAuth, type Role } from '@/lib/authClient';
+import { GLASS_STYLE } from '@/components/LFrame';
 import { ConfirmDialog, PromptDialog, useToast } from '@/components/UiDialogs';
 import ApiKeysSection from '@/components/ApiKeysSection';
 import UpdateSection from '@/components/UpdateSection';
@@ -137,11 +138,11 @@ export default function UserManagementPanel({ onClose, onLogout }: { onClose: ()
       <motion.div
         initial={{ scale: 0.97, y: 10 }}
         animate={{ scale: 1, y: 0 }}
-        className="glass-panel w-full max-w-3xl max-h-[85vh] flex flex-col overflow-hidden"
+        className="w-full max-w-3xl max-h-[85vh] flex flex-col overflow-hidden rounded-lg border border-white/10" style={GLASS_STYLE}
         onClick={e => e.stopPropagation()}
       >
         {/* header with tabs */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border-primary)]">
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-white/8">
           <Shield className="w-4 h-4 text-[var(--gold-primary)]" />
           <span className="hud-text text-[13px] text-[var(--text-primary)] tracking-[0.2em] mr-2">ADMIN PANEL</span>
           <div className="flex items-center gap-1">

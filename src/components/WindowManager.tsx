@@ -215,17 +215,17 @@ function FloatingWindow({
         onMouseDown={onDragStart}
         className="flex items-center gap-2 px-3 py-2 border-b border-white/8 cursor-grab active:cursor-grabbing select-none flex-shrink-0"
       >
-        {/* macOS-style buttons */}
-        <div className="flex items-center gap-1.5">
-          <button onClick={onClose} className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-110 transition-all flex items-center justify-center group" title="Schließen">
-            <X className="w-2 h-2 text-black/0 group-hover:text-black/70" />
-          </button>
+        <span className="text-[9px] font-mono tracking-[0.15em] text-[var(--text-muted)] flex-1">{win.title}</span>
+        {/* Window controls (right side) */}
+        <div className="flex items-center gap-1.5 ml-auto">
           <button onClick={onMinimize} className="w-3 h-3 rounded-full bg-[#febc2e] hover:brightness-110 transition-all flex items-center justify-center group" title="Minimieren">
             <Minus className="w-2 h-2 text-black/0 group-hover:text-black/70" />
           </button>
           <span className="w-3 h-3 rounded-full bg-[#28c840] opacity-50" />
+          <button onClick={onClose} className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-110 transition-all flex items-center justify-center group" title="Schließen">
+            <X className="w-2 h-2 text-black/0 group-hover:text-black/70" />
+          </button>
         </div>
-        <span className="text-[9px] font-mono tracking-[0.15em] text-[var(--text-muted)] flex-1 text-center">{win.title}</span>
       </div>
 
       {/* Content */}

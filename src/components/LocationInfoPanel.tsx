@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useToast } from '@/components/UiDialogs';
+import { GLASS_STYLE } from '@/components/LFrame';
 import { X, MapPin, Copy, ExternalLink, Navigation } from 'lucide-react';
 
 interface LocationData {
@@ -75,13 +76,13 @@ export default function LocationInfoPanel({ data, onClose }: Props) {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
-          className="fixed z-[800] w-[280px] glass-panel overflow-hidden pointer-events-auto"
-          style={{ left: pos.x, top: pos.y, boxShadow: '0 8px 40px rgba(0,0,0,0.6)' }}
+          className="fixed z-[800] w-[280px] overflow-hidden pointer-events-auto rounded-lg border border-white/10"
+          style={{ left: pos.x, top: pos.y, ...GLASS_STYLE, boxShadow: '0 8px 40px rgba(0,0,0,0.5)' }}
         >
           {/* Draggable header */}
           <div
             onMouseDown={onMouseDown}
-            className="flex items-center gap-2 px-3 py-2 border-b border-[var(--border-primary)] cursor-grab active:cursor-grabbing select-none"
+            className="flex items-center gap-2 px-3 py-1.5 border-b border-white/8 cursor-grab active:cursor-grabbing select-none"
           >
             <MapPin className="w-3.5 h-3.5 text-[var(--gold-primary)]" />
             <span className="hud-text text-[11px] text-[var(--text-primary)] tracking-[0.15em] flex-1">MAP LOCATION</span>

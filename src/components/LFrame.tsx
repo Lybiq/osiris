@@ -36,7 +36,7 @@ interface LFrameProps {
 }
 
 const SIDEBAR_W = 72;
-const SIDEBAR_EXP_W = 260;
+const SIDEBAR_EXP_W = 220;
 const HEADER_H = 34;
 
 export default function LFrame({
@@ -80,7 +80,7 @@ export default function LFrame({
       >
         <div className="h-full flex items-center pointer-events-auto" style={GLASS_STYLE}>
           {/* Left: OSINT brand */}
-          <div className="flex items-center gap-2 pl-3" style={{ width: sideW, flexShrink: 0, transition: 'width 0.3s ease' }}>
+          <div className="flex items-center gap-2 pl-3" style={{ width: sideW, flexShrink: 0, transition: 'width 0.3s ease', minWidth: sideW }}>
             <h1 className="text-[13px] font-bold tracking-[0.3em] text-[var(--gold-primary)] font-mono">OSINT</h1>
           </div>
 
@@ -113,10 +113,10 @@ export default function LFrame({
       {/* ═══ SIDEBAR (left leg of L) ═══ */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0, width: sideW }}
-        transition={{ type: 'spring', damping: 25, stiffness: 200, delay: 2.6 }}
-        className="fixed left-0 z-[290] flex flex-col pointer-events-auto overflow-hidden"
-        style={{ ...GLASS_STYLE, top: HEADER_H, bottom: 0 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 2.6 }}
+        className="fixed left-0 z-[290] flex flex-col pointer-events-auto overflow-hidden transition-[width] duration-300 ease-in-out"
+        style={{ ...GLASS_STYLE, top: HEADER_H, bottom: 0, width: sideW }}
       >
         {/* Collapse toggle (inside the glass) */}
         <button
