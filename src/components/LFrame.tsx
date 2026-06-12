@@ -79,15 +79,16 @@ export default function LFrame({
         style={{ height: HEADER_H }}
       >
         <div className="h-full flex items-center pointer-events-auto" style={GLASS_STYLE}>
-          {/* Left: OSINT brand */}
-          <div className="flex items-center gap-2 pl-3" style={{ width: sideW, flexShrink: 0, transition: 'width 0.3s ease', minWidth: sideW }}>
+          {/* Left: OSINT + Location/Time */}
+          <div className="flex items-center gap-3 pl-3">
             <h1 className="text-[13px] font-bold tracking-[0.3em] text-[var(--gold-primary)] font-mono">OSINT</h1>
+            <span className="text-[10px] text-[var(--cyan-primary)] font-mono font-bold tabular-nums opacity-90">{clockDisplay}</span>
           </div>
 
           {/* Spacer */}
           <div className="flex-1" />
 
-          {/* Right: SYSTEM → Ort/Uhrzeit → ADMIN */}
+          {/* Right: SYSTEM → ADMIN */}
           <div className="flex items-center gap-4 pr-3 text-[9px] font-mono tracking-widest">
             <button onClick={onSystemClick} className="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity text-[var(--text-muted)]">
               SYSTEM
@@ -97,8 +98,6 @@ export default function LFrame({
               />
               {sysStatus === 'error' && <AlertTriangle className="w-3 h-3 text-[var(--alert-red)] animate-pulse" />}
             </button>
-
-            <span className="text-[10px] text-[var(--cyan-primary)] font-bold tabular-nums">{clockDisplay}</span>
 
             {isAdmin && onAdminClick && (
               <button onClick={onAdminClick} className="flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity text-[var(--gold-primary)]">
@@ -148,9 +147,15 @@ export default function LFrame({
                 return (
                   <button
                     key={group.label}
-                    onClick={() => setExpanded(true)}
+                    onClick={() => {
+                      // Toggle all layers in this group
+                      const allActive = group.layers.every(l => activeLayers[l.key]);
+                      const updates: Record<string, boolean> = {};
+                      group.layers.forEach(l => { updates[l.key] = !allActive; });
+                      setActiveLayers(prev => ({ ...prev, ...updates }));
+                    }}
                     className="relative w-11 h-11 flex flex-col items-center justify-center gap-0.5 rounded-lg hover:bg-white/8 transition-colors"
-                    title={group.fullLabel}
+                    title={group.fullLabel + (group.layers.every(l => activeLayers[l.key]) ? ' (alle aktiv — klick zum deaktivieren)' : ' (klick zum aktivieren)')}
                   >
                     {isActive && (
                       <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: group.color, boxShadow: `0 0 5px ${group.color}` }} />

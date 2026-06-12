@@ -8,6 +8,7 @@ import { GLASS_STYLE } from '@/components/LFrame';
 import { ConfirmDialog, PromptDialog, useToast } from '@/components/UiDialogs';
 import ApiKeysSection from '@/components/ApiKeysSection';
 import UpdateSection from '@/components/UpdateSection';
+import FeedsSection from '@/components/FeedsSection';
 
 interface ManagedUser {
   username: string;
@@ -21,7 +22,7 @@ interface ManagedUser {
 export default function UserManagementPanel({ onClose, onLogout }: { onClose: () => void; onLogout?: () => void }) {
   const { user: me } = useAuth();
   const toast = useToast();
-  const [tab, setTab] = useState<'users' | 'apikeys' | 'update'>('users');
+  const [tab, setTab] = useState<'users' | 'apikeys' | 'update' | 'feeds'>('users');
   const [users, setUsers] = useState<ManagedUser[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -164,6 +165,12 @@ export default function UserManagementPanel({ onClose, onLogout }: { onClose: ()
             >
               UPDATE
             </button>
+            <button
+              onClick={() => setTab('feeds')}
+              className={`px-2.5 py-1 rounded text-[10px] font-mono tracking-wider transition-colors ${tab === 'feeds' ? 'bg-[var(--hover-accent)] text-[var(--gold-primary)] border border-[var(--border-active)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-transparent'}`}
+            >
+              FEEDS
+            </button>
           </div>
           {tab === 'users' && (
             <button
@@ -195,6 +202,8 @@ export default function UserManagementPanel({ onClose, onLogout }: { onClose: ()
           <ApiKeysSection />
         ) : tab === 'update' ? (
           <UpdateSection />
+        ) : tab === 'feeds' ? (
+          <FeedsSection />
         ) : (
         <>
         {/* create form */}
