@@ -16,5 +16,35 @@
     "name": "Treasure Island, California Live Cam | 24/7 Stream",
     "lat": 53.2750693,
     "lon": -8.2114469
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=fUsJZTHeZn4",
+    "name": "LIVE Nevskiy avenue St. Petersburg Russia Anichkov Palace Невский пр. Аничков дворец Санкт-Петербург",
+    "lat": 0,
+    "lon": 0
+  },
+  {
+    "url": "http://mzinfo.dnshome.de:5009/view/viewer_index.shtml?id=612",
+    "name": "Live view  - AXIS M1114 Network Camera",
+    "lat": 0,
+    "lon": 0
+  },
+  {
+    "url": "http://mzinfo.dnshome.de:5013/view/viewer_index.shtml?id=348",
+    "name": "AXIS P1355 Network Camera",
+    "lat": 0,
+    "lon": 0
+  },
+  {
+    "url": "http://mzinfo.dnshome.de:5012/view/viewer_index.shtml?id=323",
+    "name": "Live view  - AXIS M1114 Network Camera",
+    "lat": 0,
+    "lon": 0
+  },
+  {
+    "url": "http://mzinfo.dnshome.de:5010/view/view.shtml?id=361&imagePath=%2Fmjpg%2Fvideo.mjpg&size=1",
+    "name": "",
+    "lat": 0,
+    "lon": 0
   }
 ]

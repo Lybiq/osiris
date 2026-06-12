@@ -15,11 +15,6 @@
     "category": "news"
   },
   {
-    "url": "https://feeds.reuters.com/reuters/worldNews",
-    "name": "Reuters World",
-    "category": "news"
-  },
-  {
     "url": "https://www.spiegel.de/schlagzeilen/tops/index.rss",
     "name": "DER SPIEGEL - Schlagzeilen – Tops",
     "category": "news"
@@ -52,6 +47,11 @@
   {
     "url": "https://www.rferl.org/api/zbgvmtl-vomx-tpeq_kmr",
     "name": "Russia Invades Ukraine - Radio Free Europe / Radio Liberty",
+    "category": "news"
+  },
+  {
+    "url": "https://www.rt.com/rss/",
+    "name": "RT - Daily news",
     "category": "news"
   }
 ]

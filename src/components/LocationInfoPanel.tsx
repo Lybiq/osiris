@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useToast } from '@/components/UiDialogs';
 import { GLASS_STYLE } from '@/components/LFrame';
-import { X, MapPin, Copy, ExternalLink, Navigation } from 'lucide-react';
+import { X, MapPin, Copy, ExternalLink, Navigation, Plus } from 'lucide-react';
 
 interface LocationData {
   lat: number;
@@ -24,9 +24,10 @@ interface LocationData {
 interface Props {
   data: LocationData | null;
   onClose: () => void;
+  onAddFeed?: (lat: number, lon: number, name: string) => void;
 }
 
-export default function LocationInfoPanel({ data, onClose }: Props) {
+export default function LocationInfoPanel({ data, onClose, onAddFeed }: Props) {
   const toast = useToast();
   const panelRef = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ x: 60, y: 80 });
@@ -115,6 +116,11 @@ export default function LocationInfoPanel({ data, onClose }: Props) {
               <button onClick={copyCoords} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--border-primary)] text-[var(--text-muted)] hover:text-[var(--cyan-primary)] hover:border-[var(--cyan-primary)]/40 transition-colors text-[9px]">
                 <Copy className="w-3 h-3" /> Koordinaten
               </button>
+              {onAddFeed && data && !data.loading && (
+                <button onClick={() => onAddFeed(data.lat, data.lon, place || `${data.lat.toFixed(4)},${data.lon.toFixed(4)}`)} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--gold-primary)]/40 text-[var(--gold-primary)]/80 hover:text-[var(--gold-primary)] hover:border-[var(--gold-primary)]/60 transition-colors text-[9px]">
+                  <Plus className="w-3 h-3" /> Kamera/Stream
+                </button>
+              )}
               {a && !data.loading && (
                 <button onClick={copyAddress} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--border-primary)] text-[var(--text-muted)] hover:text-[var(--cyan-primary)] hover:border-[var(--cyan-primary)]/40 transition-colors text-[9px]">
                   <Copy className="w-3 h-3" /> Adresse

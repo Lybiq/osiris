@@ -177,7 +177,7 @@ export default function LFrame({
             <div className="flex flex-col gap-3 px-3">
               {layerGroups.map(group => (
                 <div key={group.label}>
-                  <div className="text-[9px] font-bold font-mono tracking-widest pb-1 mb-1 border-b border-white/8" style={{ color: group.color }}>{group.fullLabel}</div>
+                  <button onClick={() => { const allActive = group.layers.every(l => activeLayers[l.key]); const u: Record<string, boolean> = {}; group.layers.forEach(l => { u[l.key] = !allActive; }); setActiveLayers(prev => ({ ...prev, ...u })); }} className="text-[9px] font-bold font-mono tracking-widest pb-1 mb-1 border-b border-white/8 w-full text-left cursor-pointer hover:opacity-80 transition-opacity" style={{ color: group.color }}>{group.fullLabel}</button>
                   {group.layers.map(layer => {
                     const isLayerActive = activeLayers[layer.key];
                     const count = getCount(layer.dataKey);

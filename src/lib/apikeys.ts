@@ -17,7 +17,7 @@ export interface KeyDef {
 export const KEY_DEFS: KeyDef[] = [
   // ✈ FLIGHTS
   { env: 'OPENSKY_CLIENT_ID', label: 'OpenSky Username', pairWith: 'OPENSKY_CLIENT_SECRET', pair: 'opensky', hint: 'opensky-network.org — free, enables higher rate limits', registerUrl: 'https://opensky-network.org/index.php/-/login', secret: false, section: '✈ FLIGHTS' },
-  { env: 'OPENSKY_CLIENT_SECRET', label: 'OpenSky Password', pair: 'opensky', hint: 'opensky-network.org — same credentials as web login', registerUrl: 'https://opensky-network.org/index.php/-/login', secret: true, section: '✈ FLIGHTS' },
+  { env: 'OPENSKY_CLIENT_SECRET', label: 'OpenSky Password', hidden: true, pair: 'opensky', hint: 'opensky-network.org — same credentials as web login', registerUrl: 'https://opensky-network.org/index.php/-/login', secret: true, section: '✈ FLIGHTS' },
   { env: 'ADSB_API_KEY', label: 'ADSB Exchange Key', hint: 'adsbexchange.com — commercial API key for live aircraft data', registerUrl: 'https://www.adsbexchange.com/data/', secret: true, section: '✈ FLIGHTS' },
   { env: 'FR24_API_KEY', label: 'FlightRadar24 Key', hint: 'flightradar24.com — Premium / Business plan required', registerUrl: 'https://www.flightradar24.com/premium', secret: true, section: '✈ FLIGHTS' },
 

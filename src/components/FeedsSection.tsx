@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { Loader2, Plus, Trash2, Save, Rss, Tv, Zap, Check, XCircle, Camera, Search } from 'lucide-react';
+import { Loader2, Plus, Trash2, Save, Rss, Tv, Zap, Check, XCircle, Camera, Search, MessageSquare } from 'lucide-react';
 import { authFetch } from '@/lib/authClient';
 import { useToast } from '@/components/UiDialogs';
 
@@ -10,10 +10,11 @@ interface YtStream { url: string; name: string; lat: number; lon: number; countr
 
 export default function FeedsSection() {
   const toast = useToast();
-  const [tab, setTab] = useState<'rss' | 'youtube' | 'cameras'>('rss');
+  const [tab, setTab] = useState<'rss' | 'youtube' | 'cameras' | 'telegram'>('rss');
   const [rssFeeds, setRssFeeds] = useState<RssFeed[]>([]);
   const [ytStreams, setYtStreams] = useState<YtStream[]>([]);
   const [customCams, setCustomCams] = useState<{url:string;name:string;lat:number;lon:number;type?:string}[]>([]);
+  const [tgFeeds, setTgFeeds] = useState<{url:string;name:string;category?:string;country?:string}[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [testing, setTesting] = useState(false);
@@ -68,10 +69,11 @@ export default function FeedsSection() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const [rr, yr, cr] = await Promise.all([authFetch('/api/admin/feeds'), authFetch('/api/admin/streams'), authFetch('/api/admin/cameras')]);
+      const [rr, yr, cr, tr] = await Promise.all([authFetch('/api/admin/feeds'), authFetch('/api/admin/streams'), authFetch('/api/admin/cameras'), authFetch('/api/admin/telegram')]);
       if (rr.ok) setRssFeeds(await rr.json());
       if (yr.ok) setYtStreams(await yr.json());
       if (cr.ok) setCustomCams(await cr.json());
+      if (tr.ok) setTgFeeds(await tr.json());
     } catch (e) { toast((e as Error).message, 'err'); }
     finally { setLoading(false); }
   }, [toast]);
@@ -106,6 +108,9 @@ export default function FeedsSection() {
         </button>
         <button onClick={() => setTab('cameras')} className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] tracking-wider transition-colors ${tab === 'cameras' ? 'bg-white/10 text-[var(--gold-primary)] border border-white/15' : 'text-white/40 border border-transparent hover:text-white/70'}`}>
           <Camera className="w-3 h-3" /> CAMERAS
+        </button>
+        <button onClick={() => setTab('telegram')} className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] tracking-wider transition-colors ${tab === 'telegram' ? 'bg-white/10 text-[var(--gold-primary)] border border-white/15' : 'text-white/40 border border-transparent hover:text-white/70'}`}>
+          <MessageSquare className="w-3 h-3" /> TELEGRAM
         </button>
       </div>
 
@@ -185,6 +190,29 @@ export default function FeedsSection() {
               {saving ? <Loader2 className="w-3 h-3 animate-spin" /> : <Save className="w-3 h-3" />} SPEICHERN
             </button>
             <button onClick={() => testAll('camera')} disabled={testing} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--cyan-primary)]/50 text-[var(--cyan-primary)] bg-[var(--cyan-primary)]/10 hover:bg-[var(--cyan-primary)]/20 disabled:opacity-50">
+              {testing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Zap className="w-3 h-3" />} TESTEN
+            </button>
+          </div>
+        </div>
+      ) : tab === 'telegram' ? (
+        <div className="flex flex-col gap-2">
+          <p className="text-white/30 mb-1">Telegram-Kanäle als Nachrichtenquellen. Werden im News-Feed angezeigt.</p>
+          {tgFeeds.map((f, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <button onClick={async () => { const d = await autoDetect(f.url, 'rss'); if (d.name) { const n = [...tgFeeds]; n[i] = { ...f, name: d.name || f.name }; setTgFeeds(n); toast('Erkannt: ' + (d.name || '?')); } }} className="p-1 rounded hover:bg-white/10 text-white/30 hover:text-[var(--cyan-primary)]" title="Auto-Erkennung"><Search className="w-3 h-3" /></button>
+              <input value={f.name} onChange={e => { const n = [...tgFeeds]; n[i] = { ...f, name: e.target.value }; setTgFeeds(n); }} placeholder="Name" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/80 outline-none focus:border-[var(--gold-primary)]/50 w-[100px]" />
+              <input value={f.url} onChange={e => { const n = [...tgFeeds]; n[i] = { ...f, url: e.target.value }; setTgFeeds(n); }} placeholder="https://t.me/s/channel" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/80 outline-none focus:border-[var(--gold-primary)]/50 flex-1" />
+              <input value={f.category || ''} onChange={e => { const n = [...tgFeeds]; n[i] = { ...f, category: e.target.value }; setTgFeeds(n); }} placeholder="Kategorie" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/60 outline-none w-[70px]" />
+              <input value={f.country || ''} onChange={e => { const n = [...tgFeeds]; n[i] = { ...f, country: e.target.value }; setTgFeeds(n); }} placeholder="Land" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/60 outline-none w-[40px]" />
+              <button onClick={() => setTgFeeds(tgFeeds.filter((_, j) => j !== i))} className="p-1 rounded hover:bg-white/10 text-white/30 hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
+            </div>
+          ))}
+          <div className="flex gap-2 mt-2">
+            <button onClick={() => setTgFeeds([...tgFeeds, { url: '', name: '', category: 'news' }])} className="flex items-center gap-1 px-2 py-1 rounded border border-white/10 text-white/40 hover:text-white/70 hover:bg-white/5"><Plus className="w-3 h-3" /> Hinzufügen</button>
+            <button onClick={async () => { setSaving(true); const r = await authFetch('/api/admin/telegram', { method: 'POST', body: JSON.stringify({ feeds: tgFeeds }) }); setSaving(false); if (r.ok) toast(tgFeeds.length + ' Telegram-Feeds gespeichert'); else toast('Fehler', 'err'); }} disabled={saving} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--gold-primary)]/50 text-[var(--gold-primary)] bg-[var(--gold-primary)]/10 hover:bg-[var(--gold-primary)]/20 disabled:opacity-50">
+              {saving ? <Loader2 className="w-3 h-3 animate-spin" /> : <Save className="w-3 h-3" />} SPEICHERN
+            </button>
+            <button onClick={() => testAll('rss')} disabled={testing} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--cyan-primary)]/50 text-[var(--cyan-primary)] bg-[var(--cyan-primary)]/10 hover:bg-[var(--cyan-primary)]/20 disabled:opacity-50">
               {testing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Zap className="w-3 h-3" />} TESTEN
             </button>
           </div>

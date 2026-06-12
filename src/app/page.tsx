@@ -125,10 +125,12 @@ export default function Dashboard() {
   const [mapStyle, setMapStyle] = useState<string>('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}');
   const [showBasemaps, setShowBasemaps] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [hotkeyMap, setHotkeyMap] = useState<Record<string, string>>({});
   const [timeTravelDate, setTimeTravelDate] = useState<string | null>(null);
   const [pinpoint, setPinpoint] = useState<{lat:number;lon:number;address?:Record<string,string>;loading?:boolean}|null>(null);
 
   const handleMapClick = useCallback(async (coords: {lat:number;lng:number}) => {
+    setShowBasemaps(false); setShowSearch(false);
     const {lat, lng: lon} = coords;
     setPinpoint({ lat, lon, loading: true });
     try {
@@ -177,31 +179,58 @@ export default function Dashboard() {
     private: false,
     jets: false,
     military: false,
-    maritime: true,
+    maritime: false,
     satellites: false,
     balloons: false,
-    cctv: true,
-    live_news: true,
-    news_intel: true,
-    earthquakes: true,
+    cctv: false,
+    live_news: false,
+    news_intel: false,
+    earthquakes: false,
     fires: false,
     weather: false,
     radiation: false,
     infrastructure: false,
-    global_incidents: true,
+    global_incidents: false,
+    conflicts: false,
     war_alerts: false,
     gps_jamming: false,
-    day_night: true,
-    cables: true,
-    sdk_sea: true,
-    sdk_air: true,
-    sdk_naval: true,
-    
+    day_night: false,
+    cables: false,
+    sdk_sea: false,
+    sdk_air: false,
+    sdk_naval: false,
     malware: false,
   });
   const [liveFeedUrl, setLiveFeedUrl] = useState<string | null>(null);
   const [liveFeedName, setLiveFeedName] = useState('');
   const [liveFeedEmbedAllowed, setLiveFeedEmbedAllowed] = useState(true);
+
+  // Auto-update check (every 30 min)
+  useEffect(() => {
+    const check = () => {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('osiris_token') : null;
+      if (!token) return;
+      fetch('/api/admin/update', { headers: { 'Authorization': 'Bearer ' + token } })
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { if (d?.available) console.log('[OSINT] Update verfügbar:', d.message); })
+        .catch(() => {});
+    };
+    const t = setTimeout(check, 10000); // first check after 10s
+    const iv = setInterval(check, 30 * 60 * 1000); // then every 30 min
+    return () => { clearTimeout(t); clearInterval(iv); };
+  }, []);
+
+  // Load configured hotkeys
+  useEffect(() => {
+    fetch('/api/admin/hotkeys', { headers: { 'Authorization': 'Bearer ' + (typeof window !== 'undefined' ? localStorage.getItem('osiris_token') || '' : '') } })
+      .then(r => r.ok ? r.json() : [])
+      .then((keys: {id:string;key?:string;defaultKey:string}[]) => {
+        const map: Record<string, string> = {};
+        keys.forEach(k => { map[k.id] = (k.key || k.defaultKey).toLowerCase(); });
+        setHotkeyMap(map);
+      })
+      .catch(() => {});
+  }, []);
 
   // Splash screen
   useEffect(() => {
@@ -271,7 +300,20 @@ export default function Dashboard() {
       if (e.key === 'c') setShowScmPanel(p => !p);
       if (e.key === 'i') setShowIntel(p => !p);
       if (e.key === 'r') setFlyToLocation({ lat: 20, lng: 0, ts: Date.now() });
-      if (e.key === 'g') setMapProjection(p => p === 'globe' ? 'mercator' : 'globe');
+      // Dynamic hotkey matching
+      const combo = [(e.ctrlKey ? 'ctrl+' : ''), (e.altKey ? 'alt+' : ''), (e.shiftKey ? 'shift+' : ''), (e.metaKey ? 'meta+' : ''), e.key.toLowerCase()].join('');
+      const match = (id: string) => hotkeyMap[id] && combo.endsWith(hotkeyMap[id].toLowerCase().replace(/\+/g, '+'));
+      
+      if (match('globe_toggle')) setMapProjection(p => p === 'globe' ? 'mercator' : 'globe');
+      if (match('toggle_flights')) setActiveLayers(p => ({ ...p, flights: !p.flights }));
+      if (match('toggle_ships')) setActiveLayers(p => ({ ...p, maritime: !p.maritime }));
+      if (match('toggle_cctv')) setActiveLayers(p => ({ ...p, cctv: !p.cctv }));
+      if (match('toggle_earthquakes')) setActiveLayers(p => ({ ...p, earthquakes: !p.earthquakes }));
+      if (match('toggle_fires')) setActiveLayers(p => ({ ...p, fires: !p.fires }));
+      if (match('toggle_weather')) setActiveLayers(p => ({ ...p, weather: !p.weather }));
+      if (match('toggle_conflicts')) setActiveLayers(p => ({ ...p, conflicts: !p.conflicts }));
+      if (match('toggle_daynight')) setActiveLayers(p => ({ ...p, day_night: !p.day_night }));
+      if (match('time_travel')) setTimeTravelDate(d => d ? null : new Date(Date.now() - 7*86400000).toISOString().split('T')[0]);
       if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) { e.preventDefault(); setShowSearch(s => !s); }
     };
     const fsHandler = () => setIsFullscreen(!!document.fullscreenElement);
@@ -844,7 +886,14 @@ export default function Dashboard() {
       </ErrorBoundary>
 
       {/* ── PINPOINT INFO ── */}
-      <LocationInfoPanel data={pinpoint} onClose={() => setPinpoint(null)} />
+      <LocationInfoPanel data={pinpoint} onClose={() => setPinpoint(null)} onAddFeed={(lat, lon, name) => {
+        const url = prompt('Stream/Camera URL eingeben:');
+        if (url) {
+          authFetch('/api/admin/cameras', { method: 'POST', body: JSON.stringify({ cameras: [{ url, name, lat, lon }] }) })
+            .then(r => { if (r.ok) { /* toast would be nice but no direct access here */ } });
+          setPinpoint(null);
+        }
+      }} />
 
 
       {/* ── MAP VIEW CONTROLS (bottom-right) ── */}

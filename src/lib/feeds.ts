@@ -74,6 +74,32 @@ function getDefaultYtStreams(): YtStream[] {
   ];
 }
 
+
+// ── Telegram Channels ──
+export interface TelegramFeed { url: string; name: string; category?: string; country?: string; }
+const TG_FILE = path.join(DATA_DIR, 'telegram-feeds.json');
+
+export async function readTelegramFeeds(): Promise<TelegramFeed[]> {
+  try { return JSON.parse(await fs.readFile(TG_FILE, 'utf-8')) || []; }
+  catch { return getDefaultTelegramFeeds(); }
+}
+
+export async function writeTelegramFeeds(feeds: TelegramFeed[]): Promise<void> {
+  await fs.mkdir(DATA_DIR, { recursive: true });
+  await fs.writeFile(TG_FILE, JSON.stringify(feeds, null, 2), 'utf-8');
+}
+
+function getDefaultTelegramFeeds(): TelegramFeed[] {
+  return [
+    { url: 'https://t.me/s/liveuamap', name: 'LiveUAMap', category: 'conflict', country: 'UA' },
+    { url: 'https://t.me/s/inaborysenko', name: 'Illia Ponomarenko', category: 'conflict', country: 'UA' },
+    { url: 'https://t.me/s/ryaborsneak', name: 'RWApodcast', category: 'conflict' },
+    { url: 'https://t.me/s/nexaborta_en', name: 'Nexta', category: 'news', country: 'BY' },
+    { url: 'https://t.me/s/bbcukrainianservice', name: 'BBC Ukrainian', category: 'news', country: 'UA' },
+    { url: 'https://t.me/s/osaborintinsider', name: 'OSINT Insider', category: 'osint' },
+  ];
+}
+
 // ── Custom Cameras (admin-managed) ──
 export interface CustomCamera { url: string; name: string; lat: number; lon: number; type?: string; }
 const CAM_FILE = path.join(DATA_DIR, 'custom-cameras.json');

@@ -57,7 +57,7 @@ async function detectYouTube(url: string) {
 async function detectRss(url: string) {
   const result: any = { name: '', category: 'news' };
   try {
-    const r = await fetch(url, { signal: AbortSignal.timeout(8000), headers: { 'User-Agent': 'OSINT/1.0' } });
+    const r = await fetch(url, { signal: AbortSignal.timeout(8000), headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/125.0' } });
     if (r.ok) {
       const text = await r.text();
       // Extract <title> from RSS/Atom
@@ -77,7 +77,7 @@ async function detectGeneric(url: string) {
   const result: any = { name: url.split('/').pop() || 'Camera', lat: 0, lon: 0 };
   try {
     // Try to fetch page title
-    const r = await fetch(url, { signal: AbortSignal.timeout(6000), headers: { 'User-Agent': 'OSINT/1.0' } });
+    const r = await fetch(url, { signal: AbortSignal.timeout(6000), headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/125.0' } });
     if (r.ok) {
       const text = (await r.text()).slice(0, 10000);
       const titleMatch = text.match(/<title[^>]*>(.*?)<\/title>/i);
@@ -91,7 +91,7 @@ async function geocodePlace(query: string): Promise<{ lat: number; lon: number; 
   try {
     const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`, {
       signal: AbortSignal.timeout(4000),
-      headers: { 'User-Agent': 'OSINT/1.0' },
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/125.0' },
     });
     const d = await r.json();
     if (d && d[0]) {

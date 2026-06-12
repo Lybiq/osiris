@@ -16,7 +16,7 @@ export default function BasemapSwitcher({ current, onSelect, onClose }: BasemapS
       initial={{ opacity: 0, y: 10, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 10, scale: 0.97 }}
-      className="glass-panel p-3 pointer-events-auto w-[230px] max-h-[60vh] overflow-y-auto"
+      className="glass-panel p-3 pointer-events-auto w-[230px] max-h-[60vh] overflow-y-auto !bg-[rgba(30,30,30,0.88)]"
     >
       <div className="flex items-center gap-2 mb-2.5">
         <MapIcon className="w-3.5 h-3.5 text-[var(--gold-primary)]" />

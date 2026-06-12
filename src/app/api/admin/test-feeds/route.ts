@@ -5,6 +5,15 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
+const USER_AGENTS = [
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0',
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15',
+];
+function randomUA() { return USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)]; }
+
 interface TestItem {
   url: string;
   type: 'rss' | 'youtube' | 'camera';
@@ -58,7 +67,7 @@ export async function POST(req: Request) {
 async function testRss(index: number, item: TestItem, t0: number): Promise<TestResult> {
   const r = await fetch(item.url, {
     signal: AbortSignal.timeout(8000),
-    headers: { 'User-Agent': 'OSINT/1.0', 'Accept': 'application/rss+xml, application/atom+xml, application/xml, text/xml' },
+    headers: { 'User-Agent': randomUA(), 'Accept': 'application/rss+xml, application/atom+xml, application/xml, text/xml' },
   });
   const ms = Date.now() - t0;
   if (!r.ok) return { index, online: false, error: `HTTP ${r.status}`, ms };
@@ -106,7 +115,7 @@ async function testYoutube(index: number, item: TestItem, t0: number): Promise<T
 async function testCamera(index: number, item: TestItem, t0: number): Promise<TestResult> {
   const r = await fetch(item.url, {
     signal: AbortSignal.timeout(8000),
-    headers: { 'User-Agent': 'OSINT/1.0' },
+    headers: { 'User-Agent': randomUA() },
     method: 'HEAD', // Just check if URL is reachable
   });
   const ms = Date.now() - t0;
@@ -115,7 +124,7 @@ async function testCamera(index: number, item: TestItem, t0: number): Promise<Te
   if (!name && r.ok) {
     // Try GET to extract title
     try {
-      const full = await fetch(item.url, { signal: AbortSignal.timeout(5000), headers: { 'User-Agent': 'OSINT/1.0' } });
+      const full = await fetch(item.url, { signal: AbortSignal.timeout(5000), headers: { 'User-Agent': randomUA() } });
       const text = (await full.text()).slice(0, 5000);
       const m = text.match(/<title[^>]*>(.*?)<\/title>/i);
       if (m) name = m[1].trim().slice(0, 80);
@@ -129,7 +138,7 @@ async function geocode(query: string): Promise<{ lat: number; lon: number; count
   if (!query || query.length < 3) return null;
   try {
     const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`, {
-      signal: AbortSignal.timeout(3000), headers: { 'User-Agent': 'OSINT/1.0' },
+      signal: AbortSignal.timeout(3000), headers: { 'User-Agent': randomUA() },
     });
     const d = await r.json();
     if (d?.[0]) return { lat: parseFloat(d[0].lat), lon: parseFloat(d[0].lon), country: d[0].display_name?.split(',').pop()?.trim() || '' };

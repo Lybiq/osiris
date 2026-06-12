@@ -13,7 +13,9 @@ interface KeyInfo {
   section: string;
   registerUrl: string | null;
   pair: string | null;
+  hidden: boolean;
   pair: string | null;
+  hidden: boolean;
   set: boolean;
   preview: string;
   fromEnv: boolean;
@@ -73,7 +75,9 @@ export default function ApiKeysSection() {
             <div key={section}>
               <div className="text-[10px] font-mono font-bold tracking-widest text-[var(--gold-primary)] border-b border-[var(--border-secondary)] pb-1 mb-2">{section}</div>
               <div className="flex flex-col gap-3">
-                {sectionKeys.map(k => (
+                {sectionKeys.filter(k => !k.hidden).map(k => {
+                  const pairedKey = k.pair ? keys.find(p => p.env === k.pair) : null;
+                  return (
                   <div key={k.env} className="flex flex-col gap-1">
                     <div className="flex items-center gap-2">
                       <KeyRound className={`w-3 h-3 ${k.set ? 'text-[var(--alert-green)]' : 'text-[var(--text-muted)]'}`} />
@@ -85,15 +89,27 @@ export default function ApiKeysSection() {
                       )}
                     </div>
                     <span className="text-[8px] text-[var(--text-muted)] font-mono ml-5">{k.hint}</span>
+                    <div className={pairedKey ? "flex gap-2 ml-5" : ""}>
                     <input
                       type={k.secret ? 'password' : 'text'}
                       value={edits[k.env] ?? ''}
                       onChange={e => setEdits(s => ({ ...s, [k.env]: e.target.value }))}
                       placeholder={k.set ? 'Neuen Wert (leer = unverändert)' : 'Key eingeben…'}
-                      className="ml-5 bg-black/40 border border-[var(--border-primary)] rounded px-2 py-1 text-[10px] text-[var(--text-primary)] font-mono outline-none focus:border-[var(--gold-primary)]"
+                      className={pairedKey ? "bg-black/40 border border-white/10 rounded px-2 py-1 text-[10px] text-white/80 font-mono outline-none focus:border-[var(--gold-primary)]/50 flex-1" : "ml-5 bg-black/40 border border-white/10 rounded px-2 py-1 text-[10px] text-white/80 font-mono outline-none focus:border-[var(--gold-primary)]/50"}
                     />
+                    {pairedKey && (
+                      <input
+                        type="password"
+                        value={edits[pairedKey.env] ?? ''}
+                        onChange={e => setEdits(s => ({ ...s, [pairedKey.env]: e.target.value }))}
+                        placeholder={pairedKey.set ? pairedKey.label + ' (unverändert)' : pairedKey.label}
+                        className="bg-black/40 border border-white/10 rounded px-2 py-1 text-[10px] text-white/80 font-mono outline-none focus:border-[var(--gold-primary)]/50 flex-1"
+                      />
+                    )}
+                    </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}

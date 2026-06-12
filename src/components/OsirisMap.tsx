@@ -211,6 +211,7 @@ function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightCl
       createWarningIcon('warn-yellow', '#F9A825');
 
       map.addLayer({ id: 'conflict-icons', type: 'symbol', source: 'conflict-zones', layout: {
+        visibility: 'none',
         'icon-image': ['match', ['get','severity'], 'war','warn-icon', 'high','warn-orange', 'warn-yellow'],
         'icon-size': ['interpolate',['linear'],['zoom'], 1,0.6, 4,0.8, 8,1],
         'icon-allow-overlap': true,
@@ -1328,7 +1329,6 @@ function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightCl
     setVis(['ship-dots','ship-label'], activeLayers.maritime);
     setVis(['news-glow','news-dots','news-label'], activeLayers.live_news);
     setVis(['sigint-news-glow','sigint-news-dots','sigint-news-label'], activeLayers.news_intel);
-    setVis(['conflict-icons'], activeLayers.conflict_zones !== false);
 
     setVis(['balloon-dots','balloon-label'], activeLayers.balloons);
     setVis(['rad-glow','rad-dots','rad-label'], activeLayers.radiation);
