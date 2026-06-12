@@ -215,6 +215,10 @@ async function fetchVesselApiFallback() {
   // Mock data removed per user request. We only rely on real live stream data.
 }
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
+
 export async function GET() {
   // Trigger Hybrid Fallback
   await fetchVesselApiFallback();

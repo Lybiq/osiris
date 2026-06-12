@@ -60,6 +60,17 @@ function getDefaultYtStreams(): YtStream[] {
     { url: 'https://www.youtube.com/watch?v=cYGFTmcR10U', name: 'WION', lat: 28.6139, lon: 77.209, country: 'IN' },
     { url: 'https://www.youtube.com/watch?v=ntRFMkczJo0', name: 'TRT World', lat: 41.0082, lon: 28.9784, country: 'TR' },
     { url: 'https://www.youtube.com/watch?v=vOTiJkg1voo', name: 'CGTN', lat: 39.9042, lon: 116.4074, country: 'CN' },
+    { url: 'https://www.youtube.com/watch?v=fYQEae4YdOs', name: 'Euronews English', lat: 45.7640, lon: 4.8357, country: 'FR' },
+    { url: 'https://www.youtube.com/watch?v=eMyTIwO-4Gs', name: 'RT News', lat: 55.7558, lon: 37.6173, country: 'RU' },
+    { url: 'https://www.youtube.com/watch?v=_JQiEs32SqQ', name: 'i24NEWS English', lat: 32.0853, lon: 34.7818, country: 'IL' },
+    { url: 'https://www.youtube.com/watch?v=ntLPcVAyNPE', name: 'Bloomberg TV', lat: 40.7128, lon: -74.006, country: 'US' },
+    { url: 'https://www.youtube.com/watch?v=KTrKjx7XLcI', name: 'CNA (Channel NewsAsia)', lat: 1.3521, lon: 103.8198, country: 'SG' },
+    { url: 'https://www.youtube.com/watch?v=U1vGOFnmnHs', name: 'Arirang TV (Korea)', lat: 37.5665, lon: 126.978, country: 'KR' },
+    { url: 'https://www.youtube.com/watch?v=xL5vwluRLCQ', name: 'NDTV 24x7', lat: 28.6139, lon: 77.209, country: 'IN' },
+    { url: 'https://www.youtube.com/watch?v=LLxMOrmRg80', name: 'ABC News Australia', lat: -33.8688, lon: 151.2093, country: 'AU' },
+    { url: 'https://www.youtube.com/watch?v=emWMFmZsAKc', name: 'KBS World (Korea)', lat: 37.5665, lon: 126.978, country: 'KR' },
+    { url: 'https://www.youtube.com/watch?v=h3MuIUNCCzI', name: 'CBC News (Canada)', lat: 45.4215, lon: -75.6972, country: 'CA' },
+    { url: 'https://www.youtube.com/watch?v=86g1JGN0SPA', name: 'GB News', lat: 51.5074, lon: -0.1278, country: 'UK' },
   ];
 }
 

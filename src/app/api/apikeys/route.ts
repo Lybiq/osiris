@@ -23,6 +23,7 @@ export async function GET(req: Request) {
       hint: def.hint,
       secret: def.secret ?? true,
       section: def.section,
+      registerUrl: def.registerUrl || null,
       set: !!effective,
       preview: effective ? maskKey(effective) : '',
       fromEnv: !val && !!envVal,

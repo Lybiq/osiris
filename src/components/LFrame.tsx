@@ -41,7 +41,7 @@ const SIDEBAR_EXP_W = 220;
 const HEADER_H = 34;
 
 export default function LFrame({
-  sysStatus, onSystemClick, onAdminClick, isAdmin, clockDisplay,
+  sysStatus, onSystemClick, onAdminClick, isAdmin, clockDisplay, onSearchClick,
   layerGroups, activeLayers, setActiveLayers, data,
 }: LFrameProps) {
   const [expanded, setExpanded] = useState(false);

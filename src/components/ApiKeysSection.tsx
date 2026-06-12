@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { KeyRound, Loader2, Save, Check, Zap, AlertTriangle, XCircle, MinusCircle } from 'lucide-react';
+import { KeyRound, Loader2, Save, Check, Zap, AlertTriangle, XCircle, MinusCircle, ExternalLink } from 'lucide-react';
 import { authFetch } from '@/lib/authClient';
 import { useToast } from '@/components/UiDialogs';
 
@@ -11,6 +11,7 @@ interface KeyInfo {
   hint: string;
   secret: boolean;
   section: string;
+  registerUrl: string | null;
   set: boolean;
   preview: string;
   fromEnv: boolean;

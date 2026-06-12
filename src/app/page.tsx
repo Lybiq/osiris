@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layers, BarChart3, Newspaper, Search, X, Globe, MapPinned, Radar, Satellite, ExternalLink, AlertTriangle, Activity, Database, Wifi, Play, Network, Map as MapIcon, LogOut, Users, Shield } from 'lucide-react';
+import { Layers, BarChart3, Newspaper, Search, X, Globe, MapPinned, Radar, Satellite, ExternalLink, AlertTriangle, Activity, Database, Wifi, Play, Network, Map as MapIcon, LogOut, Users, Shield, Calendar } from 'lucide-react';
 import IntelFeed from '@/components/IntelFeed';
 import MarketsPanel from '@/components/MarketsPanel';
 import ScmPanel from '@/components/ScmPanel';
@@ -860,6 +860,9 @@ export default function Dashboard() {
           </span>
         </div>
 
+        {/* TimeTravel */}
+        <TimeTravel onDateChange={setTimeTravelDate} active={!!timeTravelDate} />
+
         <div className="flex items-center gap-2">
           {/* 3D/2D Toggle */}
           <button
@@ -986,17 +989,11 @@ export default function Dashboard() {
         </button>
 
         <button
-          onClick={() => wm.openWindow({
-            id: 'entity-graph',
-            title: 'ENTITY GRAPH',
-            defaultSize: { w: 400, h: 400 },
-            defaultPos: { x: window.innerWidth - 480, y: 120 },
-            content: <div className="p-4 text-[10px] font-mono text-white/40 text-center">Entity Graph — Coming Soon</div>,
-          })}
-          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${wm.isOpen('entity-graph') ? 'bg-[#D4AF37]/20' : 'hover:bg-white/10'}`}
-          title="Entity Graph"
+          onClick={() => setTimeTravelDate(timeTravelDate ? null : new Date(Date.now() - 7*86400000).toISOString().split('T')[0])}
+          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${timeTravelDate ? 'bg-[var(--gold-primary)]/20' : 'hover:bg-white/10'}`}
+          title="Time Travel — Historische Satellitenbilder"
         >
-          <Network className={`w-4 h-4 ${wm.isOpen('entity-graph') ? 'text-[#D4AF37]' : 'text-white/60'}`} />
+          <Calendar className={`w-4 h-4 ${timeTravelDate ? 'text-[var(--gold-primary)]' : 'text-white/60'}`} />
         </button>
       </div>}
 

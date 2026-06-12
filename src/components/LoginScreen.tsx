@@ -13,7 +13,7 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
-  const [lang, setLang] = useState<Lang>('de');
+  const [lang, setLang] = useState<Lang>('en');
 
   const t = LOGIN_I18N[lang];
   const isRtl = lang === 'ar' || lang === 'fa';
@@ -90,8 +90,7 @@ export default function LoginScreen() {
 
         {/* Footer */}
         <div className="flex flex-col items-center gap-1">
-          <span className="text-[8px] text-white/25 font-mono tracking-wide">{t.brand}</span>
-          <span className="text-[7px] text-white/15 font-mono">
+          <span className="text-[8px] text-white/25 font-mono">
             {t.copyright} {new Date().getFullYear()}{' '}
             <a href="https://9rn.de" target="_blank" rel="noopener" className="text-[var(--cyan-primary)]/40 hover:text-[var(--cyan-primary)]/70 transition-colors">9rn.de</a>
             {' · '}
