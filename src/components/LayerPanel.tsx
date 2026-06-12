@@ -20,7 +20,7 @@ interface LayerPanelProps {
   onToggleExpand?: () => void;
 }
 
-const getLayerGroups = (theme: 'core' | 'ghost') => {
+export const getLayerGroups = (theme: 'core' | 'ghost') => {
   const isGhost = theme === 'ghost';
   const phantomPurple = '#B388FF';
   const ghostPriv = '#CE93D8';

@@ -16,6 +16,7 @@ import KeyboardShortcuts from '@/components/KeyboardShortcuts';
 import GlobalStatusBar from '@/components/GlobalStatusBar';
 import LiveAlerts from '@/components/LiveAlerts';
 import BasemapSwitcher from '@/components/BasemapSwitcher';
+import LFrame, { GLASS_STYLE } from '@/components/LFrame';
 import LocationInfoPanel from '@/components/LocationInfoPanel';
 import SystemHealthContent, { useSystemHealth } from '@/components/SystemHealth';
 import { useWindowManager } from '@/components/WindowManager';
@@ -25,6 +26,7 @@ const UserManagementPanel = dynamic(() => import('@/components/UserManagementPan
 
 const OsirisMap = dynamic(() => import('@/components/OsirisMap'), { ssr: false });
 const LayerPanel = dynamic(() => import('@/components/LayerPanel'));
+import { getLayerGroups } from '@/components/LayerPanel';
 const CameraViewer = dynamic(() => import('@/components/CameraViewer'));
 const OsintPanel = dynamic(() => import('@/components/OsintPanel'));
 const EntityGraphPanel = dynamic(() => import('@/components/EntityGraphPanel'));
@@ -782,6 +784,22 @@ export default function Dashboard() {
         )}
       </AnimatePresence>
 
+      {/* ═══ L-FRAME: Header + Sidebar ═══ */}
+      {!isMobile && (
+        <LFrame
+          sysStatus={sysStatus}
+          onSystemClick={() => wm.openWindow({ id: 'system-health', title: 'SYSTEM HEALTH', content: <SystemHealthContent />, defaultSize: { w: 440, h: 400 } })}
+          onAdminClick={authUser?.role === 'admin' ? () => setShowUserMgmt(true) : undefined}
+          isAdmin={authUser?.role === 'admin'}
+          clockDisplay={<LocalClock />}
+          layerGroups={getLayerGroups(osirisTheme)}
+          activeLayers={activeLayers}
+          setActiveLayers={setActiveLayers}
+          data={data}
+        />
+      )}
+
+
 
 
       {/* ── MAP ── */}
@@ -868,40 +886,9 @@ export default function Dashboard() {
         </div>
       </motion.div>
 
-      {/* ── HEADER BAR (L-frame top, Nardo grey) ── */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 2.5 }} className="absolute top-0 left-0 right-0 z-[200] pointer-events-none">
-        <div className="flex items-center px-4 py-1.5" style={{ background: 'rgba(75,75,75,0.35)', backdropFilter: 'blur(20px) saturate(1.4)' }}>
-          <h1 className="text-[14px] font-bold tracking-[0.35em] text-[var(--gold-primary)] font-mono">OSINT</h1>
-          <span className="ml-auto text-[11px] text-[var(--cyan-primary)] font-mono font-bold tabular-nums"><LocalClock /></span>
-        </div>
-      </motion.div>
+      {/* Header + Sidebar now in LFrame */}
 
       {/* ── TOP-RIGHT STATUS (desktop) — C2 DISPLAY ── */}
-      {/* ── TOP-RIGHT: SYSTEM + ADMIN (inside L-frame) ── */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.8 }} className="absolute top-0 right-0 z-[260] pointer-events-auto flex items-center gap-3 px-3 py-1.5 text-[9px] font-mono tracking-widest text-[var(--text-muted)]">
-        <button
-          onClick={() => wm.openWindow({ id: 'system-health', title: 'SYSTEM HEALTH', content: <SystemHealthContent />, defaultSize: { w: 440, h: 400 } })}
-          className="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity"
-        >
-          SYSTEM
-          <span className={`w-2 h-2 rounded-full ${sysStatus === 'ok' ? 'bg-[var(--alert-green)]' : sysStatus === 'error' ? 'bg-[var(--alert-red)] animate-pulse' : 'bg-[var(--gold-primary)] animate-pulse'}`} style={{ boxShadow: sysStatus === 'ok' ? '0 0 6px var(--alert-green)' : sysStatus === 'error' ? '0 0 6px var(--alert-red)' : '0 0 6px var(--gold-primary)' }} />
-          {sysStatus === 'error' && <AlertTriangle className="w-3 h-3 text-[var(--alert-red)] animate-pulse" />}
-        </button>
-        {authUser?.role === 'admin' && (
-          <button
-            onClick={() => setShowUserMgmt(true)}
-            className="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity text-[var(--gold-primary)]"
-          >
-            <Shield className="w-3 h-3" />
-            ADMIN
-          </button>
-        )}
-        {authUser?.role !== 'admin' && authUser && (
-          <button onClick={logout} className="flex items-center gap-1 cursor-pointer hover:opacity-80 text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors">
-            <LogOut className="w-3 h-3" /> LOGOUT
-          </button>
-        )}
-      </motion.div>
 
       {/* ── USER MANAGEMENT MODAL ── */}
       <AnimatePresence>
@@ -926,16 +913,10 @@ export default function Dashboard() {
       )}
 
 
-
-      {/* ── NEW SIDEBAR (Root Level) ── */}
-      {showLayers && !isMobile && <LayerPanel data={data} activeLayers={activeLayers} setActiveLayers={setActiveLayers} theme={osirisTheme} setTheme={setOsirisTheme} expanded={layersExpanded} onToggleExpand={() => setLayersExpanded(c => !c)} />}
-
-
-
-      {/* ── RIGHT TOOL STRIP (desktop only — mobile uses bottom nav) ── */}
-      {!isMobile && <div className="absolute right-2 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-[250] pointer-events-auto bg-black/40 backdrop-blur-sm p-1 rounded-full border border-white/5">
+      {/* ═══ RIGHT SIDE PANELS ═══ */}
+      {!isMobile && <div className="absolute right-2 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-[250] pointer-events-auto p-1 rounded-full border border-white/5" style={GLASS_STYLE}>
         <div className="relative group">
-          <button onClick={() => { setShowIntel(!showIntel); setShowMarkets(false); setShowAlerts(false); }} className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${showIntel ? 'bg-[var(--cyan-primary)]/20' : 'hover:bg-white/10'}`}>
+          <button onClick={() => { setShowIntel(!showIntel); setShowMarkets(false); setShowAlerts(false); setShowEntityGraph(false); }} className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${showIntel ? 'bg-[var(--cyan-primary)]/20' : 'hover:bg-white/10'}`}>
             <Radar className={`w-4 h-4 ${showIntel ? 'text-[var(--cyan-primary)]' : 'text-white/60'}`} />
           </button>
           {/* OSINT / Recon Panel Slideout */}

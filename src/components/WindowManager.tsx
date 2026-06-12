@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useCallback, useRef, useEffect, type ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Minus, Maximize2, Minimize2 } from 'lucide-react';
+import { GLASS_STYLE } from '@/components/LFrame';
 
 // ── Types ──────────────────────────────────────────────
 export interface WinDef {
@@ -129,12 +130,12 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
 
       {/* ── Taskbar ── */}
       {minimizedWindows.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 z-[9000] flex items-center gap-1 px-2 py-1 bg-black/70 backdrop-blur-md border-t border-[var(--border-primary)]">
+        <div className="fixed bottom-0 left-0 right-0 z-[9000] flex items-center gap-1 px-2 py-1 border-t border-white/8" style={GLASS_STYLE}>
           {minimizedWindows.map(w => (
             <button
               key={w.id}
               onClick={() => toggleMinimize(w.id)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-[var(--border-primary)] bg-[var(--hover-accent)] text-[var(--text-secondary)] hover:text-[var(--gold-primary)] hover:border-[var(--gold-primary)]/40 text-[10px] font-mono tracking-wider transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-white/10 text-[var(--text-secondary)] hover:text-[var(--gold-primary)] hover:border-[var(--gold-primary)]/30 text-[10px] font-mono tracking-wider transition-colors hover:bg-white/5"
             >
               {w.icon}
               {w.title}
@@ -200,18 +201,19 @@ function FloatingWindow({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.15 }}
-      className="fixed overflow-hidden rounded-lg border border-[var(--border-primary)] bg-[var(--bg-panel)] backdrop-blur-[24px] saturate-150 flex flex-col pointer-events-auto"
+      className="fixed overflow-hidden rounded-lg border border-white/10 flex flex-col pointer-events-auto"
       style={{
         left: win.x, top: win.y, width: win.w, height: win.h,
         zIndex: win.zIndex,
-        boxShadow: '0 8px 40px rgba(0,0,0,0.6), 0 0 1px rgba(var(--gold-rgb),0.2)',
+        ...GLASS_STYLE,
+        boxShadow: '0 8px 40px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.05)',
       }}
       onMouseDown={onFocus}
     >
       {/* Title bar */}
       <div
         onMouseDown={onDragStart}
-        className="flex items-center gap-2 px-3 py-2 border-b border-[var(--border-primary)] cursor-grab active:cursor-grabbing select-none flex-shrink-0 bg-[rgba(0,200,255,0.03)]"
+        className="flex items-center gap-2 px-3 py-2 border-b border-white/8 cursor-grab active:cursor-grabbing select-none flex-shrink-0"
       >
         {/* macOS-style buttons */}
         <div className="flex items-center gap-1.5">
