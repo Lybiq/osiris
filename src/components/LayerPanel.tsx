@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Plane, Satellite, Activity, Sun, AlertTriangle, Camera, Flame, Target,
   CloudLightning, Radiation, Tv, Anchor, Ship, Newspaper,
-  Network, Share2, Radio
+  Network, Share2, Radio, ChevronLeft, ChevronRight
 } from 'lucide-react';
 
 interface LayerPanelProps {
@@ -15,6 +15,8 @@ interface LayerPanelProps {
   isMobile?: boolean;
   theme?: 'core' | 'ghost';
   setTheme?: (theme: 'core' | 'ghost') => void;
+  collapsed?: boolean;
+  onToggleCollapse?: () => void;
 }
 
 const getLayerGroups = (theme: 'core' | 'ghost') => {
@@ -31,7 +33,7 @@ const getLayerGroups = (theme: 'core' | 'ghost') => {
   return [
   {
     label: 'SDK',
-    fullLabel: 'OSIRIS SDK',
+    fullLabel: 'OSINT SDK',
     color: '#1565C0',
     layers: [
       { key: 'sdk_sea', label: 'Maritime Lines', icon: Anchor, color: '#4FC3F7', dataKey: 'sdk_entities' },
@@ -116,7 +118,7 @@ function Shield(props: any) {
   );
 }
 
-function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'core', setTheme }: LayerPanelProps) {
+function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'core', setTheme, collapsed = false, onToggleCollapse }: LayerPanelProps) {
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
 
   const LAYER_GROUPS = getLayerGroups(theme);
@@ -224,12 +226,13 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
   }
 
   return (
+    <>
     <motion.div 
       initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
+      animate={{ x: collapsed ? -80 : 0, opacity: collapsed ? 0 : 1 }}
       transition={{ type: 'spring', damping: 25, stiffness: 200 }}
       className="absolute top-0 left-0 h-full w-[80px] border-r border-[var(--border-primary)] flex flex-col pt-32 pb-8 z-50 pointer-events-auto bg-[var(--bg-panel)] backdrop-blur-[24px] saturate-150"
-      style={{ boxShadow: '4px 0 24px rgba(0,0,0,0.5)' }}
+      style={{ boxShadow: '4px 0 24px rgba(0,0,0,0.5)', pointerEvents: collapsed ? 'none' : 'auto' }}
     >
       
       <div className="flex-1 flex flex-col gap-8 px-2">
@@ -352,6 +355,22 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
       )}
 
     </motion.div>
+
+    {/* Collapse / expand arrow tab (Pfeil ein-/ausklappen) */}
+    {onToggleCollapse && (
+      <motion.button
+        initial={false}
+        animate={{ left: collapsed ? 0 : 80 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+        onClick={onToggleCollapse}
+        title={collapsed ? 'Sidebar einblenden' : 'Sidebar ausblenden'}
+        className="absolute top-1/2 -translate-y-1/2 z-[60] w-5 h-12 flex items-center justify-center rounded-r border border-l-0 border-[var(--border-primary)] bg-[var(--bg-panel)] backdrop-blur-[24px] text-[var(--text-muted)] hover:text-[var(--gold-primary)] pointer-events-auto transition-colors"
+        style={{ boxShadow: '4px 0 16px rgba(0,0,0,0.4)' }}
+      >
+        {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+      </motion.button>
+    )}
+    </>
   );
 }
 

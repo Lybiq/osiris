@@ -1,11 +1,9 @@
 name: osiris
 services:
   osiris:
-    # Pulls the prebuilt image from GitHub Container Registry. The `build:`
-    # block is kept as a fallback: `docker compose up -d` uses the registry
-    # image if present/pullable, otherwise builds locally from the Dockerfile.
-    # Run `docker compose pull` to fetch the latest published image.
-    image: ghcr.io/aiacos/osiris:latest
+    # NOTE: the upstream registry image does NOT contain the custom auth /
+    # user-management / map-views changes. Build locally from this source.
+    # image: ghcr.io/aiacos/osiris:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -23,12 +21,15 @@ services:
       - NODE_ENV=production
       - PORT=3000
       - HOSTNAME=0.0.0.0
+      # Persist users.json + secret.key on the host (see volume below).
+      - OSIRIS_DATA_DIR=/app/data
+    volumes:
+      - ./data:/app/data
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
     networks:
       - default
-      - umami_default
 
   osiris-cache:
     image: nginx:alpine
@@ -58,9 +59,8 @@ services:
 volumes:
   nginx-cache:
 
-networks:
-  umami_default:
-    external: true
+# (Removed the external `umami_default` network — only needed if you run the
+#  Umami analytics stack. The middleware analytics call fails silently without it.)
 
 # ── CasaOS app-store metadata (ignored by plain Docker Compose) ──
 x-casaos:

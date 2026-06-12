@@ -4,7 +4,7 @@ import { stealthFetch } from '@/lib/stealthFetch';
 export const dynamic = 'force-dynamic';
 
 /**
- * OSIRIS — Real-Time Geopolitical Events (GDELT 2.0 GeoJSON API)
+ * OSINT — Real-Time Geopolitical Events (GDELT 2.0 GeoJSON API)
  * Source: GDELT Project — completely free, no auth required
  * Replaces the old RSS scraper with actual GDELT geo-coded events.
  */
@@ -104,12 +104,12 @@ export async function GET() {
       events: allEvents,
       total: allEvents.length,
       timestamp: new Date().toISOString(),
-      source: allEvents[0]?.id?.includes('fb') ? 'OSIRIS Simulated Incident Engine' : 'GDELT 2.0 GeoJSON API',
+      source: allEvents[0]?.id?.includes('fb') ? 'OSINT Simulated Incident Engine' : 'GDELT 2.0 GeoJSON API',
     }, {
       headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600' },
     });
   } catch (error) {
-    console.error('[OSIRIS] GDELT fetch error:', error);
+    console.error('[OSINT] GDELT fetch error:', error);
     return NextResponse.json({ events: [], total: 0, error: 'GDELT unavailable' }, { status: 500 });
   }
 }

@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layers, BarChart3, Newspaper, Search, X, Globe, MapPinned, Radar, Satellite, Moon, ExternalLink, AlertTriangle, Activity, Database, Wifi, Play, Network } from 'lucide-react';
+import { Layers, BarChart3, Newspaper, Search, X, Globe, MapPinned, Radar, Satellite, ExternalLink, AlertTriangle, Activity, Database, Wifi, Play, Network, Map as MapIcon, LogOut, Users, Shield } from 'lucide-react';
 import IntelFeed from '@/components/IntelFeed';
 import MarketsPanel from '@/components/MarketsPanel';
 import ScmPanel from '@/components/ScmPanel';
@@ -15,6 +15,10 @@ import ViewPresets from '@/components/ViewPresets';
 import KeyboardShortcuts from '@/components/KeyboardShortcuts';
 import GlobalStatusBar from '@/components/GlobalStatusBar';
 import LiveAlerts from '@/components/LiveAlerts';
+import BasemapSwitcher from '@/components/BasemapSwitcher';
+import { useAuth } from '@/lib/authClient';
+
+const UserManagementPanel = dynamic(() => import('@/components/UserManagementPanel'));
 
 const OsirisMap = dynamic(() => import('@/components/OsirisMap'), { ssr: false });
 const LayerPanel = dynamic(() => import('@/components/LayerPanel'));
@@ -101,6 +105,7 @@ export default function Dashboard() {
   const [activeCamera, setActiveCamera] = useState<any>(null);
   const [spaceWeather, setSpaceWeather] = useState<any>(null);
   const [showLayers, setShowLayers] = useState(true);
+  const [layersCollapsed, setLayersCollapsed] = useState(false);
   const [showMarkets, setShowMarkets] = useState(false);
   const [showAlerts, setShowAlerts] = useState(false);
   const [showScmPanel, setShowScmPanel] = useState(true);
@@ -109,7 +114,10 @@ export default function Dashboard() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [mobilePanel, setMobilePanel] = useState<'layers'|'markets'|'intel'|'search'|'recon'|null>(null);
   const [mapProjection, setMapProjection] = useState<'globe'|'mercator'>('globe');
-  const [mapStyle, setMapStyle] = useState<'dark'|'satellite'>('dark');
+  const [mapStyle, setMapStyle] = useState<string>('dark');
+  const [showBasemaps, setShowBasemaps] = useState(false);
+  const [showUserMgmt, setShowUserMgmt] = useState(false);
+  const { user: authUser, logout } = useAuth();
   const [sweepData, setSweepData] = useState<any>(null);
   const [scanTargets, setScanTargets] = useState<any[]>([]);
   const [entityGraphTarget, setEntityGraphTarget] = useState<{ type: string; id: string; label?: string; properties?: Record<string, any> } | null>(null);
@@ -259,7 +267,7 @@ export default function Dashboard() {
           setLocationLabel(label);
           lastGeocodedPos.current = coords;
         }
-      } catch (e) { console.warn('[OSIRIS] Suppressed error:', e instanceof Error ? e.message : e); }
+      } catch (e) { console.warn('[OSINT] Suppressed error:', e instanceof Error ? e.message : e); }
     }, 3000); // 3s debounce (was 1.5s)
   }, []);
 
@@ -269,7 +277,7 @@ export default function Dashboard() {
     try {
       const res = await fetch(`/api/region-dossier?lat=${coords.lat}&lng=${coords.lng}`);
       if (res.ok) setRegionDossier(await res.json());
-    } catch (e) { console.warn('[OSIRIS] Suppressed error:', e instanceof Error ? e.message : e); } finally { setDossierLoading(false); }
+    } catch (e) { console.warn('[OSINT] Suppressed error:', e instanceof Error ? e.message : e); } finally { setDossierLoading(false); }
   }, []);
   // Entity click handler (hoisted from JSX to comply with Rules of Hooks - Fixes #113)
   const handleEntityClick = useCallback((entity: any) => {
@@ -315,7 +323,7 @@ export default function Dashboard() {
         setBackendStatus('connected');
       }
     } catch (e) {
-      console.warn('[OSIRIS] Suppressed error:', e instanceof Error ? e.message : e);
+      console.warn('[OSINT] Suppressed error:', e instanceof Error ? e.message : e);
       setBackendStatus('error');
     }
   }, []);
@@ -332,7 +340,7 @@ export default function Dashboard() {
       try {
         const r = await fetch('/api/space-weather');
         if (r.ok) setSpaceWeather(await r.json());
-      } catch (e) { console.warn('[OSIRIS] Suppressed error:', e instanceof Error ? e.message : e); }
+      } catch (e) { console.warn('[OSINT] Suppressed error:', e instanceof Error ? e.message : e); }
     }, 5000);
 
     // Polling — OPTIMIZED intervals to minimize edge requests
@@ -463,7 +471,7 @@ export default function Dashboard() {
 
   // Reactive layer fetch: handled by layerFetchedRef above (no duplicate)
 
-  // ── OSIRIS SDK — Intelligence Fusion Layer ──
+  // ── OSINT SDK — Intelligence Fusion Layer ──
   // Produces node coordinates for the SDK network mesh visualization.
   // Does NOT duplicate existing layer visuals — SDK layer is LINES ONLY.
   // Cameras are excluded — they have their own dedicated layer.
@@ -644,9 +652,9 @@ export default function Dashboard() {
               />
             </div>
 
-            {/* ── OSIRIS title — letter-by-letter stagger ── */}
+            {/* ── OSINT title — letter-by-letter stagger ── */}
             <div className="flex items-center gap-[2px] mb-3 z-[2]">
-              {'OSIRIS'.split('').map((letter, i) => (
+              {'OSINT'.split('').map((letter, i) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
@@ -751,7 +759,7 @@ export default function Dashboard() {
           data={data} 
           activeLayers={activeLayers} 
           projection={mapProjection} 
-          mapStyle={mapStyle === 'satellite' ? 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' : 'dark'} 
+          mapStyle={mapStyle} 
           onEntityClick={handleEntityClick} 
           onMouseCoords={handleMouseCoords} 
           onRightClick={handleRightClick} 
@@ -786,33 +794,46 @@ export default function Dashboard() {
           </span>
         </button>
 
-        {/* Map Style Toggle */}
-        <button
-          onClick={() => setMapStyle(s => s === 'dark' ? 'satellite' : 'dark')}
-          className="glass-panel p-3.5 pointer-events-auto hover:border-[var(--gold-primary)]/40 transition-colors group relative"
-          title={mapStyle === 'dark' ? 'Satellite View' : 'Night View'}
-        >
-          {mapStyle === 'dark' ? (
-            <Satellite className="w-5 h-5 text-[var(--alert-green)] group-hover:scale-110 transition-transform" />
-          ) : (
-            <Moon className="w-5 h-5 text-[var(--cyan-primary)] group-hover:scale-110 transition-transform" />
-          )}
-          <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 text-[9px] font-mono text-[var(--text-muted)] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity glass-panel px-2 py-1 z-[300]">
-            {mapStyle === 'dark' ? 'SATELLITE' : 'NIGHT MODE'}
-          </span>
-        </button>
+        {/* Map Views (basemap switcher) */}
+        <div className="relative pointer-events-auto">
+          <AnimatePresence>
+            {showBasemaps && (
+              <div className="absolute bottom-full mb-2 left-0 z-[300]">
+                <BasemapSwitcher
+                  current={mapStyle}
+                  onSelect={(v) => { setMapStyle(v); setShowBasemaps(false); }}
+                  onClose={() => setShowBasemaps(false)}
+                />
+              </div>
+            )}
+          </AnimatePresence>
+          <button
+            onClick={() => setShowBasemaps(s => !s)}
+            className="glass-panel p-3.5 hover:border-[var(--gold-primary)]/40 transition-colors group relative"
+            title="Map Views"
+          >
+            {mapStyle === 'dark' ? (
+              <MapIcon className="w-5 h-5 text-[var(--gold-primary)] group-hover:scale-110 transition-transform" />
+            ) : (
+              <Satellite className="w-5 h-5 text-[var(--alert-green)] group-hover:scale-110 transition-transform" />
+            )}
+            <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 text-[9px] font-mono text-[var(--text-muted)] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity glass-panel px-2 py-1 z-[300]">
+              MAP VIEWS
+            </span>
+          </button>
+        </div>
 
       </motion.div>
 
       {/* ── HEADER ── */}
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 2.5 }} className={`absolute top-4 left-6 z-[200] pointer-events-none flex flex-col`}>
         <div className="flex items-baseline gap-2">
-          <h1 className="text-xl font-bold tracking-[0.4em] text-[var(--gold-primary)] font-mono">OSIRIS</h1>
+          <h1 className="text-xl font-bold tracking-[0.4em] text-[var(--gold-primary)] font-mono">OSINT</h1>
           <span className="text-[10px] text-[var(--text-muted)] font-mono tracking-[0.15em] opacity-80">GLOBAL INTELLIGENCE COMMAND</span>
         </div>
         <div className="flex items-center gap-4 mt-1">
           <span className="text-[5px] text-[var(--text-muted)] font-mono tracking-[0.3em] uppercase opacity-40">
-            POWERED BY OSIRIS OPEN SOURCE INTELLIGENCE · C2 ENGINE: PHYSICAL COMMAND CORE · SENSORS: ORBITAL LATTICE · NET: LYCAN NETWORK
+            POWERED BY OSINT OPEN SOURCE INTELLIGENCE · C2 ENGINE: PHYSICAL COMMAND CORE · SENSORS: ORBITAL LATTICE · NET: LYCAN NETWORK
           </span>
         </div>
       </motion.div>
@@ -837,6 +858,42 @@ export default function Dashboard() {
         <span className="text-[10px] font-bold tracking-[0.2em] text-[var(--text-muted)] opacity-50 ml-2">V.4.1</span>
       </motion.div>
 
+      {/* ── AUTH CONTROLS (desktop) ── */}
+      {!isMobile && authUser && (
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.2 }}
+          className="absolute top-11 right-6 z-[250] pointer-events-auto flex items-center gap-2"
+        >
+          <span className="glass-panel px-2.5 py-1 text-[9px] font-mono tracking-widest text-[var(--text-secondary)] flex items-center gap-1.5">
+            <span className={authUser.role === 'admin' ? 'text-[var(--gold-primary)]' : 'text-[var(--cyan-primary)]'}>●</span>
+            {authUser.username.toUpperCase()}
+            <span className="text-[var(--text-muted)]/60">/ {authUser.role.toUpperCase()}</span>
+          </span>
+          {authUser.role === 'admin' && (
+            <button
+              onClick={() => setShowUserMgmt(true)}
+              title="Admin Panel öffnen"
+              className="glass-panel px-2.5 py-1 flex items-center gap-1.5 hover:border-[var(--gold-primary)]/60 text-[var(--gold-primary)] transition-colors cursor-pointer text-[9px] font-mono tracking-widest"
+            >
+              <Shield className="w-3.5 h-3.5" />
+              ADMIN PANEL
+            </button>
+          )}
+          <button
+            onClick={logout}
+            title="Logout"
+            className="glass-panel p-1.5 hover:border-[var(--alert-red)]/40 text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+          </button>
+        </motion.div>
+      )}
+
+      {/* ── USER MANAGEMENT MODAL ── */}
+      <AnimatePresence>
+        {showUserMgmt && <UserManagementPanel onClose={() => setShowUserMgmt(false)} />}
+      </AnimatePresence>
+
       {/* ── MOBILE: Compact top status ── */}
       {isMobile && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} className="absolute top-3 right-3 z-[200] pointer-events-auto flex items-center gap-2">
@@ -844,13 +901,23 @@ export default function Dashboard() {
             <div className="w-1 h-1 rounded-full bg-[var(--gold-primary)] animate-osiris-pulse" />
             <span className="text-[var(--gold-primary)] font-bold">SUPPORT PROJECT</span>
           </a>
+          {authUser?.role === 'admin' && (
+            <button onClick={() => setShowUserMgmt(true)} title="User Management" className="glass-panel p-1.5 text-[var(--text-muted)]">
+              <Users className="w-3.5 h-3.5" />
+            </button>
+          )}
+          {authUser && (
+            <button onClick={logout} title="Logout" className="glass-panel p-1.5 text-[var(--text-muted)]">
+              <LogOut className="w-3.5 h-3.5" />
+            </button>
+          )}
         </motion.div>
       )}
 
 
 
       {/* ── NEW SIDEBAR (Root Level) ── */}
-      {showLayers && !isMobile && <LayerPanel data={data} activeLayers={activeLayers} setActiveLayers={setActiveLayers} theme={osirisTheme} setTheme={setOsirisTheme} />}
+      {showLayers && !isMobile && <LayerPanel data={data} activeLayers={activeLayers} setActiveLayers={setActiveLayers} theme={osirisTheme} setTheme={setOsirisTheme} collapsed={layersCollapsed} onToggleCollapse={() => setLayersCollapsed(c => !c)} />}
 
 
 
@@ -1035,7 +1102,7 @@ export default function Dashboard() {
                 <div className="px-3 pb-3">
                   <div className="flex items-center justify-between mb-2">
                     <span className="hud-text text-[9px] text-[var(--text-primary)]">
-                      {mobilePanel === 'layers' ? 'LAYERS & STATS' : mobilePanel === 'markets' ? 'MARKETS & INTEL' : mobilePanel === 'intel' ? 'INTEL FEED' : mobilePanel === 'recon' ? 'OSIRIS RECON' : 'SEARCH'}
+                      {mobilePanel === 'layers' ? 'LAYERS & STATS' : mobilePanel === 'markets' ? 'MARKETS & INTEL' : mobilePanel === 'intel' ? 'INTEL FEED' : mobilePanel === 'recon' ? 'OSINT RECON' : 'SEARCH'}
                     </span>
                     <button onClick={() => setMobilePanel(null)} className="text-[var(--text-muted)] p-1"><X className="w-4 h-4" /></button>
                   </div>

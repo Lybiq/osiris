@@ -44,3 +44,9 @@ scanner_backend_backup.js
 # Security - Prevent accidental manual leaks
 *Manual*.md
 
+
+/data
+.env
+.env.local
+node_modules
+.next
