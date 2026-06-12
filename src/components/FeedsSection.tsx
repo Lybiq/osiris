@@ -19,38 +19,42 @@ export default function FeedsSection() {
   const [testing, setTesting] = useState(false);
   const [rssResults, setRssResults] = useState<Record<number, 'ok'|'fail'|'testing'>>({});
   const [ytResults, setYtResults] = useState<Record<number, 'ok'|'fail'|'testing'>>({});
+  const [camResults, setCamResults] = useState<Record<number, 'ok'|'fail'|'testing'>>({});
 
-  const testRssFeeds = async () => {
+  const testAll = async (type: 'rss' | 'youtube' | 'camera') => {
     setTesting(true);
-    const results: Record<number, 'ok'|'fail'> = {};
-    for (let i = 0; i < rssFeeds.length; i++) {
-      setRssResults(prev => ({ ...prev, [i]: 'testing' }));
-      try {
-        const r = await fetch('/api/proxy-tiles?url=' + encodeURIComponent(rssFeeds[i].url), { signal: AbortSignal.timeout(8000) });
-        results[i] = r.ok ? 'ok' : 'fail';
-      } catch { results[i] = 'fail'; }
-      setRssResults(prev => ({ ...prev, [i]: results[i] }));
-    }
-    setTesting(false);
-    const ok = Object.values(results).filter(r => r === 'ok').length;
-    toast(ok + '/' + rssFeeds.length + ' RSS-Feeds erreichbar');
-  };
+    const items = type === 'rss' ? rssFeeds.map(f => ({ url: f.url, type: 'rss' as const }))
+      : type === 'youtube' ? ytStreams.map(s => ({ url: s.url, type: 'youtube' as const, lat: s.lat, lon: s.lon }))
+      : customCams.map(c => ({ url: c.url, type: 'camera' as const, name: c.name }));
 
-  const testYtStreams = async () => {
-    setTesting(true);
-    const results: Record<number, 'ok'|'fail'> = {};
-    for (let i = 0; i < ytStreams.length; i++) {
-      setYtResults(prev => ({ ...prev, [i]: 'testing' }));
-      try {
-        // Just check if URL is valid YouTube
-        const valid = ytStreams[i].url.includes('youtube.com') || ytStreams[i].url.includes('youtu.be');
-        results[i] = valid && ytStreams[i].url.length > 20 ? 'ok' : 'fail';
-      } catch { results[i] = 'fail'; }
-      setYtResults(prev => ({ ...prev, [i]: results[i] }));
-    }
+    // Set all to testing
+    const setResults = type === 'rss' ? setRssResults : type === 'youtube' ? setYtResults : setCamResults;
+    items.forEach((_, i) => setResults(prev => ({ ...prev, [i]: 'testing' as const })));
+
+    try {
+      const res = await authFetch('/api/admin/test-feeds', { method: 'POST', body: JSON.stringify({ items }) });
+      if (!res.ok) { toast('Test fehlgeschlagen', 'err'); setTesting(false); return; }
+      const results: {index:number;online:boolean;name?:string;lat?:number;lon?:number;country?:string;category?:string;ms:number}[] = await res.json();
+
+      let okCount = 0;
+      for (const r of results) {
+        setResults(prev => ({ ...prev, [r.index]: r.online ? 'ok' as const : 'fail' as const }));
+        if (r.online) okCount++;
+
+        // Auto-fill detected names and locations
+        if (type === 'rss' && r.name) {
+          setRssFeeds(prev => { const n = [...prev]; if (n[r.index] && (!n[r.index].name || n[r.index].name === '')) n[r.index] = { ...n[r.index], name: r.name!, category: r.category || n[r.index].category }; return n; });
+        }
+        if (type === 'youtube') {
+          setYtStreams(prev => { const n = [...prev]; if (n[r.index]) { if (r.name && !n[r.index].name) n[r.index] = { ...n[r.index], name: r.name! }; if (r.lat && (!n[r.index].lat || n[r.index].lat === 0)) n[r.index] = { ...n[r.index], lat: r.lat!, lon: r.lon || 0, country: r.country || '' }; } return n; });
+        }
+        if (type === 'camera' && r.name) {
+          setCustomCams(prev => { const n = [...prev]; if (n[r.index] && (!n[r.index].name || n[r.index].name === '')) n[r.index] = { ...n[r.index], name: r.name! }; return n; });
+        }
+      }
+      toast(`${okCount}/${items.length} erreichbar`);
+    } catch (e) { toast((e as Error).message, 'err'); }
     setTesting(false);
-    const ok = Object.values(results).filter(r => r === 'ok').length;
-    toast(ok + '/' + ytStreams.length + ' Streams gültig');
   };
 
   const autoDetect = async (url: string, type: string): Promise<{name?:string;lat?:number;lon?:number;category?:string;country?:string}> => {
@@ -127,7 +131,7 @@ export default function FeedsSection() {
             <button onClick={saveRss} disabled={saving} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--gold-primary)]/50 text-[var(--gold-primary)] bg-[var(--gold-primary)]/10 hover:bg-[var(--gold-primary)]/20 disabled:opacity-50">
               {saving ? <Loader2 className="w-3 h-3 animate-spin" /> : <Save className="w-3 h-3" />} SPEICHERN
             </button>
-            <button onClick={testRssFeeds} disabled={testing} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--cyan-primary)]/50 text-[var(--cyan-primary)] bg-[var(--cyan-primary)]/10 hover:bg-[var(--cyan-primary)]/20 disabled:opacity-50">
+            <button onClick={() => testAll('rss')} disabled={testing} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--cyan-primary)]/50 text-[var(--cyan-primary)] bg-[var(--cyan-primary)]/10 hover:bg-[var(--cyan-primary)]/20 disabled:opacity-50">
               {testing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Zap className="w-3 h-3" />} TESTEN
             </button>
           </div>
@@ -153,7 +157,7 @@ export default function FeedsSection() {
             <button onClick={saveYt} disabled={saving} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--gold-primary)]/50 text-[var(--gold-primary)] bg-[var(--gold-primary)]/10 hover:bg-[var(--gold-primary)]/20 disabled:opacity-50">
               {saving ? <Loader2 className="w-3 h-3 animate-spin" /> : <Save className="w-3 h-3" />} SPEICHERN
             </button>
-            <button onClick={testYtStreams} disabled={testing} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--cyan-primary)]/50 text-[var(--cyan-primary)] bg-[var(--cyan-primary)]/10 hover:bg-[var(--cyan-primary)]/20 disabled:opacity-50">
+            <button onClick={() => testAll('youtube')} disabled={testing} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--cyan-primary)]/50 text-[var(--cyan-primary)] bg-[var(--cyan-primary)]/10 hover:bg-[var(--cyan-primary)]/20 disabled:opacity-50">
               {testing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Zap className="w-3 h-3" />} TESTEN
             </button>
           </div>
@@ -169,6 +173,9 @@ export default function FeedsSection() {
               <input value={c.url} onChange={e => { const n = [...customCams]; n[i] = { ...c, url: e.target.value }; setCustomCams(n); }} placeholder="URL (Stream/Bild)" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/80 outline-none focus:border-[var(--gold-primary)]/50 flex-1 min-w-[140px]" />
               <input type="number" step="0.01" value={c.lat} onChange={e => { const n = [...customCams]; n[i] = { ...c, lat: parseFloat(e.target.value) || 0 }; setCustomCams(n); }} placeholder="Lat" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/60 outline-none w-[55px]" />
               <input type="number" step="0.01" value={c.lon} onChange={e => { const n = [...customCams]; n[i] = { ...c, lon: parseFloat(e.target.value) || 0 }; setCustomCams(n); }} placeholder="Lon" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/60 outline-none w-[55px]" />
+              {camResults[i] === 'ok' && <Check className="w-3 h-3 text-green-400" />}
+              {camResults[i] === 'fail' && <XCircle className="w-3 h-3 text-red-400" />}
+              {camResults[i] === 'testing' && <Loader2 className="w-3 h-3 animate-spin text-cyan-400" />}
               <button onClick={() => setCustomCams(customCams.filter((_, j) => j !== i))} className="p-1 rounded hover:bg-white/10 text-white/30 hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
             </div>
           ))}
@@ -176,6 +183,9 @@ export default function FeedsSection() {
             <button onClick={() => setCustomCams([...customCams, { url: '', name: '', lat: 0, lon: 0 }])} className="flex items-center gap-1 px-2 py-1 rounded border border-white/10 text-white/40 hover:text-white/70 hover:bg-white/5"><Plus className="w-3 h-3" /> Hinzufügen</button>
             <button onClick={async () => { setSaving(true); const r = await authFetch('/api/admin/cameras', { method: 'POST', body: JSON.stringify({ cameras: customCams }) }); setSaving(false); if (r.ok) toast(customCams.length + ' Kameras gespeichert'); else toast('Fehler', 'err'); }} disabled={saving} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--gold-primary)]/50 text-[var(--gold-primary)] bg-[var(--gold-primary)]/10 hover:bg-[var(--gold-primary)]/20 disabled:opacity-50">
               {saving ? <Loader2 className="w-3 h-3 animate-spin" /> : <Save className="w-3 h-3" />} SPEICHERN
+            </button>
+            <button onClick={() => testAll('camera')} disabled={testing} className="flex items-center gap-1 px-2 py-1 rounded border border-[var(--cyan-primary)]/50 text-[var(--cyan-primary)] bg-[var(--cyan-primary)]/10 hover:bg-[var(--cyan-primary)]/20 disabled:opacity-50">
+              {testing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Zap className="w-3 h-3" />} TESTEN
             </button>
           </div>
         </div>

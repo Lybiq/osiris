@@ -139,7 +139,7 @@ export default function UserManagementPanel({ onClose, onLogout }: { onClose: ()
       <motion.div
         initial={{ scale: 0.97, y: 10 }}
         animate={{ scale: 1, y: 0 }}
-        className="w-full max-w-3xl max-h-[85vh] flex flex-col overflow-hidden rounded-lg border border-white/10" style={GLASS_STYLE}
+        className="w-full max-w-3xl h-[80vh] flex flex-col overflow-hidden rounded-lg border border-white/10" style={GLASS_STYLE}
         onClick={e => e.stopPropagation()}
       >
         {/* header with tabs */}

@@ -1,0 +1,57 @@
+[
+  {
+    "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+    "name": "BBC News",
+    "category": "news"
+  },
+  {
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+    "name": "NYT &gt; World News",
+    "category": "news"
+  },
+  {
+    "url": "https://www.aljazeera.com/xml/rss/all.xml",
+    "name": "Al Jazeera &#8211; Breaking News, World News and Video from Al Jazeera",
+    "category": "news"
+  },
+  {
+    "url": "https://feeds.reuters.com/reuters/worldNews",
+    "name": "Reuters World",
+    "category": "news"
+  },
+  {
+    "url": "https://www.spiegel.de/schlagzeilen/tops/index.rss",
+    "name": "DER SPIEGEL - Schlagzeilen – Tops",
+    "category": "news"
+  },
+  {
+    "url": "https://www.tagesschau.de/xml/rss2/",
+    "name": "tagesschau.de - Die Nachrichten der ARD",
+    "category": "news"
+  },
+  {
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.atom",
+    "name": "USGS Significant Earthquakes, Past Month",
+    "category": "disaster"
+  },
+  {
+    "url": "https://gdacs.org/xml/rss.xml",
+    "name": "GDACS RSS information",
+    "category": "news"
+  },
+  {
+    "url": "https://www.pravda.com.ua/eng/rss/",
+    "name": "Ukrainska Pravda",
+    "category": "news"
+  },
+  {
+    "url": "https://liveuamap.com/rss",
+    "name": "Liveuamap API - Discovery Explorer",
+    "category": "conflict"
+  },
+  {
+    "url": "https://www.rferl.org/api/zbgvmtl-vomx-tpeq_kmr",
+    "name": "Russia Invades Ukraine - Radio Free Europe / Radio Liberty",
+    "category": "news"
+  }
+]
