@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Plane, Ship, Camera, Flame, Shield, Network, Monitor, Eye, Database, Activity,
   Satellite, Tv, CloudLightning, Radiation, AlertTriangle, Radio, Anchor, Sun,
-  Target, ChevronRight, ChevronLeft, Check, X as XIcon
+  Target, ChevronRight, ChevronLeft, Check, X as XIcon, Search
 } from 'lucide-react';
 
 // ── Glass style (shared by the entire L-frame + all windows) ──
@@ -28,6 +28,7 @@ interface LFrameProps {
   onAdminClick?: () => void;
   isAdmin?: boolean;
   clockDisplay: ReactNode;
+  onSearchClick?: () => void;
   // Sidebar
   layerGroups: { label: string; fullLabel: string; color: string; layers: { key: string; label: string; color: string; icon?: any; dataKey: string }[] }[];
   activeLayers: Record<string, boolean>;
@@ -83,6 +84,11 @@ export default function LFrame({
           <div className="flex items-center gap-3 pl-3">
             <h1 className="text-[13px] font-bold tracking-[0.3em] text-[var(--gold-primary)] font-mono">OSINT</h1>
             <span className="text-[10px] text-[var(--cyan-primary)] font-mono font-bold tabular-nums opacity-90">{clockDisplay}</span>
+            {onSearchClick && (
+              <button onClick={onSearchClick} className="ml-2 p-1 rounded hover:bg-white/10 text-white/30 hover:text-white/60 transition-colors" title="Suche (Ctrl+K)">
+                <Search className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
 
           {/* Spacer */}

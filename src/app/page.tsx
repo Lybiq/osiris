@@ -16,6 +16,7 @@ import GlobalStatusBar from '@/components/GlobalStatusBar';
 import LiveAlerts from '@/components/LiveAlerts';
 import BasemapSwitcher from '@/components/BasemapSwitcher';
 import TimeTravel from '@/components/TimeTravel';
+import SearchBar2 from '@/components/SearchBar2';
 import LFrame, { GLASS_STYLE } from '@/components/LFrame';
 import LocationInfoPanel from '@/components/LocationInfoPanel';
 import SystemHealthContent, { useSystemHealth } from '@/components/SystemHealth';
@@ -123,6 +124,7 @@ export default function Dashboard() {
   const [mapProjection, setMapProjection] = useState<'globe'|'mercator'>('globe');
   const [mapStyle, setMapStyle] = useState<string>('dark');
   const [showBasemaps, setShowBasemaps] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const [timeTravelDate, setTimeTravelDate] = useState<string | null>(null);
   const [pinpoint, setPinpoint] = useState<{lat:number;lon:number;address?:Record<string,string>;loading?:boolean}|null>(null);
 
@@ -270,6 +272,7 @@ export default function Dashboard() {
       if (e.key === 'i') setShowIntel(p => !p);
       if (e.key === 'r') setFlyToLocation({ lat: 20, lng: 0, ts: Date.now() });
       if (e.key === 'g') setMapProjection(p => p === 'globe' ? 'mercator' : 'globe');
+      if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) { e.preventDefault(); setShowSearch(s => !s); }
     };
     const fsHandler = () => setIsFullscreen(!!document.fullscreenElement);
     window.addEventListener('keydown', handler);
@@ -785,6 +788,19 @@ export default function Dashboard() {
         )}
       </AnimatePresence>
 
+      {/* ═══ SEARCH BAR (Ctrl+K) ═══ */}
+      {showSearch && (
+        <div className="fixed top-12 left-1/2 -translate-x-1/2 z-[350] pointer-events-auto">
+          <SearchBar2
+            onSelect={(lat, lon, label) => {
+              setFlyToLocation({ lat, lng: lon, ts: Date.now() });
+              setShowSearch(false);
+            }}
+            onClose={() => setShowSearch(false)}
+          />
+        </div>
+      )}
+
       {/* ═══ L-FRAME: Header + Sidebar ═══ */}
       {!isMobile && (
         <LFrame
@@ -793,6 +809,7 @@ export default function Dashboard() {
           onAdminClick={authUser?.role === 'admin' ? () => setShowUserMgmt(true) : undefined}
           isAdmin={authUser?.role === 'admin'}
           clockDisplay={<LocalClock />}
+          onSearchClick={() => setShowSearch(s => !s)}
           layerGroups={getLayerGroups(osirisTheme)}
           activeLayers={activeLayers}
           setActiveLayers={setActiveLayers}
@@ -1147,30 +1164,6 @@ export default function Dashboard() {
           </AnimatePresence>
         </>
       )}
-
-      {/* ── BOTTOM RAW METRICS (desktop) ── */}
-      {!isMobile && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3, duration: 0.8 }} className="desktop-only absolute bottom-4 left-20 z-[200] pointer-events-auto">
-          <div className="flex items-center gap-6 text-[8px] font-mono tracking-widest text-[var(--text-muted)] opacity-60">
-            <div className="flex gap-2 items-center">
-              <span>COORD</span>
-              <span ref={coordsDisplayRef} className="text-[var(--gold-primary)] font-bold tabular-nums">—</span>
-            </div>
-            <div className="flex gap-2 items-center">
-              <span>LOC</span>
-              <span className="text-[var(--cyan-primary)] truncate max-w-[200px]">{locationLabel || 'HOVER MAP'}</span>
-            </div>
-            <div className="flex gap-2 items-center">
-              <span>Z</span>
-              <span className="text-[var(--gold-primary)] font-bold tabular-nums">{mapView.zoom.toFixed(1)}</span>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-      {/* ── Scale Bar (desktop) ── */}
-      <div className="desktop-only absolute bottom-[4.5rem] left-[20rem] z-[201] pointer-events-none">
-      </div>
 
       {/* ── Region Dossier ── */}
       {(regionDossier || dossierLoading) && (
