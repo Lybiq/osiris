@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useToast } from '@/components/UiDialogs';
 import { X, MapPin, Copy, ExternalLink, Navigation } from 'lucide-react';
 
 interface LocationData {
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export default function LocationInfoPanel({ data, onClose }: Props) {
+  const toast = useToast();
   const panelRef = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ x: 60, y: 80 });
   const dragging = useRef(false);
@@ -51,14 +53,14 @@ export default function LocationInfoPanel({ data, onClose }: Props) {
   const copyCoords = () => {
     if (!data) return;
     const txt = `${data.lat.toFixed(6)}, ${data.lon.toFixed(6)}`;
-    navigator.clipboard.writeText(txt).catch(() => {});
+    navigator.clipboard.writeText(txt).then(() => toast('📋 ' + txt + ' kopiert')).catch(() => {});
   };
 
   const copyAddress = () => {
     if (!data?.address) return;
     const a = data.address;
     const parts = [a.name, a.road ? `${a.road}${a.houseNumber ? ' ' + a.houseNumber : ''}` : '', a.postcode, a.city, a.state, a.country].filter(Boolean);
-    navigator.clipboard.writeText(parts.join(', ')).catch(() => {});
+    navigator.clipboard.writeText(parts.join(', ')).then(() => toast('📋 Adresse kopiert')).catch(() => {});
   };
 
   const ll = data ? `${data.lat},${data.lon}` : '';

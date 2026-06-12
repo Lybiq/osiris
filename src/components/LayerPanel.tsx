@@ -224,12 +224,38 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1, width: expanded ? 280 : 80 }}
       transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-      className="absolute top-0 left-0 h-full border-r border-[var(--border-primary)] flex flex-col pt-32 pb-8 z-50 pointer-events-auto bg-[var(--bg-panel)] backdrop-blur-[24px] saturate-150 overflow-hidden"
-      style={{ boxShadow: '4px 0 24px rgba(0,0,0,0.5)' }}
+      className="absolute top-0 left-0 h-full flex flex-col pt-10 pb-8 z-50 pointer-events-auto overflow-hidden"
+      style={{ background: 'rgba(75,75,75,0.35)', backdropFilter: 'blur(20px) saturate(1.4)' }}
     >
       
+      {/* Select All / Deselect All */}
+      <div className="flex items-center justify-center gap-3 px-2 py-2 flex-shrink-0">
+        <button
+          onClick={() => {
+            const all: Record<string, boolean> = {};
+            LAYER_GROUPS.forEach(g => g.layers.forEach(l => { all[l.key] = true; }));
+            setActiveLayers(prev => ({ ...prev, ...all }));
+          }}
+          className="w-6 h-6 flex items-center justify-center rounded hover:bg-white/10 text-[var(--text-muted)] hover:text-[var(--alert-green)] transition-colors"
+          title="Alle aktivieren"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+        <button
+          onClick={() => {
+            const off: Record<string, boolean> = {};
+            LAYER_GROUPS.forEach(g => g.layers.forEach(l => { off[l.key] = false; }));
+            setActiveLayers(prev => ({ ...prev, ...off }));
+          }}
+          className="w-6 h-6 flex items-center justify-center rounded hover:bg-white/10 text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors"
+          title="Alle deaktivieren"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
       {!expanded && (
-      <div className="flex-1 flex flex-col gap-2 px-2 items-center">
+      <div className="flex-1 flex flex-col gap-2 px-2 items-center overflow-y-auto">
         {LAYER_GROUPS.map((group) => {
           const groupActiveCount = group.layers.filter(l => activeLayers[l.key]).length;
           const isActive = groupActiveCount > 0;
@@ -240,7 +266,7 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
             <div key={group.label} className="relative flex justify-center items-center">
               {/* Group Icon Button */}
               <button
-                onClick={() => setActiveGroup(isOpen ? null : group.label)}
+                onClick={() => { if (onToggleExpand) onToggleExpand(); }}
                 className="w-12 h-12 flex flex-col items-center justify-center gap-0.5 rounded-lg transition-all hover:bg-white/5"
                 title={group.fullLabel}
               >
@@ -251,46 +277,6 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
                 <span className="text-[6px] font-mono tracking-wider" style={{ color: isActive || isOpen ? group.color : 'rgba(255,255,255,0.3)' }}>{group.label}</span>
               </button>
 
-              {/* Click-based Flyout Menu */}
-              <AnimatePresence>
-                {isOpen && (
-                  <>
-                    {/* Invisible backdrop to close on click-away */}
-                    <div className="fixed inset-0 z-40" onClick={() => setActiveGroup(null)} />
-                    <motion.div
-                      initial={{ opacity: 0, x: -10, scale: 0.95 }}
-                      animate={{ opacity: 1, x: 0, scale: 1 }}
-                      exit={{ opacity: 0, x: -5, scale: 0.97 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute left-[70px] top-1/2 -translate-y-1/2 min-w-[240px] bg-black/90 backdrop-blur-md border border-white/10 rounded-lg p-3 shadow-2xl z-50 pointer-events-auto"
-                      style={{ boxShadow: `0 0 30px ${group.color}15, inset 0 0 20px ${group.color}05` }}
-                    >
-                      <div className="text-[11px] font-bold font-mono mb-3 tracking-widest border-b border-white/10 pb-2" style={{ color: group.color }}>
-                        {group.fullLabel}
-                      </div>
-                      <div className="flex flex-col gap-1.5">
-                        {group.layers.map((layer) => {
-                          const isLayerActive = activeLayers[layer.key];
-                          const count = getCount(layer.dataKey);
-                          const Icon = layer.icon || Shield;
-                          return (
-                            <button
-                              key={layer.key}
-                              onClick={() => { if (layer.key !== 'sdk_ransomware') toggle(layer.key); }}
-                              className="w-full flex items-center gap-3 px-2 py-1.5 rounded bg-transparent hover:bg-white/5 transition-colors group"
-                            >
-                              <div className={`w-2 h-2 rounded-full border flex-shrink-0 transition-all ${isLayerActive ? 'bg-current border-current' : 'bg-transparent border-white/30 scale-75'}`} style={{ color: isLayerActive ? layer.color : 'inherit', boxShadow: isLayerActive ? `0 0 8px ${layer.color}` : 'none' }} />
-                              <Icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: isLayerActive ? layer.color : 'rgba(255,255,255,0.4)' }} />
-                              <span className={`text-[11px] font-mono uppercase tracking-wider flex-1 text-left ${isLayerActive ? 'text-white' : 'text-white/50 group-hover:text-white/80'}`}>{layer.label}</span>
-                              {count !== null && <span className="text-[9px] font-mono tabular-nums opacity-60">{count.toLocaleString()}</span>}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </motion.div>
-                  </>
-                )}
-              </AnimatePresence>
             </div>
           );
         })}
@@ -334,31 +320,6 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
       </div>
       )}
 
-      {/* Select All / Deselect All */}
-      <div className="mt-auto px-2 pt-3 pb-2 border-t border-[var(--border-primary)] flex items-center justify-center gap-2">
-        <button
-          onClick={() => {
-            const all: Record<string, boolean> = {};
-            LAYER_GROUPS.forEach(g => g.layers.forEach(l => { all[l.key] = true; }));
-            setActiveLayers(prev => ({ ...prev, ...all }));
-          }}
-          className="text-[8px] font-mono tracking-wider text-[var(--text-muted)] hover:text-[var(--alert-green)] transition-colors px-1.5 py-1 rounded hover:bg-white/5"
-          title="Alle aktivieren"
-        >
-          {expanded ? 'SELECT ALL' : '✓'}
-        </button>
-        <button
-          onClick={() => {
-            const off: Record<string, boolean> = {};
-            LAYER_GROUPS.forEach(g => g.layers.forEach(l => { off[l.key] = false; }));
-            setActiveLayers(prev => ({ ...prev, ...off }));
-          }}
-          className="text-[8px] font-mono tracking-wider text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors px-1.5 py-1 rounded hover:bg-white/5"
-          title="Alle deaktivieren"
-        >
-          {expanded ? 'DESELECT ALL' : '✗'}
-        </button>
-      </div>
 
     </motion.div>
 
@@ -370,8 +331,8 @@ function LayerPanel({ data, activeLayers, setActiveLayers, isMobile, theme = 'co
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         onClick={onToggleExpand}
         title={expanded ? 'Sidebar einklappen' : 'Sidebar ausklappen'}
-        className="absolute top-1/2 -translate-y-1/2 z-[60] w-5 h-12 flex items-center justify-center rounded-r border border-l-0 border-[var(--border-primary)] bg-[var(--bg-panel)] backdrop-blur-[24px] text-[var(--text-muted)] hover:text-[var(--gold-primary)] pointer-events-auto transition-colors"
-        style={{ boxShadow: '4px 0 16px rgba(0,0,0,0.4)' }}
+        className="absolute top-1 z-[60] w-5 h-12 flex items-center justify-center rounded-r border border-l-0 border-[var(--border-primary)] text-[var(--text-muted)] hover:text-[var(--gold-primary)] pointer-events-auto transition-colors"
+        style={{ background: 'rgba(75,75,75,0.5)', backdropFilter: 'blur(20px)' }}
       >
         {expanded ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
       </motion.button>

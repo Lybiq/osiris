@@ -11,6 +11,7 @@ interface OsirisMapProps {
   onMouseCoords?: (coords: { lat: number; lng: number }) => void;
   onRightClick?: (coords: { lat: number; lng: number }) => void;
   onMapClick?: (coords: { lat: number; lng: number }) => void;
+  pinpoint?: { lat: number; lon: number } | null;
   onViewStateChange?: (vs: { zoom: number; latitude: number }) => void;
   flyToLocation?: { lat: number; lng: number; ts: number } | null;
   projection?: 'mercator' | 'globe';
@@ -43,7 +44,7 @@ function computeSolarTerminator(): [number, number][] {
 
 const EMPTY_FC = { type: 'FeatureCollection' as const, features: [] };
 
-function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightClick, onMapClick, onViewStateChange, flyToLocation, projection = 'globe', mapStyle = 'dark', sweepData, scanTargets = [], demoMode = false, theme = 'core' }: OsirisMapProps) {
+function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightClick, onMapClick, pinpoint, onViewStateChange, flyToLocation, projection = 'globe', mapStyle = 'dark', sweepData, scanTargets = [], demoMode = false, theme = 'core' }: OsirisMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
@@ -1485,6 +1486,28 @@ function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightCl
       console.warn('Style switch failed:', e);
     }
   }, [mapReady, mapStyle]);
+
+  // ── Pinpoint marker ──
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !mapReady) return;
+    // Remove existing pin
+    const oldPin = document.getElementById('osint-pinpoint');
+    if (oldPin) oldPin.remove();
+    if (!pinpoint) return;
+    // Create pin element
+    const el = document.createElement('div');
+    el.id = 'osint-pinpoint';
+    el.innerHTML = `<svg width="28" height="40" viewBox="0 0 28 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 26 14 26s14-15.5 14-26C28 6.27 21.73 0 14 0z" fill="#D4AF37" fill-opacity="0.9"/>
+      <circle cx="14" cy="14" r="6" fill="#111" stroke="#D4AF37" stroke-width="1.5"/>
+      <circle cx="14" cy="14" r="2.5" fill="#D4AF37"/>
+    </svg>`;
+    el.style.cssText = 'cursor:pointer;transform:translate(-50%,-100%);filter:drop-shadow(0 2px 6px rgba(0,0,0,0.6));';
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const maplibregl = require('maplibre-gl');
+    new maplibregl.Marker({ element: el }).setLngLat([pinpoint.lon, pinpoint.lat]).addTo(map);
+  }, [mapReady, pinpoint]);
 
   return <div ref={containerRef} className="absolute inset-0 w-full h-full" />;
 }

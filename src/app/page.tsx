@@ -796,6 +796,7 @@ export default function Dashboard() {
           onMouseCoords={handleMouseCoords} 
           onRightClick={handleRightClick} 
           onMapClick={handleMapClick}
+          pinpoint={pinpoint}
           onViewStateChange={setMapView} 
           flyToLocation={flyToLocation}
           sweepData={sweepData}
@@ -816,7 +817,7 @@ export default function Dashboard() {
       >
         {/* Zoom level */}
         <span className="text-[11px] font-mono font-bold tracking-widest text-[var(--gold-primary)] tabular-nums pointer-events-none">
-          ZOOM {Math.round(mapView.zoom)}
+          ZOOM {(Math.round(mapView.zoom * 2) / 2).toFixed(1)}
         </span>
 
         <div className="flex items-center gap-2">
@@ -867,81 +868,58 @@ export default function Dashboard() {
         </div>
       </motion.div>
 
-      {/* ── HEADER BAR (part of L-frame with sidebar) ── */}
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 2.5 }} className="absolute top-0 left-0 right-0 z-[200] pointer-events-none">
-        <div className="flex items-center justify-center gap-4 px-6 py-3 bg-[var(--bg-panel)] backdrop-blur-[24px] saturate-150 border-b border-[var(--border-primary)]" style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.4)' }}>
-          <h1 className="text-lg font-bold tracking-[0.4em] text-[var(--gold-primary)] font-mono">OSINT</h1>
-          <span className="text-[10px] text-[var(--text-muted)] font-mono tracking-[0.15em] opacity-80">GLOBAL INTELLIGENCE</span>
-          <LocalClock />
+      {/* ── HEADER BAR (L-frame top, Nardo grey) ── */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 2.5 }} className="absolute top-0 left-0 right-0 z-[200] pointer-events-none">
+        <div className="flex items-center px-4 py-1.5" style={{ background: 'rgba(75,75,75,0.35)', backdropFilter: 'blur(20px) saturate(1.4)' }}>
+          <h1 className="text-[14px] font-bold tracking-[0.35em] text-[var(--gold-primary)] font-mono">OSINT</h1>
+          <span className="ml-auto text-[11px] text-[var(--cyan-primary)] font-mono font-bold tabular-nums"><LocalClock /></span>
         </div>
       </motion.div>
 
       {/* ── TOP-RIGHT STATUS (desktop) — C2 DISPLAY ── */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3 }} className="status-bar-desktop absolute top-4 right-6 z-[200] pointer-events-none flex items-center gap-4 text-[9px] font-mono tracking-widest text-[var(--text-muted)]">
-
+      {/* ── TOP-RIGHT: SYSTEM + ADMIN (inside L-frame) ── */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.8 }} className="absolute top-0 right-0 z-[260] pointer-events-auto flex items-center gap-3 px-3 py-1.5 text-[9px] font-mono tracking-widest text-[var(--text-muted)]">
         <button
           onClick={() => wm.openWindow({ id: 'system-health', title: 'SYSTEM HEALTH', content: <SystemHealthContent />, defaultSize: { w: 440, h: 400 } })}
-          className="flex items-center gap-1.5 pointer-events-auto cursor-pointer hover:opacity-80 transition-opacity"
+          className="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity"
         >
           SYSTEM
           <span className={`w-2 h-2 rounded-full ${sysStatus === 'ok' ? 'bg-[var(--alert-green)]' : sysStatus === 'error' ? 'bg-[var(--alert-red)] animate-pulse' : 'bg-[var(--gold-primary)] animate-pulse'}`} style={{ boxShadow: sysStatus === 'ok' ? '0 0 6px var(--alert-green)' : sysStatus === 'error' ? '0 0 6px var(--alert-red)' : '0 0 6px var(--gold-primary)' }} />
           {sysStatus === 'error' && <AlertTriangle className="w-3 h-3 text-[var(--alert-red)] animate-pulse" />}
         </button>
-
-        {spaceWeather && <span className="hidden lg:inline">SOLAR: <span style={{ color: spaceWeather.storm_color, fontWeight: 700 }}>Kp{spaceWeather.kp_index}</span></span>}
-
-        <span className="hidden lg:inline-flex items-center gap-1">
-          <span className="text-[var(--cyan-primary)] font-bold">{Object.values(activeLayers).filter(Boolean).length}</span>
-          <span className="text-[var(--text-muted)]/60">FEEDS</span>
-        </span>
-
-        <UptimeClock />
+        {authUser?.role === 'admin' && (
+          <button
+            onClick={() => setShowUserMgmt(true)}
+            className="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity text-[var(--gold-primary)]"
+          >
+            <Shield className="w-3 h-3" />
+            ADMIN
+          </button>
+        )}
+        {authUser?.role !== 'admin' && authUser && (
+          <button onClick={logout} className="flex items-center gap-1 cursor-pointer hover:opacity-80 text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors">
+            <LogOut className="w-3 h-3" /> LOGOUT
+          </button>
+        )}
       </motion.div>
-
-      {/* ── AUTH CONTROLS (desktop) ── */}
-      {!isMobile && authUser && (
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.2 }}
-          className="absolute top-11 right-6 z-[250] pointer-events-auto flex items-center gap-2"
-        >
-          {authUser.role === 'admin' && (
-            <button
-              onClick={() => setShowUserMgmt(true)}
-              title="Admin Panel öffnen"
-              className="glass-panel px-2.5 py-1 flex items-center gap-1.5 hover:border-[var(--gold-primary)]/60 text-[var(--gold-primary)] transition-colors cursor-pointer text-[9px] font-mono tracking-widest"
-            >
-              <Shield className="w-3.5 h-3.5" />
-              ADMIN PANEL
-            </button>
-          )}
-          {authUser.role !== 'admin' && (
-            <button onClick={logout} title="Logout" className="glass-panel p-1.5 hover:border-[var(--alert-red)]/40 text-[var(--text-muted)] hover:text-[var(--alert-red)] transition-colors">
-              <LogOut className="w-3.5 h-3.5" />
-            </button>
-          )}
-        </motion.div>
-      )}
 
       {/* ── USER MANAGEMENT MODAL ── */}
       <AnimatePresence>
         {showUserMgmt && <UserManagementPanel onClose={() => setShowUserMgmt(false)} onLogout={logout} />}
       </AnimatePresence>
 
-      {/* ── MOBILE: Compact top status ── */}
-      {isMobile && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} className="absolute top-3 right-3 z-[200] pointer-events-auto flex items-center gap-2">
-          <a href='https://ko-fi.com/M8D41ZYW4Z' target='_blank' className="glass-panel px-2 py-1 flex items-center gap-1.5 text-[7px] font-mono tracking-widest hover:opacity-80 transition-opacity border-[var(--gold-primary)]/40 bg-[var(--gold-primary)]/10">
-            <div className="w-1 h-1 rounded-full bg-[var(--gold-primary)] animate-osiris-pulse" />
-            <span className="text-[var(--gold-primary)] font-bold">SUPPORT PROJECT</span>
-          </a>
-          {authUser?.role === 'admin' && (
-            <button onClick={() => setShowUserMgmt(true)} title="User Management" className="glass-panel p-1.5 text-[var(--text-muted)]">
-              <Users className="w-3.5 h-3.5" />
-            </button>
-          )}
-          {authUser && (
-            <button onClick={logout} title="Logout" className="glass-panel p-1.5 text-[var(--text-muted)]">
-              <LogOut className="w-3.5 h-3.5" />
+      {/* ── MOBILE: Top controls ── */}
+      {isMobile && authUser && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} className="absolute top-2 right-2 z-[200] pointer-events-auto flex items-center gap-2">
+          <button
+            onClick={() => wm.openWindow({ id: 'system-health', title: 'SYSTEM HEALTH', content: <SystemHealthContent />, defaultSize: { w: 340, h: 360 } })}
+            className="glass-panel p-1.5 text-[var(--text-muted)]"
+          >
+            <span className={`w-2 h-2 rounded-full inline-block ${sysStatus === 'ok' ? 'bg-[var(--alert-green)]' : 'bg-[var(--alert-red)] animate-pulse'}`} />
+          </button>
+          {authUser.role === 'admin' && (
+            <button onClick={() => setShowUserMgmt(true)} className="glass-panel p-1.5 text-[var(--gold-primary)]">
+              <Shield className="w-3.5 h-3.5" />
             </button>
           )}
         </motion.div>
@@ -1273,9 +1251,6 @@ export default function Dashboard() {
       <GlobalStatusBar />
 
       {/* Shortcut hint */}
-      <div className="desktop-only absolute bottom-[26px] right-5 z-[200] pointer-events-none text-[6px] font-mono text-[var(--text-muted)]/40 tracking-widest">
-        [?] SHORTCUTS · [F] FULLSCREEN · [S] SHARE · [R] RESET VIEW
-      </div>
 
 
     </main>
