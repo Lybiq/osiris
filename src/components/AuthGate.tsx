@@ -5,6 +5,7 @@ import { Loader2 } from 'lucide-react';
 import { AuthProvider, useAuth } from '@/lib/authClient';
 import LoginScreen from '@/components/LoginScreen';
 import { ToastProvider } from '@/components/UiDialogs';
+import { WindowManagerProvider } from '@/components/WindowManager';
 
 function Gate({ children }: { children: ReactNode }) {
   const { user, ready } = useAuth();
@@ -25,7 +26,9 @@ export default function AuthGate({ children }: { children: ReactNode }) {
   return (
     <AuthProvider>
       <ToastProvider>
-        <Gate>{children}</Gate>
+        <WindowManagerProvider>
+          <Gate>{children}</Gate>
+        </WindowManagerProvider>
       </ToastProvider>
     </AuthProvider>
   );

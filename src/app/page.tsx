@@ -17,6 +17,8 @@ import GlobalStatusBar from '@/components/GlobalStatusBar';
 import LiveAlerts from '@/components/LiveAlerts';
 import BasemapSwitcher from '@/components/BasemapSwitcher';
 import LocationInfoPanel from '@/components/LocationInfoPanel';
+import SystemHealthContent, { useSystemHealth } from '@/components/SystemHealth';
+import { useWindowManager } from '@/components/WindowManager';
 import { useAuth } from '@/lib/authClient';
 
 const UserManagementPanel = dynamic(() => import('@/components/UserManagementPanel'));
@@ -146,6 +148,8 @@ export default function Dashboard() {
   }, []);
   const [showUserMgmt, setShowUserMgmt] = useState(false);
   const { user: authUser, logout } = useAuth();
+  const wm = useWindowManager();
+  const sysStatus = useSystemHealth();
   const [sweepData, setSweepData] = useState<any>(null);
   const [scanTargets, setScanTargets] = useState<any[]>([]);
   const [entityGraphTarget, setEntityGraphTarget] = useState<{ type: string; id: string; label?: string; properties?: Record<string, any> } | null>(null);
@@ -805,62 +809,68 @@ export default function Dashboard() {
       <LocationInfoPanel data={pinpoint} onClose={() => setPinpoint(null)} />
 
 
-      {/* ── MAP VIEW CONTROLS (3D/2D + SATELLITE TOGGLE) ── */}
+      {/* ── MAP VIEW CONTROLS (bottom-right) ── */}
       <motion.div
         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 3.5 }}
-        className="absolute bottom-[75px] md:bottom-6 left-3 md:left-[315px] z-[200] flex items-center gap-2 pointer-events-none"
+        className="absolute bottom-6 right-6 z-[200] flex flex-col items-end gap-2 pointer-events-none"
       >
-        {/* 3D/2D Toggle */}
-        <button
-          onClick={() => setMapProjection(p => p === 'globe' ? 'mercator' : 'globe')}
-          className="glass-panel p-3.5 pointer-events-auto hover:border-[var(--gold-primary)]/40 transition-colors group relative"
-          title={mapProjection === 'globe' ? 'Switch to 2D Map' : 'Switch to 3D Globe'}
-        >
-          {mapProjection === 'globe' ? (
-            <MapPinned className="w-5 h-5 text-[var(--gold-primary)] group-hover:scale-110 transition-transform" />
-          ) : (
-            <Globe className="w-5 h-5 text-[var(--cyan-primary)] group-hover:scale-110 transition-transform" />
-          )}
-          <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 text-[9px] font-mono text-[var(--text-muted)] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity glass-panel px-2 py-1 z-[300]">
-            {mapProjection === 'globe' ? '2D MAP' : '3D GLOBE'}
-          </span>
-        </button>
+        {/* Zoom level */}
+        <span className="text-[11px] font-mono font-bold tracking-widest text-[var(--gold-primary)] tabular-nums pointer-events-none">
+          ZOOM {Math.round(mapView.zoom)}
+        </span>
 
-        {/* Map Views (basemap switcher) */}
-        <div className="relative pointer-events-auto">
-          <AnimatePresence>
-            {showBasemaps && (
-              <div className="absolute bottom-full mb-2 left-0 z-[300]">
-                <BasemapSwitcher
-                  current={mapStyle}
-                  onSelect={(v) => { setMapStyle(v); setShowBasemaps(false); }}
-                  onClose={() => setShowBasemaps(false)}
-                />
-              </div>
-            )}
-          </AnimatePresence>
+        <div className="flex items-center gap-2">
+          {/* 3D/2D Toggle */}
           <button
-            onClick={() => setShowBasemaps(s => !s)}
-            className="glass-panel p-3.5 hover:border-[var(--gold-primary)]/40 transition-colors group relative"
-            title="Map Views"
+            onClick={() => setMapProjection(p => p === 'globe' ? 'mercator' : 'globe')}
+            className="glass-panel p-3 pointer-events-auto hover:border-[var(--gold-primary)]/40 transition-colors group relative"
+            title={mapProjection === 'globe' ? '2D Map' : '3D Globe'}
           >
-            {mapStyle === 'dark' ? (
-              <MapIcon className="w-5 h-5 text-[var(--gold-primary)] group-hover:scale-110 transition-transform" />
+            {mapProjection === 'globe' ? (
+              <MapPinned className="w-4 h-4 text-[var(--gold-primary)] group-hover:scale-110 transition-transform" />
             ) : (
-              <Satellite className="w-5 h-5 text-[var(--alert-green)] group-hover:scale-110 transition-transform" />
+              <Globe className="w-4 h-4 text-[var(--cyan-primary)] group-hover:scale-110 transition-transform" />
             )}
-            <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 text-[9px] font-mono text-[var(--text-muted)] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity glass-panel px-2 py-1 z-[300]">
-              MAP VIEWS
+            <span className="absolute bottom-full mb-2 right-0 text-[8px] font-mono text-[var(--text-muted)] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity glass-panel px-2 py-1 z-[300]">
+              {mapProjection === 'globe' ? '2D MAP' : '3D GLOBE'}
             </span>
           </button>
-        </div>
 
+          {/* Map Views (basemap switcher) */}
+          <div className="relative pointer-events-auto">
+            <AnimatePresence>
+              {showBasemaps && (
+                <div className="absolute bottom-full mb-2 right-0 z-[300]">
+                  <BasemapSwitcher
+                    current={mapStyle}
+                    onSelect={(v) => { setMapStyle(v); setShowBasemaps(false); }}
+                    onClose={() => setShowBasemaps(false)}
+                  />
+                </div>
+              )}
+            </AnimatePresence>
+            <button
+              onClick={() => setShowBasemaps(s => !s)}
+              className="glass-panel p-3 hover:border-[var(--gold-primary)]/40 transition-colors group relative"
+              title="Map Views"
+            >
+              {mapStyle === 'dark' ? (
+                <MapIcon className="w-4 h-4 text-[var(--gold-primary)] group-hover:scale-110 transition-transform" />
+              ) : (
+                <Satellite className="w-4 h-4 text-[var(--alert-green)] group-hover:scale-110 transition-transform" />
+              )}
+              <span className="absolute bottom-full mb-2 right-0 text-[8px] font-mono text-[var(--text-muted)] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity glass-panel px-2 py-1 z-[300]">
+                MAP VIEWS
+              </span>
+            </button>
+          </div>
+        </div>
       </motion.div>
 
-      {/* ── HEADER (centered) ── */}
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 2.5 }} className={`absolute top-4 left-0 right-0 z-[200] pointer-events-none flex flex-col items-center`}>
-        <div className="flex items-baseline gap-3">
-          <h1 className="text-xl font-bold tracking-[0.4em] text-[var(--gold-primary)] font-mono">OSINT</h1>
+      {/* ── HEADER BAR (part of L-frame with sidebar) ── */}
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 2.5 }} className="absolute top-0 left-0 right-0 z-[200] pointer-events-none">
+        <div className="flex items-center justify-center gap-4 px-6 py-3 bg-[var(--bg-panel)] backdrop-blur-[24px] saturate-150 border-b border-[var(--border-primary)]" style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.4)' }}>
+          <h1 className="text-lg font-bold tracking-[0.4em] text-[var(--gold-primary)] font-mono">OSINT</h1>
           <span className="text-[10px] text-[var(--text-muted)] font-mono tracking-[0.15em] opacity-80">GLOBAL INTELLIGENCE</span>
           <LocalClock />
         </div>
@@ -869,7 +879,14 @@ export default function Dashboard() {
       {/* ── TOP-RIGHT STATUS (desktop) — C2 DISPLAY ── */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3 }} className="status-bar-desktop absolute top-4 right-6 z-[200] pointer-events-none flex items-center gap-4 text-[9px] font-mono tracking-widest text-[var(--text-muted)]">
 
-        <span className="flex items-center gap-1">SYS: <span className={backendStatus === 'connected' ? 'text-[var(--alert-green)]' : 'text-[var(--alert-red)]'}>{backendStatus.toUpperCase()}</span></span>
+        <button
+          onClick={() => wm.openWindow({ id: 'system-health', title: 'SYSTEM HEALTH', content: <SystemHealthContent />, defaultSize: { w: 440, h: 400 } })}
+          className="flex items-center gap-1.5 pointer-events-auto cursor-pointer hover:opacity-80 transition-opacity"
+        >
+          SYSTEM
+          <span className={`w-2 h-2 rounded-full ${sysStatus === 'ok' ? 'bg-[var(--alert-green)]' : sysStatus === 'error' ? 'bg-[var(--alert-red)] animate-pulse' : 'bg-[var(--gold-primary)] animate-pulse'}`} style={{ boxShadow: sysStatus === 'ok' ? '0 0 6px var(--alert-green)' : sysStatus === 'error' ? '0 0 6px var(--alert-red)' : '0 0 6px var(--gold-primary)' }} />
+          {sysStatus === 'error' && <AlertTriangle className="w-3 h-3 text-[var(--alert-red)] animate-pulse" />}
+        </button>
 
         {spaceWeather && <span className="hidden lg:inline">SOLAR: <span style={{ color: spaceWeather.storm_color, fontWeight: 700 }}>Kp{spaceWeather.kp_index}</span></span>}
 

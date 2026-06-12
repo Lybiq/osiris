@@ -578,10 +578,15 @@ function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightCl
 
     // General click on empty map space → pinpoint
     map.on('click', e => {
-      // Check if any feature layer was hit — if so, skip (those have their own handlers)
-      const features = map.queryRenderedFeatures(e.point);
-      const isInteractive = features.some(f => f.layer && f.layer.id && !f.layer.id.startsWith('carto-') && !f.layer.id.startsWith('satellite'));
-      if (!isInteractive) {
+      // Only fire pinpoint if no interactive data layer was clicked
+      const interactiveLayers = [
+        'flight-dots', 'flight-mil-dots', 'flight-priv-dots', 'flight-jet-dots',
+        'cctv-dots', 'eq-circles', 'sat-dots', 'fires-heat', 'malware-dots',
+        'gdelt-dots', 'conflict-icons', 'maritime-dots', 'infra-dots',
+        'weather-dots', 'gps-jam-dots', 'news-dots',
+      ];
+      const features = map.queryRenderedFeatures(e.point, { layers: interactiveLayers.filter(l => { try { return !!map.getLayer(l); } catch { return false; } }) });
+      if (features.length === 0) {
         onMapClick?.({ lat: e.lngLat.lat, lng: e.lngLat.lng });
       }
     });
