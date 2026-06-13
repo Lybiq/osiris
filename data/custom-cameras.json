@@ -46,5 +46,33 @@
     "name": "",
     "lat": 0,
     "lon": 0
+  },
+  {
+    "url": "https://webcam.solutionshosted.de/6de6d0eb-e8a1-4ee3-8f18-3ad68a68d6ed.html",
+    "name": "Hamburg, Deutschland",
+    "lat": 53.543781579094485,
+    "lon": 9.91643526555086,
+    "type": "stream"
+  },
+  {
+    "url": "https://webcam.solutionshosted.de/013dcc9a-5220-43cf-a80c-c37c388d1989.html",
+    "name": "Hamburg, Deutschland",
+    "lat": 53.55606209305546,
+    "lon": 9.804201591213229,
+    "type": "stream"
+  },
+  {
+    "url": "https://webcam.solutionshosted.de/8d4b2999-8980-4f9e-899e-9989e5afcc76.html",
+    "name": "Wedel, Schleswig-Holstein, Deutschland",
+    "lat": 53.57064919635283,
+    "lon": 9.699748467103603,
+    "type": "stream"
+  },
+  {
+    "url": "https://webcam.solutionshosted.de/f8e2a4cb-f57f-4f07-9732-3aa51906e66b.html",
+    "name": "Wedel, Schleswig-Holstein, Deutschland",
+    "lat": 53.59155453788523,
+    "lon": 9.652618836230062,
+    "type": "stream"
   }
 ]

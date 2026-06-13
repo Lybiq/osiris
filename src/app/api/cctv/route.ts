@@ -486,6 +486,10 @@ export async function GET(request: Request) {
       regionsToFetch = Object.keys(REGION_FETCHERS);
     }
 
+    // Always include custom cameras + legacy cameras regardless of viewport
+    if (!regionsToFetch.includes('custom')) regionsToFetch.push('custom');
+    if (!regionsToFetch.includes('legacy')) regionsToFetch.push('legacy');
+    
     const results = await Promise.allSettled(
       regionsToFetch.map(r => REGION_FETCHERS[r]())
     );

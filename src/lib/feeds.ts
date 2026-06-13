@@ -113,3 +113,17 @@ export async function writeCustomCameras(cams: CustomCamera[]): Promise<void> {
   await fs.mkdir(DATA_DIR, { recursive: true });
   await fs.writeFile(CAM_FILE, JSON.stringify(cams, null, 2), 'utf-8');
 }
+
+// ── Git Config (for updates) ──
+export interface GitConfig { userName: string; userEmail: string; }
+const GIT_FILE = path.join(DATA_DIR, 'git-config.json');
+
+export async function readGitConfig(): Promise<GitConfig> {
+  try { return JSON.parse(await fs.readFile(GIT_FILE, 'utf-8')); }
+  catch { return { userName: 'OSINT System', userEmail: 'osint@local' }; }
+}
+
+export async function writeGitConfig(config: GitConfig): Promise<void> {
+  await fs.mkdir(DATA_DIR, { recursive: true });
+  await fs.writeFile(GIT_FILE, JSON.stringify(config, null, 2), 'utf-8');
+}

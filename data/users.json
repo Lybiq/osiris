@@ -3,9 +3,9 @@
     "hash": "scrypt$e48fc842b811f10cba40b338f1de4f46$4e4436446cde0bd488dd65449f0d5db7e3d370678e281012aec07f297ddc60b7b707b4771e99f6dfa726349e531624ac897b5308e8c6d43beec14cb4aab870c1",
     "role": "admin",
     "created": "2026-06-12T08:04:35.139Z",
-    "lastLogin": "2026-06-12T17:44:18.874Z",
-    "lastIP": "2a0d:3341:b100:cf80:9683:c4ff:fea7:c489",
+    "lastLogin": "2026-06-13T07:59:43.737Z",
+    "lastIP": "192.168.8.143",
     "lastLoc": null,
-    "lastUA": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36"
+    "lastUA": "Mozilla/5.0 (X11; Linux x86_64; rv:151.0) Gecko/20100101 Firefox/151.0"
   }
 }

@@ -111,6 +111,7 @@ export async function POST(req: Request) {
   await writeStatus({ phase: 'starting', message: 'Update gestartet...' });
 
   // Fire and forget: the exec callback runs after we've already responded
+  const gitCfg = await readGitConfig();
   const updateCmd = [
     `cd ${REPO}`,
     // Ensure upstream remote
@@ -120,6 +121,7 @@ export async function POST(req: Request) {
     // Apply OSINT rename patch
     `sh ${REPO}/scripts/patch-osint.sh ${REPO}`,
     `git add -A`,
+    `git config user.email "` + gitCfg.userEmail + `" && git config user.name "` + gitCfg.userName + `"`,
     `git diff --cached --quiet || git commit -m "auto: OSINT rename patch"`,
     // Rebuild and restart (this kills the current container)
     `docker compose build --no-cache osiris`,
@@ -138,4 +140,19 @@ export async function POST(req: Request) {
     ok: true,
     message: 'Update gestartet. Der Container wird nach dem Rebuild automatisch neu gestartet. Bitte warte 2-3 Minuten und lade die Seite dann neu.',
   });
+}
+
+// Save git config
+export async function PATCH(req: Request) {
+  const user = await requireAuth(req);
+  if (!user || user.role !== 'admin') return NextResponse.json({ error: 'Admin only' }, { status: 403 });
+  const { userName, userEmail } = await req.json();
+  if (!userName || !userEmail) return NextResponse.json({ error: 'userName and userEmail required' }, { status: 400 });
+  await writeGitConfig({ userName, userEmail });
+  // Apply immediately
+  try {
+    const { execSync } = require('child_process');
+    execSync(`cd /repo && git config user.email "${userEmail}" && git config user.name "${userName}"`, { timeout: 5000 });
+  } catch {}
+  return NextResponse.json({ ok: true, userName, userEmail });
 }

@@ -12,7 +12,6 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import SharePanel from '@/components/SharePanel';
 import ViewPresets from '@/components/ViewPresets';
 import KeyboardShortcuts from '@/components/KeyboardShortcuts';
-import GlobalStatusBar from '@/components/GlobalStatusBar';
 import LiveAlerts from '@/components/LiveAlerts';
 import BasemapSwitcher from '@/components/BasemapSwitcher';
 import TimeTravel from '@/components/TimeTravel';
@@ -1274,7 +1273,6 @@ export default function Dashboard() {
       <KeyboardShortcuts />
 
       {/* ── GLOBAL STATUS TICKER (bottom) ── */}
-      <GlobalStatusBar />
 
       {/* Shortcut hint */}
 
