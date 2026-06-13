@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { Loader2, Plus, Trash2, Save, Rss, Tv, Zap, Check, XCircle, Camera, Search, MessageSquare } from 'lucide-react';
+import { Loader2, Plus, Trash2, Save, Rss, Tv, Zap, Check, XCircle, Camera, Search, MessageSquare, Globe } from 'lucide-react';
 import { authFetch } from '@/lib/authClient';
 import { useToast } from '@/components/UiDialogs';
 
@@ -64,6 +64,31 @@ export default function FeedsSection() {
       if (r.ok) return await r.json();
     } catch {}
     return {};
+  };
+
+  const geocodeAddress = async (address: string): Promise<{lat:number;lon:number}|null> => {
+    try {
+      const r = await fetch('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(address) + '&format=json&limit=1&accept-language=de');
+      const d = await r.json();
+      if (d?.[0]) return { lat: parseFloat(d[0].lat), lon: parseFloat(d[0].lon) };
+    } catch {}
+    return null;
+  };
+
+  const promptGeocode = async (index: number, type: 'youtube' | 'camera') => {
+    const address = window.prompt('Adresse oder Ort eingeben:');
+    if (!address) return;
+    const result = await geocodeAddress(address);
+    if (result) {
+      if (type === 'youtube') {
+        setYtStreams(prev => { const n = [...prev]; n[index] = { ...n[index], lat: result.lat, lon: result.lon }; return n; });
+      } else {
+        setCustomCams(prev => { const n = [...prev]; n[index] = { ...n[index], lat: result.lat, lon: result.lon }; return n; });
+      }
+      toast('📍 ' + address + ' → ' + result.lat.toFixed(4) + ', ' + result.lon.toFixed(4));
+    } else {
+      toast('Adresse nicht gefunden', 'err');
+    }
   };
 
   const load = useCallback(async () => {
@@ -146,6 +171,7 @@ export default function FeedsSection() {
           <p className="text-white/30 mb-1">YouTube-Live-Streams. Werden auf der Karte als Standorte angezeigt und sind im Viewer abspielbar.</p>
           {ytStreams.map((s, i) => (
             <div key={i} className="flex items-center gap-2 flex-wrap">
+              <button onClick={() => promptGeocode(i, 'youtube')} className="p-1 rounded hover:bg-white/10 text-white/30 hover:text-[var(--gold-primary)]" title="Adresse suchen"><Globe className="w-3 h-3" /></button>
               <button onClick={async () => { const d = await autoDetect(s.url, 'youtube'); const n = [...ytStreams]; n[i] = { ...s, name: d.name || s.name, lat: d.lat || s.lat, lon: d.lon || s.lon, country: d.country || s.country }; setYtStreams(n); toast('Erkannt: ' + (d.name || '?')); }} className="p-1 rounded hover:bg-white/10 text-white/30 hover:text-[var(--cyan-primary)]" title="Auto-Erkennung"><Search className="w-3 h-3" /></button>
               <input value={s.name} onChange={e => { const n = [...ytStreams]; n[i] = { ...s, name: e.target.value }; setYtStreams(n); }} placeholder="Name" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/80 outline-none focus:border-[var(--gold-primary)]/50 w-[100px]" />
               <input value={s.url} onChange={e => { const n = [...ytStreams]; n[i] = { ...s, url: e.target.value }; setYtStreams(n); }} placeholder="YouTube URL" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/80 outline-none focus:border-[var(--gold-primary)]/50 flex-1 min-w-[140px]" />
@@ -173,6 +199,7 @@ export default function FeedsSection() {
           <p className="text-white/30 mb-1">Eigene Kameras/Streams. Werden als zusätzliche CCTV-Quellen auf der Karte angezeigt.</p>
           {customCams.map((c, i) => (
             <div key={i} className="flex items-center gap-2 flex-wrap">
+              <button onClick={() => promptGeocode(i, 'camera')} className="p-1 rounded hover:bg-white/10 text-white/30 hover:text-[var(--gold-primary)]" title="Adresse suchen"><Globe className="w-3 h-3" /></button>
               <button onClick={async () => { const d = await autoDetect(c.url, 'camera'); const n = [...customCams]; n[i] = { ...c, name: d.name || c.name, lat: d.lat || c.lat, lon: d.lon || c.lon }; setCustomCams(n); toast('Erkannt: ' + (d.name || '?')); }} className="p-1 rounded hover:bg-white/10 text-white/30 hover:text-[var(--cyan-primary)]" title="Auto-Erkennung"><Search className="w-3 h-3" /></button>
               <input value={c.name} onChange={e => { const n = [...customCams]; n[i] = { ...c, name: e.target.value }; setCustomCams(n); }} placeholder="Name" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/80 outline-none focus:border-[var(--gold-primary)]/50 w-[100px]" />
               <input value={c.url} onChange={e => { const n = [...customCams]; n[i] = { ...c, url: e.target.value }; setCustomCams(n); }} placeholder="URL (Stream/Bild)" className="bg-black/30 border border-white/10 rounded px-2 py-1 text-white/80 outline-none focus:border-[var(--gold-primary)]/50 flex-1 min-w-[140px]" />

@@ -390,16 +390,19 @@ const REGION_FETCHERS: Record<string, () => Promise<any[]>> = {
   'custom': async () => {
     try {
       const { readCustomCameras } = await import('@/lib/feeds');
-      return (await readCustomCameras()).map((c: any) => ({
-        id: `custom-${c.lat}-${c.lon}`,
-        name: c.name,
-        lat: c.lat,
-        lon: c.lon,
+      const cams = await readCustomCameras();
+      console.log('[OSINT] Custom cameras loaded:', cams.length);
+      return cams.map((c: any, i: number) => ({
+        id: `custom-${i}-${c.lat}-${c.lon}`,
+        name: c.name || 'Custom Camera',
+        lat: Number(c.lat) || 0,
+        lon: Number(c.lon) || 0,
         url: c.url,
         source: 'custom',
         type: c.type || 'stream',
+        location: c.name,
       }));
-    } catch { return []; }
+    } catch (e) { console.error('[OSINT] Custom cameras error:', e); return []; }
   },
 };
 

@@ -1,5 +1,5 @@
 {
-  "phase": "error",
-  "message": "Command failed: cd /repo && git remote get-url upstream 2>/dev/null || git remote add upstream https://github.com/simplifaisoul/osiris.git && git fetch upstream && git merge upstream/master --no-edit -X theirs && sh /repo/scripts/patch-osint.sh /repo && git add -A && git diff --cached --quiet || git commit -m \"auto: OSINT rename patch\" && docker compose build --no-cache osiris && docker compose up -d osiris\nCommitter identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: unable to auto-detect email address (got 'root@2444fdda604c.(none)')\nAuthor identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: unable to auto-detect email address (got 'root@2444fdda604c.(none)')\n",
-  "ts": "2026-06-13T07:51:51.205Z"
+  "phase": "starting",
+  "message": "Update gestartet...",
+  "ts": "2026-06-13T08:14:39.361Z"
 }

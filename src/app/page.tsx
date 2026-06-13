@@ -836,6 +836,7 @@ export default function Dashboard() {
           <SearchBar2
             onSelect={(lat, lon, label) => {
               setFlyToLocation({ lat, lng: lon, ts: Date.now() });
+              setPinpoint({ lat, lon, address: { display_name: label }, loading: false });
               setShowSearch(false);
             }}
             onClose={() => setShowSearch(false)}

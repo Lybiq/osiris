@@ -40,18 +40,37 @@ export default function UpdateSection() {
   }, [check]);
 
   const triggerUpdate = async () => {
-    setConfirm(false);
     setUpdating(true);
+    setProgress({ percent: 0, cmd: 'starting', status: 'Update wird gestartet...' });
+    setError(null);
+    
+    // Start polling progress
+    const pollInterval = setInterval(async () => {
+      try {
+        const r = await authFetch('/api/admin/update?progress=1');
+        if (r.ok) {
+          const p = await r.json();
+          if (p && p.percent > 0) setProgress({ percent: p.percent, cmd: p.cmd, status: p.status });
+        }
+      } catch {}
+    }, 1500);
+
     try {
-      const res = await authFetch('/api/admin/update', { method: 'POST' });
-      const d = await res.json();
-      if (!res.ok) throw new Error(d.error || 'Update fehlgeschlagen');
-      toast(d.message);
+      const r = await authFetch('/api/admin/update', { method: 'POST' });
+      const data = await r.json().catch(() => ({}));
+      if (r.ok && data.ok) {
+        setProgress({ percent: 100, cmd: 'done', status: 'Update abgeschlossen!' });
+        toast('Update erfolgreich!');
+      } else {
+        setError(data.error || 'Update fehlgeschlagen');
+        setProgress(null);
+      }
     } catch (e) {
-      toast((e as Error).message, 'err');
-    } finally {
-      setUpdating(false);
+      setError((e as Error).message);
+      setProgress(null);
     }
+    clearInterval(pollInterval);
+    setUpdating(false);
   };
 
   return (
